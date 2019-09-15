@@ -30,17 +30,16 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1
+exec_always --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1
 
 exec ss-qt5
 
 exec fcitx
 
-exec_always compton
-
 exec variety
 
-exec_always ~/.config/polybar/launch.sh
+
+exec_always compton
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -203,3 +202,12 @@ client.background       #FFFFFF
  # bar {
  #        status_command i3status
  # }
+ #
+ #
+ 
+ # for tim
+ for_window [instance=”TIM.exe”] floating enable
+ for_window [instance=”TIM.exe”] border none
+
+
+exec_always ~/.config/polybar/launch.sh

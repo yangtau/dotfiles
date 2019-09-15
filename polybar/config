@@ -20,7 +20,7 @@ white = #FFFFFF
 black = #000000
 
 ;bg = #7F000000
-bg = #bfFFFFFF
+bg = #b0FFFFFF
 fg = #2E2E2E
 ;fg = #FFFFFF
 fg-alt = #424242
@@ -89,9 +89,44 @@ tray-padding = 1
 
 ;== Module Location ========================================================
 
-modules-left = arch workspaces 
+modules-left = arch i3 
 modules-right = cpu memory backlight volume battery date powermenu
+
+
+;== subbar =========================================================
+[bar/subbar]
+monitor = HDMI1
+width = 100%
+height = 40
+bottom = false
+fixed-center = false
+line-size = 2
+
+background = ${color.bg}
+foreground = ${color.fg}
+
+border-top-size = 8
+border-left-size = 8
+border-right-size = 8
+border-color = ${color.trans}
+
+module-margin-left = 1
+module-margin-right = 1
+
+;==========================================================
+
+font-0 = "Noto Sans Mono:size=13;2"
+font-1 = "Material Icons:size=13;4"
+font-2 = "Font Awesome 5 Free:style=solid:size=13;3"
+
+;==========================================================
+cursor-click = pointer
+
+;== Module Location ========================================================
+modules-left = i3-sub 
+modules-right = date padding
  
+
 ;== Modules ========================================================
 [module/arch]
 type = custom/text
@@ -101,8 +136,130 @@ content-padding = 1
 content-background = ${color.acolor}
 content-foreground = ${color.fg}
 click-left = ~/.config/polybar/scripts/rmenu_g
-click-middle = ~/.config/polybar/scripts/rfull
-click-right = ~/.config/polybar/scripts/rmenu_wi_g
+
+
+[module/i3]
+type = internal/i3
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+ws-icon-0 = 1;♚
+ws-icon-1 = 2;♛
+ws-icon-2 = 3;♜
+ws-icon-3 = 4;♝
+ws-icon-4 = 5;♞
+ws-icon-default = ♟
+; NOTE: You cannot skip icons, e.g. to get a ws-icon-6
+; you must also define a ws-icon-5.
+; NOTE: Icon will be available as the %icon% token inside label-*
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> 
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 0
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %index%
+label-focused-foreground = ${color.fg}
+label-focused-background = ${color.acolor}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-underline = ${color.acolor}
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
+
+; Separator in between workspaces
+label-separator = 
+label-separator-padding = 0
+label-separator-foreground = #ffb52
+
+
+[module/i3-sub]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = false
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+format = <label-state> 
+label-mode = %mode%
+label-mode-padding = 0
+label-mode-background = #e60053
+
+label-focused = %index%
+label-focused-foreground = ${color.fg}
+label-focused-background = ${color.acolor}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-underline = ${color.acolor}
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
+
+label-separator = 
+label-separator-padding = 0
+label-separator-foreground = #ffb52
+
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -365,7 +522,10 @@ content = 
 content-padding = 1
 ;content-background = ${color.acolor}
 content-foreground = ${color.fg}
-click-left = ~/.config/polybar/scripts/pmenu_g
-click-right = ~/.config/polybar/scripts/pmenu_g
+click-left = ~/.config/polybar/scripts/powermenu
+
+[module/padding]
+type = custom/text
+content = " " 
 
 ;== EOF ========================================================

@@ -2,10 +2,9 @@
 
 ## Created By Aditya Shakya
 
-#MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 5 -xoffset -14 -yoffset -52 -width 10 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")"
-MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 5 -xoffset -14 -yoffset -52 -width 10 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")"
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 3 -xoffset -20 -yoffset 60 -width 15 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 -font "Noto Sans Mono 13" <<< " Lock| Logout| Reboot| Shutdown")"
             case "$MENU" in
-                *Lock) i3lock-fancy ;;
+                *Lock) i3lock ;;
                 *Logout) openbox --exit;;
                 *Reboot) systemctl reboot ;;
                 *Shutdown) systemctl -i poweroff
