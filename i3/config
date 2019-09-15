@@ -36,7 +36,7 @@ exec ss-qt5
 
 exec fcitx
 
-exec compton
+exec_always compton
 
 exec variety
 
