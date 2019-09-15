@@ -19,13 +19,13 @@ trans = #00000000
 white = #FFFFFF
 black = #000000
 
-bg = #7F000000
-;bg = #00000000
-;fg = #2E2E2E
-fg = #FFFFFF
+;bg = #7F000000
+bg = #bfFFFFFF
+fg = #2E2E2E
+;fg = #FFFFFF
 fg-alt = #424242
 
-acolor = #64b5f6 
+acolor = #00acc1 
 curgent = #e53935
 coccupied = #43a047
 
@@ -64,7 +64,7 @@ line-size = 2
 background = ${color.bg}
 foreground = ${color.fg}
 
-border-size = 0
+border-size = 2
 border-color = ${color.bg}
 
 module-margin-left = 1
@@ -72,7 +72,7 @@ module-margin-right = 1
 
 ;==========================================================
 
-font-0 = "Noto Sans Mono:style=bold:size=13;2"
+font-0 = "Noto Sans Mono:size=13;2"
 font-1 = "Material Icons:size=13;4"
 font-2 = "Font Awesome 5 Free:pixelsize=13;2"
 font-3 = "Font Awesome 5 Free Solid:pixelsize=13;3"
