@@ -9,4 +9,7 @@ set expandtab
 set softtabstop=4
 set number
 set relativenumber
-
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
