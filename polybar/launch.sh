@@ -8,5 +8,5 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch sub polybar
 polybar subbar -c /home/tau/.config/polybar/config & 
 # Launch main polybar
-polybar main -c /home/tau/.config/polybar/config &
+polybar mainbar -c /home/tau/.config/polybar/config &
 
