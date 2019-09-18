@@ -1,8 +1,8 @@
 # Dotfiles
 
-This repository consists of configuration for some tools that I use within my Manjaro. 
+This repository consists of configuration for some tools that I use within my Manjaro. More details about how to set my configuration are in my blog in Chinese.
 
-![](https://raw.githubusercontent.com/yangtau/dotfiles/master/screenshot.png)
+![](https://github.com/yangtau/dotfiles/blob/master/screenshot.jpg?raw=true)
 
 # Key Components
  - [i3-gaps](https://github.com/Airblader/i3)
@@ -15,7 +15,18 @@ This repository consists of configuration for some tools that I use within my Ma
 
 # i3
 
+## [TocuhPad](https://github.com/yangtau/dotfiles/blob/master/30-touchpad.conf)
+
+This configuration enables natural scrolling and tapping for touchpad, and it requires libinput. 
+
+Usage: `ln ./30-touchpad.conf /etc/X11/xorg.conf.d/30-touchpad.conf`
+
+See the ArchWiki about [libinput](https://wiki.archlinux.org/index.php/Libinput) for more details.
 
 # polybar
 
+I modify the configuration in [polybar-theme](https://github.com/adi1090x/polybar-themes) to get my own config, and I add two different bars to adapt multiple monitors.
+
 # compton
+
+The comtpon that I use is a fork of the original version, and it can have an effect of frosted glass. The config file is a copy of [compton.conf](https://github.com/theniceboy/.config/blob/master/compton.conf).

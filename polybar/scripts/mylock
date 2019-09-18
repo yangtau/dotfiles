@@ -18,7 +18,7 @@ i3lock \
   --linecolor=00000000   \
   --keyhlcolor=ffffff80   \
   --ringvercolor=ffffff00 \
-  --separatorcolor=22222260 
+  --separatorcolor=22222260 \
   --insidevercolor=ffffff1c \
   --ringwrongcolor=ffffff55 \
   --insidewrongcolor=ffffff1c \
