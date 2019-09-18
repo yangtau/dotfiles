@@ -57,11 +57,6 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
-# rofi
-bindsym $mod+space exec rofi -show run
-
-# rofi window
-
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -196,11 +191,11 @@ client.unfocused        #BABABA #BABABA #555555 #484E50   #5F676A
 
 client.background       #FFFFFF
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
- # bar {
- #        status_command i3status
- # }
- #
- #
+# custom shortcut
+# screenshot
+bindsym $mod+Print exec scrot ~/Pictures/tmp.jpg
+# rofi
+bindsym $mod+space exec rofi -show run  -font "Noto Sans Mono 13"
+# rofi window
+bindsym Mod1+space exec rofi -show window -show-icons -font "Noto Sans Mono 13" -hide-scrollbar
 
