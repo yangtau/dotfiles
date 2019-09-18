@@ -1,10 +1,12 @@
 #!/bin/bash
 
 ## Created By Aditya Shakya
+## Modified By Tau
 
-MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 3 -xoffset -20 -yoffset 60 -width 15 -hide-scrollbar -line-padding 4 -padding 20 -lines 5 -font "Noto Sans Mono 13" <<< " Lock| Suspend| Logout| Reboot| Shutdown")"
+
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 3 -xoffset -20 -yoffset 60 -width 15 -hide-scrollbar -line-padding 4 -padding 20 -lines 5 -font "Noto Sans Mono 13" <<< " Lock| Suspend| Logout| Reboot| Shutdown")"
             case "$MENU" in
-                *Lock) i3lock-fancy ;;
+                *Lock) /home/tau/.config/polybar/scripts/lock;;
                 *Suspend) i3lock && systemctl suspend;;
                 *Logout) i3-msg exit;;
                 *Reboot) systemctl reboot ;;

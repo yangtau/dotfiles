@@ -1,0 +1,33 @@
+#!/bin/bash
+
+TMPBG=/tmp/screen.png
+scrot $TMPBG && convert $TMPBG -scale 5% -scale 2000%  $TMPBG
+
+param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
+    "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
+    "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
+    "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
+    "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
+    "--datecolor=ffffff00" "--layoutcolor=ffffff00")
+
+
+i3lock \
+  -i $TMPBG \
+  --insidecolor=0000001c \
+  --ringcolor=0000003e   \
+  --linecolor=00000000   \
+  --keyhlcolor=ffffff80   \
+  --ringvercolor=ffffff00 \
+  --separatorcolor=22222260 
+  --insidevercolor=ffffff1c \
+  --ringwrongcolor=ffffff55 \
+  --insidewrongcolor=ffffff1c \
+  --verifcolor=ffffff00 \
+  --wrongcolor=ff000000  \
+  --timecolor=ffffff00 \
+  --datecolor=ffffff00 \
+  --layoutcolor=ffffff00
+
+
+rm $TMPBG
+
