@@ -18,7 +18,7 @@ include-file = /home/tau/.config/polybar/modules.ini
 [bar/mainbar]
 include-file = /home/tau/.config/polybar/fonts.ini
 include-file = /home/tau/.config/polybar/bar-common.ini
-monitor = eDP1
+monitor = eDP-1
 ;== tray ======================================
 tray-position = right
 tray-backgroud = ${color.trans}
@@ -35,7 +35,7 @@ modules-right = cpu memory backlight volume battery date powermenu
 [bar/subbar]
 include-file = /home/tau/.config/polybar/fonts.ini
 include-file = /home/tau/.config/polybar/bar-common.ini
-monitor = HDMI1
+monitor = HDMI-1
 
 ;== Module Location ========================================================
 modules-left = i3-sub 
