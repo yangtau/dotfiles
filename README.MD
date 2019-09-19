@@ -10,7 +10,8 @@ This repository consists of configuration for some tools that I use within my Ma
  - [rofi](https://github.com/davatorium/rofi)
  - [polybar](https://github.com/polybar/polybar)
  - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
- - [compton](https://github.com/tryone144/compton.git)
+ - ~~[compton](https://github.com/tryone144/compton.git)~~
+ - [compton](https://github.com/yshui/compton)
  - [nvim](https://neovim.io/)
 
 # i3
