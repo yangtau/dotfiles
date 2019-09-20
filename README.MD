@@ -16,7 +16,7 @@ This repository consists of configuration for some tools that I use within my Ma
 
 # i3
 
-## [TocuhPad](https://github.com/yangtau/dotfiles/blob/master/30-touchpad.conf)
+## TocuhPad
 
 This configuration enables natural scrolling and tapping for touchpad, and it requires libinput. 
 
@@ -30,4 +30,11 @@ I modify the configuration in [polybar-theme](https://github.com/adi1090x/polyba
 
 # compton
 
-The comtpon that I use is a fork of the original version, and it can have an effect of frosted glass. The config file is a copy of [compton.conf](https://github.com/theniceboy/.config/blob/master/compton.conf).
+~~The comtpon that I use is a fork of the original version, and it can have an effect of frosted glass. The config file is a copy of [compton.conf](https://github.com/theniceboy/.config/blob/master/compton.conf).~~
+
+I come back to the version that can be installed by `pacman`, which is much steady. As for the one above, the CPU usage is high, when I watch vedio in Chrome.
+
+# backlight
+
+I first use xbacklight to adjust the backlight. However, after I install the nvidia driver, it does not work. 
+I use [light](https://github.com/haikarainen/light) now. **Note:** make sure that your user is part if the `video` group.
