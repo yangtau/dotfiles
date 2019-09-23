@@ -2,13 +2,14 @@ syntax on
 set showmode
 set showcmd
 filetype indent on
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
+" set autoindent
+set tabstop=2
+set shiftwidth=2
+" set expandtab
+set softtabstop=2
 set number
 set relativenumber
+set background=light
 
 call plug#begin('~/.vim/plugged')
 
@@ -18,7 +19,9 @@ Plug 'neoclide/coc.nvim',
 
 call plug#end()
 
-set background=light
+" NERDTree 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 
 " if hidden is not set, TextEdit might fail.
