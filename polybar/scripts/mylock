@@ -28,6 +28,5 @@ i3lock \
   --datecolor=ffffff00 \
   --layoutcolor=ffffff00
 
-
 rm $TMPBG
 

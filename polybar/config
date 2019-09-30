@@ -26,8 +26,8 @@ tray-scale = 1
 tray-padding = 1
 
 ;== Module Location ========================================================
-modules-left = arch i3 
-modules-right = cpu memory backlight volume battery date powermenu
+modules-left = i3 
+modules-right = cpu memory backlight volume battery date 
 
 
 
