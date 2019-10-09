@@ -184,7 +184,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 for_window [class=".*"] border pixel 0
-gaps inner 5 
+gaps inner 2 
+gaps outer 2
 
 # class                 border  bground text    indicator child_border
 client.focused          #FFFFFF #FFFFFF #222222 #2E9EF4   #285577
