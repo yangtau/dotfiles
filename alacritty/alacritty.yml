@@ -4,7 +4,7 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
-  WINIT_HIDPI_FACTOR: '1.6'
+  WINIT_HIDPI_FACTOR: '1.5'
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -20,7 +20,7 @@ window:
   # If both are `0`, this setting is ignored.
   dimensions:
     columns: 80
-    lines: 30
+    lines: 20
 
   # Window position (changes require restart)
   #
@@ -97,46 +97,14 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
+tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
-  # Normal (roman) font face
-  #normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux) monospace
-    #   - (Windows) Consolas
-    #family: monospace
 
-    # The `style` can be specified to pick a specific face.
-    #style: Regular
+  normal:
+    family: Noto Sans Mono
 
-  # Bold font face
-  #bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
-
-  # Italic font face
-  #italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
-
-  # Point size
   size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
@@ -171,48 +139,30 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Pencil Light)
 colors:
-   # Default Colors
    primary:
      background: '0xf1f1f1'
-     foreground: '0x424242'
-   # Normal colors
+     foreground: '0x000000'
    normal:
-     black:    '0x414141'
-     red:      '0xb23670'
-     green:    '0x66781d'
-     yellow:   '0xcc6e33'
-     blue:     '0x3b5ea7'
-     magenta:  '0xa353b2'
-     cyan:     '0x66781d'
+     black:    '0x000000'
+     red:      '0xaa0000'
+     green:    '0x149114'
+     yellow:   '0xaa5500'
+     blue:     '0x0000aa'
+     magenta:  '0xaa00aa'
+     cyan:     '0x008888'
      white:    '0xffffff' 
-     # black:   '0x212121'
-     # red:     '0xc30771'
-     # green:   '0x10a778'
-     # yellow:  '0xa89c14'
-     # blue:    '0x008ec4'
-     # magenta: '0x523c79'
-     # cyan:    '0x20a5ba'
-     # white:   '0xe0e0e0'
-   # Bright colors
    bright:
-     black:    '0x3e3e3e'
-     red:      '0xda3365'
-     green:    '0x829428'
+     black:    '0x555555'
+     red:      '0xff5555'
+     green:    '0x00aa00'
      yellow:   '0xcc6e33'
-     blue:     '0x3b5ea7'
-     magenta:  '0xa353b2'
-     cyan:     '0x829428'
-     white:    '0xf1f1f1'
-     # black:   '0x212121'
-     # red:     '0xfb007a'
-     # green:   '0x5fd7af'
-     # yellow:  '0xf3e430'
-     # blue:    '0x20bbfc'
-     # magenta: '0x6855de'
-     # cyan:    '0x4fb8cc'
-     # white:   '0xf1f1f1'
+     # yellow:   '0xcce02b'
+     blue:     '0x5555ff'
+     magenta:  '0x8b1a8b'
+     # cyan:     '0x4fb8cc'
+     cyan:     '0x00aaaa'
+     white:    '0xffffff'
 
 # Visual Bell
 #
@@ -244,7 +194,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.8
+background_opacity: 0.88
 
 # Mouse bindings
 #
