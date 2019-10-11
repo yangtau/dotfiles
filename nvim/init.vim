@@ -16,7 +16,13 @@ Plug 'scrooloose/nerdtree',
 
 Plug 'neoclide/coc.nvim', 
 
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim',
+
+Plug 'dart-lang/dart-vim-plugin',
+
+Plug 'jiangmiao/auto-pairs',
+
+Plug 'tpope/vim-fugitive',
 
 call plug#end()
 
