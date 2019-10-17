@@ -99,5 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
 alias update-time="sudo ntpdate -u ntp.api.bz"
+
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
