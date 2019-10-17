@@ -24,14 +24,18 @@ Plug 'jiangmiao/auto-pairs',
 
 Plug 'tpope/vim-fugitive',
 
+Plug 'rafi/awesome-vim-colorschemes'
+
 call plug#end()
 
 " color scheme
 set background=light
-highlight SignColumn guibg=None ctermbg=None
 let g:lightline = {
       \ 'colorscheme': 'PaperColor',
       \ }
+
+" highlight Normal guibg=None ctermbg=None
+highlight SignColumn guibg=None ctermbg=None
 
 " NERDTree 
 autocmd StdinReadPre * let s:std_in=1
