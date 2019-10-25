@@ -22,6 +22,7 @@ font pango:Noto Sans Mono 10
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
+# TODO: repalce i3lock with i3lock-color
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -53,7 +54,7 @@ bindsym XF86MonBrightnessDown exec light -U 5
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 #i3-sensible-terminal
 
 
@@ -193,7 +194,7 @@ client.background       #FFFFFF
 
 # custom shortcut
 # screenshot
-bindsym $mod+Print exec scrot ~/Pictures/tmp.jpg
+bindsym $mod+Print exec deepin-screenshot -n -s ~/Pictures/tmp.jpg
 # rofi
 bindsym $mod+space exec rofi -show run  -font "Noto Sans Mono 13"
 # rofi window

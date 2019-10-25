@@ -9,6 +9,8 @@ set expandtab
 set softtabstop=2
 set number
 set relativenumber
+set fileencodings=utf-8,gb18030,gbk,gb2312
+set spelllang=en,cjk
 
 call plug#begin('~/.vim/plugged')
 

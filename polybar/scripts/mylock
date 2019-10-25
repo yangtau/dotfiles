@@ -3,13 +3,6 @@
 TMPBG=/tmp/screen.png
 scrot $TMPBG && convert $TMPBG -scale 5% -scale 2000%  $TMPBG
 
-param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
-    "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
-    "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
-    "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
-    "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
-    "--datecolor=ffffff00" "--layoutcolor=ffffff00")
-
 
 i3lock \
   -i $TMPBG \
@@ -20,13 +13,23 @@ i3lock \
   --ringvercolor=ffffff00 \
   --separatorcolor=22222260 \
   --insidevercolor=ffffff1c \
-  --ringwrongcolor=ffffff55 \
-  --insidewrongcolor=ffffff1c \
-  --verifcolor=ffffff00 \
-  --wrongcolor=ff000000  \
-  --timecolor=ffffff00 \
-  --datecolor=ffffff00 \
-  --layoutcolor=ffffff00
+  --verifcolor=333333ee \
+  --insidewrongcolor=ff000009\
+  --ringwrongcolor=ff000055 \
+  --wrongcolor=ff0000ff  \
+  --bshlcolor=ff000055 \
+  -k --datestr="%d, %m, %Y" \
+  --timestr="%H:%M"  \
+  --wrongtext='wrong!' \
+  --timecolor=333333ee \
+  --datecolor=333333ee \
+  --layoutcolor=ffffff00 \
+  --ring-width=7.0  \
+  --radius=100 \
+  --time-font="Fira Code" \
+  --date-font="Fira Code" \
+  --timesize=50 \
+  --datesize=16
 
 rm $TMPBG
 
