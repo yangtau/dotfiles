@@ -54,7 +54,7 @@ bindsym XF86MonBrightnessDown exec light -U 5
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 #i3-sensible-terminal
 
 
