@@ -44,11 +44,16 @@ h3 {
 	margin-top: 3em;
 }
 
+h1+h2, h2+h3 {
+	margin-top: 0.83em;
+}
+
 h1, 
-h2, 
-h3{
+h2 
+{
 	text-align: center;
 }
+
 
 h2:after{
 	border-bottom: 1px solid #2f2f2f;
@@ -59,9 +64,7 @@ h2:after{
     height: 1px;
 }
 
-h1+h2, h2+h3 {
-	margin-top: 0.83em;
-}
+
 
 p,
 .mathjax-block {
@@ -82,9 +85,10 @@ blockquote {
 	padding-left: 1em;
 	border-left: 1px solid #ddd;
 }
+
 code,
 pre {
-	font-family: "Consolas", "Menlo", "Monaco", monospace, serif;
+	font-family: "Fira Code","Consolas", "Menlo", "Monaco", monospace, serif;
 	font-size: .9em;
 	background: white;
 }

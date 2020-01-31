@@ -605,14 +605,8 @@ h6.md-focus .md-attr,
     opacity: 1;
 }
 
-.md-inline-math g,
 .md-inline-math svg {
-    stroke: #b8bfc6 !important;
-    fill: #b8bfc6 !important;
-}
-
-[md-inline='inline_math'] {
-    color: #9CB2E9;
+    color: #b8bfc6;
 }
 
 #math-inline-preview .md-arrow:after {
@@ -974,7 +968,7 @@ footer.ty-footer {
 }
 
 .md-search-hit {
-    background-color: rgba(199, 140, 60, 0.81);
+    background: rgba(199, 140, 60, 0.81);
     color: #eee;
 }
 

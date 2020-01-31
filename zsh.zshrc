@@ -101,3 +101,5 @@ alias vim=nvim
 
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
+
+source ~/.zprofile

@@ -3,10 +3,10 @@ set showmode
 set showcmd
 filetype indent on
 set autoindent
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
-set softtabstop=2
+set softtabstop=4
 set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
@@ -28,7 +28,9 @@ Plug 'tpope/vim-fugitive',
 
 Plug 'junegunn/vim-peekaboo',
 
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rafi/awesome-vim-colorschemes',
+
+Plug 'rust-lang/rust.vim',
 
 call plug#end()
 
