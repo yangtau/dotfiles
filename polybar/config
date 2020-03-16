@@ -28,8 +28,8 @@ tray-padding = 1
 ;== Module Location ========================================================
 modules-left = arch i3 
 modules-center = xwindow
-modules-right = cpu memory backlight volume battery date 
-
+;modules-right = cpu memory backlight volume battery date 
+modules-right = volume battery date 
 
 
 ;== subbar =========================================================

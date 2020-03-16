@@ -1,37 +1,54 @@
 {
-  "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls",
-        "compile_commands.json",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        "dart": {
+            "command": "dart",
+            "args": [
+                "/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot",
+                "--lsp"
+            ],
+            "filetypes": [
+                "dart"
+            ],
+            "disableDynamicRegister": true,
+            "trace.server": "verbose"
+        },
+        "hdlChecker": {
+            "command": "hdl_checker",
+            "args": [
+                "--lsp"
+            ],
+            "filetypes": [
+                "vhdl",
+                "verilog",
+                "systemverilog"
+            ]
         }
-      }
     },
-    "dart": {
-      "command": "dart",
-      "args": [
-        "/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot",
-        "--lsp"
-      ],
-      "filetypes": [
-        "dart"
-      ],
-      "disableDynamicRegister": true,
-      "trace.server": "verbose"
-    }
-  }
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "solargraph.formatting": true,
+    "solargraph.rename": true,
+    "solargraph.hover": true,
+    "solargraph.completion": true,
+    "solargraph.diagnostics": true
 }

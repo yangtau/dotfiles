@@ -54,9 +54,9 @@ bindsym XF86MonBrightnessDown exec light -U 5
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 #i3-sensible-terminal
-
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -199,4 +199,3 @@ bindsym $mod+Print exec deepin-screenshot -n -s ~/Pictures/tmp.jpg
 bindsym $mod+space exec rofi -show run  -font "Noto Sans Mono 13"
 # rofi window
 bindsym Mod1+space exec rofi -show window -show-icons -font "Noto Sans Mono 13" -hide-scrollbar
-

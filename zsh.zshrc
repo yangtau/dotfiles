@@ -102,4 +102,8 @@ alias vim=nvim
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
-source ~/.zprofile
+# bash auto completion
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+# wudao dict auto completion
+source /etc/bash_completion.d/wd
