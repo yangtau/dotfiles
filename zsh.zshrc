@@ -98,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
+alias rm="rm -i"
 
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
@@ -107,3 +108,5 @@ autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 # wudao dict auto completion
 source /etc/bash_completion.d/wd
+
+source ~/.profile
