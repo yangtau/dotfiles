@@ -1,6 +1,7 @@
 #!env /bin/bash
-killall  compton
+killall compton
+killall picom
 
 while pgrep -u $UID -x compton >/dev/null; do sleep 1; done
 
-compton > /dev/null 2>&1 &
+picom > /dev/null 2>&1 &
