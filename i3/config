@@ -35,6 +35,8 @@ exec fcitx
 
 exec variety
 
+exec blueman-tray
+
 exec_always bash /home/tau/.config/i3/compton_launch.sh
 
 exec_always bash /home/tau/.config/i3/bar-monitor.sh
