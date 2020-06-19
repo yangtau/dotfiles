@@ -98,7 +98,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
+
 alias rm="rm -i"
+alias mv="rm -i"
+alias cp="cp -i"
 
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
