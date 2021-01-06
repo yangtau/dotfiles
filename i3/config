@@ -31,11 +31,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec fcitx
-
 exec variety
 
 exec blueman-tray
+
+exec electron-ssr
 
 exec_always bash /home/tau/.config/i3/compton_launch.sh
 

@@ -14,13 +14,13 @@ set spelllang=en,cjk
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree',
+" Plug 'scrooloose/nerdtree',
 
-Plug 'neoclide/coc.nvim', 
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'itchyny/lightline.vim',
 
-Plug 'dart-lang/dart-vim-plugin',
+" Plug 'dart-lang/dart-vim-plugin',
 
 Plug 'jiangmiao/auto-pairs',
 
@@ -30,9 +30,8 @@ Plug 'junegunn/vim-peekaboo',
 
 Plug 'rafi/awesome-vim-colorschemes',
 
-Plug 'rust-lang/rust.vim',
+" Plug 'rust-lang/rust.vim',
 
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' },
 
 call plug#end()
 
