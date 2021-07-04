@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/tau/.config/polybar'
-let g:netrw_dirhist_2='/home/tau/.config/alacritty'
-let g:netrw_dirhist_3='/home/tau/.config/polybar/scripts'
