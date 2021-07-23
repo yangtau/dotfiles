@@ -22,6 +22,8 @@ Plug 'rafi/awesome-vim-colorschemes',
 
 Plug 'christoomey/vim-tmux-navigator',
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 call plug#end()
 
 " color scheme
@@ -35,7 +37,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " coc-extensions
-let g:coc_global_extensions = ['coc-yank', 'coc-git', 'coc-css', 'coc-html', 'coc-xml', 'coc-yaml', 'coc-json', 'coc-sql', 'coc-jedi', 'coc-java', 'coc-go', 'coc-rls', 'coc-clangd', 'coc-cmake']
+let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 
+            \ 'coc-css', 'coc-html', 'coc-xml', 'coc-yaml', 'coc-json', 'coc-sql', 'coc-jedi', 'coc-java', 'coc-go', 'coc-rls', 'coc-clangd', 'coc-cmake']
 
 " lightline
 let g:lightline = {
