@@ -6,6 +6,7 @@ set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set spelllang=en,cjk
+set mouse=a
 
 call plug#begin('~/.vim/plugged')
 
@@ -19,6 +20,8 @@ Plug 'junegunn/vim-peekaboo',
 
 Plug 'rafi/awesome-vim-colorschemes',
 
+Plug 'christoomey/vim-tmux-navigator',
+
 call plug#end()
 
 " color scheme
@@ -27,7 +30,7 @@ set background=light
 " highlight Normal guibg=None ctermbg=None
 highlight SignColumn guibg=None ctermbg=None
 
-" NERDTree
+" NERDTree 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
@@ -224,3 +227,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
