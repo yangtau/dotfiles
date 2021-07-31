@@ -31,6 +31,10 @@ yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 
+# external_bar
+# SPACEBAR_HEIGHT=$(spacebar -m config height)
+# yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
+
 # general space settings
 yabai -m config layout                       bsp
 yabai -m config top_padding                  6
@@ -57,17 +61,32 @@ yabai -m rule --add app="音乐"              space=default
 yabai -m rule --add app="Code"              space=ide
 
 # Unmanaged
-yabai -m rule --add app="Finder"             manage=off
-yabai -m rule --add app="System Preferences" manage=off
-yabai -m rule --add app="System Information" manage=off
-yabai -m rule --add app="ClashX"             manage=off
-yabai -m rule --add app="Calculator"         manage=off
-yabai -m rule --add app="Activity Monitor"   manage=off
-yabai -m rule --add app="Seal"               manage=off
-yabai -m rule --add app="Tencent Lemon"      manage=off
-yabai -m rule --add app="QQ"                 manage=off
-yabai -m rule --add app="Wechat"             manage=off
-yabai -m rule --add app="微信"               manage=off
-yabai -m rule --add app="系统偏好设置"       manage=off
+yabai -m rule --add app="Finder"             manage=off  layer=above
+yabai -m rule --add app="System Preferences" manage=off  layer=above
+yabai -m rule --add app="System Information" manage=off  layer=above
+yabai -m rule --add app="ClashX"             manage=off  layer=above
+yabai -m rule --add app="Calculator"         manage=off  layer=above
+yabai -m rule --add app="Activity Monitor"   manage=off  layer=above
+yabai -m rule --add app="Seal"               manage=off  layer=above
+yabai -m rule --add app="Tencent Lemon"      manage=off  layer=above
+yabai -m rule --add app="QQ"                 manage=off  layer=above
+yabai -m rule --add app="Wechat"             manage=off  layer=above
+yabai -m rule --add app="微信"               manage=off  layer=above
+yabai -m rule --add app="系统偏好设置"       manage=off  layer=above
+
+
+yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+
+yabai -m signal --add event=space_changed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=display_added action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=display_removed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=display_changed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=display_moved action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=mission_control_exit action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+yabai -m signal --add event=system_woke action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
+
+# add the following if you want window status reporting
+yabai -m signal --add event=window_focused action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabai.1d.sh'"
 
 echo "yabai configuration loaded.."
