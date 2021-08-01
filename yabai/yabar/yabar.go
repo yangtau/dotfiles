@@ -59,7 +59,7 @@ type space struct {
 	Index            int    `json:"index"`
 	Display          int    `json:"display"`
 	Windows          []int  `json:"windows"`
-	Type_            string `json:"type"`
+	Type             string `json:"type"`
 	Visible          int    `json:"visible"`
 	Focused          int    `json:"focused"`
 	NativeFullscreen int    `json:"native-fullscreen"`

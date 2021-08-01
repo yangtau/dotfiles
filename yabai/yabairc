@@ -15,74 +15,71 @@ sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # global settings
-yabai -m config mouse_follows_focus          off
-yabai -m config focus_follows_mouse          off
-yabai -m config window_placement             second_child
-yabai -m config window_topmost               off
-yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
-yabai -m config window_shadow                on
-yabai -m config insert_feedback_color        0xaad75f5f
-yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        1.0
-yabai -m config split_ratio                  0.50
-yabai -m config auto_balance                 on
-yabai -m config mouse_modifier               fn
-yabai -m config mouse_action1                move
-yabai -m config mouse_action2                resize
-
-# external_bar
-# SPACEBAR_HEIGHT=$(spacebar -m config height)
-# yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
-
-# general space settings
-yabai -m config layout                       bsp
-yabai -m config top_padding                  6
-yabai -m config bottom_padding               6
-yabai -m config left_padding                 6
-yabai -m config right_padding                6
-yabai -m config window_gap                   6
+yabai -m config mouse_follows_focus     on
+yabai -m config focus_follows_mouse     off
+yabai -m config window_placement        second_child
+yabai -m config window_topmost          off
+yabai -m config window_opacity          off
+yabai -m config window_opacity_duration 0.0
+yabai -m config window_shadow           on
+yabai -m config insert_feedback_color   0xaad75f5f
+yabai -m config active_window_opacity   1.0
+yabai -m config normal_window_opacity   1.0
+yabai -m config split_ratio             0.50
+yabai -m config auto_balance            on
+yabai -m config mouse_modifier          fn
+yabai -m config mouse_action1           move
+yabai -m config mouse_action2           resize
+yabai -m config layout                  bsp
+yabai -m config top_padding             6
+yabai -m config bottom_padding          6
+yabai -m config left_padding            6
+yabai -m config right_padding           6
+yabai -m config window_gap              6
 
 yabai -m config --space 1 layout float
 
+# Labels
 yabai -m space 1 --label default
 yabai -m space 2 --label reference
 yabai -m space 3 --label terminal
 yabai -m space 4 --label ide
 
 # Placement
-yabai -m rule --add app="iTerm2"            space=terminal
-yabai -m rule --add app="Microsoft Edge"    space=reference
-yabai -m rule --add app="Safari"            space=reference
-yabai -m rule --add app="Preview"           space=reference
-yabai -m rule --add app="预览"              space=reference
-yabai -m rule --add app="Lark"              space=default
-yabai -m rule --add app="音乐"              space=default
-yabai -m rule --add app="Code"              space=ide
+yabai -m rule --add app="iTerm2"         space=terminal
+yabai -m rule --add app="Microsoft Edge" space=reference
+yabai -m rule --add app="Safari"         space=reference
+yabai -m rule --add app="Preview"        space=reference
+yabai -m rule --add app="Code"           space=ide
+yabai -m rule --add app="飞书"           space=default    manage=off
+yabai -m rule --add app="音乐"           space=default    manage=off
+yabai -m rule --add app="微信"           space=default    manage=off
+yabai -m rule --add app="QQ"             space=default    manage=off
 
-# Unmanaged
-yabai -m rule --add app="Finder"             manage=off  layer=above
-yabai -m rule --add app="System Preferences" manage=off  layer=above
-yabai -m rule --add app="System Information" manage=off  layer=above
-yabai -m rule --add app="ClashX"             manage=off  layer=above
-yabai -m rule --add app="Calculator"         manage=off  layer=above
-yabai -m rule --add app="Activity Monitor"   manage=off  layer=above
-yabai -m rule --add app="Seal"               manage=off  layer=above
-yabai -m rule --add app="Tencent Lemon"      manage=off  layer=above
-yabai -m rule --add app="QQ"                 manage=off  layer=above
-yabai -m rule --add app="Wechat"             manage=off  layer=above
-yabai -m rule --add app="微信"               manage=off  layer=above
-yabai -m rule --add app="系统偏好设置"       manage=off  layer=above
+## setting or information
+yabai -m rule --add app="Seal"           manage=off layer=above
+yabai -m rule --add app="ClashX"         manage=off layer=above
+yabai -m rule --add app="Stretchly"      manage=off layer=above
+yabai -m rule --add app="系统偏好设置"   manage=off layer=above
+yabai -m rule --add app="系统信息"       manage=off layer=above
+yabai -m rule --add app="词典"           manage=off layer=above
+yabai -m rule --add app="计算器"         manage=off layer=above
+yabai -m rule --add subrole="AXDialog"   manage=off layer=above
+# subrole is supported in a fork version: https://github.com/yangtau/yabai
 
+# signals for yabar:
+# yabar is a xbar plugin for yabai, more abort yabar: https://github.com/yangtau/dotfiles/tree/main/yabai/yabar
+REFRESH_YABAR="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
+yabai -m signal --add event=space_changed        action="$REFRESH_YABAR"
+yabai -m signal --add event=display_added        action="$REFRESH_YABAR"
+yabai -m signal --add event=display_removed      action="$REFRESH_YABAR"
+yabai -m signal --add event=display_changed      action="$REFRESH_YABAR"
+yabai -m signal --add event=display_moved        action="$REFRESH_YABAR"
+yabai -m signal --add event=mission_control_exit action="$REFRESH_YABAR"
+yabai -m signal --add event=system_woke          action="$REFRESH_YABAR"
+
+# signals:
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-
-yabai -m signal --add event=space_changed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=display_added action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=display_removed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=display_changed action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=display_moved action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=mission_control_exit action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
-yabai -m signal --add event=system_woke action="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
 
 echo "yabai configuration loaded.."
