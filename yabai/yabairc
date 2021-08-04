@@ -51,10 +51,10 @@ yabai -m rule --add app="Microsoft Edge" space=reference
 yabai -m rule --add app="Safari"         space=reference
 yabai -m rule --add app="Preview"        space=reference
 yabai -m rule --add app="Code"           space=ide
-yabai -m rule --add app="飞书"           space=default    manage=off
 yabai -m rule --add app="音乐"           space=default    manage=off
 yabai -m rule --add app="微信"           space=default    manage=off
 yabai -m rule --add app="QQ"             space=default    manage=off
+yabai -m rule --add app="飞书"           space=default
 
 ## setting or information
 yabai -m rule --add app="Seal"           manage=off layer=above
