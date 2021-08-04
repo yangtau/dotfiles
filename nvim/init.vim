@@ -37,8 +37,27 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " coc-extensions
-let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 
-            \ 'coc-css', 'coc-html', 'coc-xml', 'coc-yaml', 'coc-json', 'coc-sql', 'coc-jedi', 'coc-java', 'coc-go', 'coc-rls', 'coc-clangd', 'coc-cmake']
+let g:coc_global_extensions = [
+    \ 'coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git',
+    \ 'coc-css', 'coc-html', 'coc-xml', 'coc-yaml', 'coc-json',
+    \ 'coc-sql', 'coc-jedi', 'coc-java', 'coc-go', 'coc-rls',
+    \ 'coc-clangd', 'coc-cmake', 'coc-highlight', 'coc-smartf',
+    \ 'coc-tabnine']
+
+" coc-highlight
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" coc-smartf
+" press <esc> to cancel.
+nmap f <Plug>(coc-smartf-forward)
+nmap F <Plug>(coc-smartf-backward)
+nmap ; <Plug>(coc-smartf-repeat)
+nmap , <Plug>(coc-smartf-repeat-opposite)
+
+augroup Smartf
+  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+augroup end
 
 " lightline
 let g:lightline = {
@@ -60,7 +79,6 @@ let g:lightline = {
 
 function! LightlineGitBlame() abort
   let blame = get(b:, 'coc_git_blame', '')
-  " return blame
   return winwidth(0) > 120 ? blame : ''
 endfunction
 
@@ -252,10 +270,10 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = "gna",
+      scope_incremental = "gns",
+      node_decremental = "gnd",
+      node_incremental = "gnf",
     },
   },
   -- indent = {

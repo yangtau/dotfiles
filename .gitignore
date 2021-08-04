@@ -5,3 +5,8 @@ htop/
 iterm2/
 neofetch/
 nvim/.netrwhist
+TabNine/
+go/
+ranger/
+configstore/
+nvim/coc-settings.json
