@@ -69,7 +69,7 @@ yabai -m rule --add subrole="AXDialog"   manage=off layer=above
 
 # signals for yabar:
 # yabar is a xbar plugin for yabai, more abort yabar: https://github.com/yangtau/dotfiles/tree/main/yabai/yabar
-REFRESH_YABAR="open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.cgo'"
+REFRESH_YABAR="$HOME/.config/yabai/yabar/yabar && open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.sh'"
 yabai -m signal --add event=space_changed        action="$REFRESH_YABAR"
 yabai -m signal --add event=display_added        action="$REFRESH_YABAR"
 yabai -m signal --add event=display_removed      action="$REFRESH_YABAR"

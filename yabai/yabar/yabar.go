@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -67,21 +68,9 @@ type space struct {
 	LastWindow       int    `json:"last-window"`
 }
 
-/*
-[{
-	"id":4,
-	"label":"reference",
-	"index":2,
-	"display":1,
-	"windows":[15429],
-	"type":"bsp",
-	"visible":0,
-	"focused":0,
-	"native-fullscreen":0,
-	"first-window":15429,
-	"last-window":15429
-}]
-*/
+const (
+	YabarFilename = "/tmp/.yabar"
+)
 
 func main() {
 	os.Setenv("PATH", "/usr/local/bin")
@@ -113,5 +102,11 @@ func main() {
 		spaceStatus[i] = color(s, focusedDisplay) + left(s) + shape(s, focusedDisplay) + right(s)
 	}
 
-	fmt.Println(strings.Join(spaceStatus, divider))
+	output := strings.Join(spaceStatus, divider)
+
+	ioutil.WriteFile(YabarFilename, []byte(output), os.FileMode(0660))
+
+	if len(os.Args) >= 2 && os.Args[1] == "debug" {
+		fmt.Println(output)
+	}
 }

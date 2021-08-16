@@ -1,11 +1,10 @@
 PLUGINS = ~/Library/Application\ Support/xbar/plugins/
-NAME = yabar.1d.cgo
+NAME = yabar.1d.sh
+
+all: yabar install
 
 yabar: yabar.go
 	go build yabar.go
 
-install: yabar
-	mv yabar $(PLUGINS)$(NAME)
-
-clean:
-	rm -f yabar
+install: yabar.1d.sh
+	cp $< $(PLUGINS)$(NAME)
