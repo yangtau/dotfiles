@@ -64,7 +64,7 @@ yabai -m rule --add app="系统偏好设置"   manage=off layer=above
 yabai -m rule --add app="系统信息"       manage=off layer=above
 yabai -m rule --add app="词典"           manage=off layer=above
 yabai -m rule --add app="计算器"         manage=off layer=above
-yabai -m rule --add subrole="AXDialog"   manage=off layer=above
+yabai -m rule --add subrole="AXDialog"   manage=off
 # subrole is supported in a fork version: https://github.com/yangtau/yabai
 
 # signals for yabar:
