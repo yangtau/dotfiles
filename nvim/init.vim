@@ -6,7 +6,7 @@ set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set spelllang=en,cjk
-set mouse=a
+" set mouse=a
 
 call plug#begin('~/.vim/plugged')
 
@@ -24,6 +24,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'},
 
+" copy text over ssh
+Plug 'ojroques/vim-oscyank',
+
 call plug#end()
 
 " colorscheme
@@ -35,6 +38,8 @@ highlight VertSplit  cterm=None
 " NERDTree 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " coc-extensions
 let g:coc_global_extensions = [
@@ -270,6 +275,7 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
+      -- TODO: fix me
       init_selection = "gna",
       scope_incremental = "gns",
       node_decremental = "gnd",
