@@ -20,12 +20,11 @@ Plug 'junegunn/vim-peekaboo',
 
 Plug 'christoomey/vim-tmux-navigator',
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
-
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'},
 
-" copy text over ssh
-Plug 'ojroques/vim-oscyank',
+Plug 'ojroques/vim-oscyank', " copy text over ssh
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
 call plug#end()
 
@@ -39,7 +38,7 @@ highlight VertSplit  cterm=None
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
+" autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " coc-extensions
 let g:coc_global_extensions = [
@@ -51,6 +50,13 @@ let g:coc_global_extensions = [
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" show buffers
+nnoremap <silent><nowait> <space>b  :<C-u>CocCommand fzf-preview.Buffers<CR>
+" show project files
+nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
+" show directory files
+nnoremap <silent><nowait> <space>f  :<C-u>CocCommand fzf-preview.Lines<CR>
 
 " coc-smartf
 " press <esc> to cancel.
