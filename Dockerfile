@@ -17,10 +17,8 @@ RUN	echo 'root:hello' | chpasswd
 
 # Fix sshd
 RUN sed -i "s/#*PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
-    sed -i "s/#*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-
-# Expose tcp port
-EXPOSE 22
+    sed -i "s/#*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config && \
+    sed -i "s/#*Port.*/Port 2333/g" /etc/ssh/sshd_config
 
 # Create new user
 RUN sed -i "s/^#.*%wheel ALL=(ALL) ALL.*/%wheel ALL=(ALL) ALL/g"  /etc/sudoers && \
@@ -40,9 +38,8 @@ RUN cd /home/tau && \
 RUN cd /home/tau && \
     git clone https://github.com/yangtau/dotfiles .config && \
     sh -c 'curl -fLo .local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' && \
-    nvim --headless +PlugInstall +qall # && \
-    # nvim --headless -c 'CocInstall -sync coc-fzf-preview coc-pairs coc-yank coc-git coc-json coc-smartf coc-tabnine' +qall && \
-RUN cd /home/tau && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    nvim --headless +PlugInstall +qall
+RUN cd /home/tau && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
 USER root
 
