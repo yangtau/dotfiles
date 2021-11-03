@@ -41,12 +41,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " coc-extensions
-let g:coc_global_extensions = [
-    \ 'coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git',
-    \ 'coc-css', 'coc-html', 'coc-xml', 'coc-yaml', 'coc-json',
-    \ 'coc-sql', 'coc-jedi', 'coc-java', 'coc-go', 'coc-rls',
-    \ 'coc-clangd', 'coc-cmake', 'coc-highlight', 'coc-smartf',
-    \ 'coc-tabnine']
+let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json', 'coc-smartf', 'coc-tabnine']
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
