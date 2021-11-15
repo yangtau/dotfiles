@@ -39,23 +39,6 @@ yabai -m config window_gap              6
 
 yabai -m config --space 1 layout float
 
-# Labels
-yabai -m space 1 --label default
-yabai -m space 2 --label reference
-yabai -m space 3 --label terminal
-yabai -m space 4 --label ide
-
-# Placement
-yabai -m rule --add app="iTerm2"         space=terminal
-yabai -m rule --add app="Microsoft Edge" space=reference
-yabai -m rule --add app="Safari"         space=reference
-yabai -m rule --add app="Preview"        space=reference
-yabai -m rule --add app="Code"           space=ide
-yabai -m rule --add app="音乐"           space=default    manage=off
-yabai -m rule --add app="微信"           space=default    manage=off
-yabai -m rule --add app="QQ"             space=default    manage=off
-yabai -m rule --add app="飞书"           space=default
-
 ## setting or information
 yabai -m rule --add app="Seal"           manage=off layer=above
 yabai -m rule --add app="ClashX"         manage=off layer=above
@@ -64,7 +47,7 @@ yabai -m rule --add app="系统偏好设置"   manage=off layer=above
 yabai -m rule --add app="系统信息"       manage=off layer=above
 yabai -m rule --add app="词典"           manage=off layer=above
 yabai -m rule --add app="计算器"         manage=off layer=above
-yabai -m rule --add subrole="AXDialog"   manage=off
+yabai -m rule --add subrole="AXDialog"   manage=off layer=above
 # subrole is supported in a fork version: https://github.com/yangtau/yabai
 
 # signals for yabar:
@@ -76,10 +59,10 @@ yabai -m signal --add event=display_removed      action="$REFRESH_YABAR"
 yabai -m signal --add event=display_changed      action="$REFRESH_YABAR"
 yabai -m signal --add event=display_moved        action="$REFRESH_YABAR"
 yabai -m signal --add event=mission_control_exit action="$REFRESH_YABAR"
-yabai -m signal --add event=system_woke          action="$REFRESH_YABAR"
+# yabai -m signal --add event=system_woke          action="$REFRESH_YABAR"
 
 # signals:
-yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=window_destroyed       action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 
 echo "yabai configuration loaded.."

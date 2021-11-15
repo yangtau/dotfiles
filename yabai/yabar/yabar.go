@@ -23,7 +23,7 @@ var (
 		}
 	}
 	shape = func(s space, focusedDisplay int) string {
-		if s.Focused == 1 {
+		if s.Focused {
 			return "●" // "⦿" "◆"
 		} else {
 			return "○" // "◇"
@@ -55,17 +55,17 @@ const (
 )
 
 type space struct {
-	Id               int    `json:"id"`
-	Label            string `json:"label"`
-	Index            int    `json:"index"`
-	Display          int    `json:"display"`
-	Windows          []int  `json:"windows"`
-	Type             string `json:"type"`
-	Visible          int    `json:"visible"`
-	Focused          int    `json:"focused"`
-	NativeFullscreen int    `json:"native-fullscreen"`
-	FirstWindow      int    `json:"first-window"`
-	LastWindow       int    `json:"last-window"`
+	Display int  `json:"display"`
+	Focused bool `json:"has-focus"`
+	Visible bool `json:"is-visible"`
+	// Id               int    `json:"id"`
+	// Label            string `json:"label"`
+	// Index            int    `json:"index"`
+	// Windows          []int  `json:"windows"`
+	// Type             string `json:"type"`
+	// NativeFullscreen int    `json:"is-native-fullscreen"`
+	// FirstWindow      int    `json:"first-window"`
+	// LastWindow       int    `json:"last-window"`
 }
 
 const (
@@ -91,7 +91,7 @@ func main() {
 
 	focusedDisplay := 0
 	for _, s := range spaces {
-		if s.Focused == 1 {
+		if s.Focused && s.Visible {
 			focusedDisplay = s.Display
 			break
 		}
