@@ -10,6 +10,8 @@ set spelllang=en,cjk
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-sensible',
+
 Plug 'scrooloose/nerdtree',
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

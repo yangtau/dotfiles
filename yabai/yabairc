@@ -20,7 +20,6 @@ yabai -m config focus_follows_mouse     off
 yabai -m config window_placement        second_child
 yabai -m config window_topmost          off
 yabai -m config window_opacity          off
-yabai -m config window_opacity_duration 0.0
 yabai -m config window_shadow           on
 yabai -m config insert_feedback_color   0xaad75f5f
 yabai -m config active_window_opacity   1.0
@@ -40,13 +39,12 @@ yabai -m config window_gap              6
 yabai -m config --space 1 layout float
 
 ## setting or information
-yabai -m rule --add app="Seal"           manage=off layer=above
+yabai -m rule --add app="飞书*"          manage=off
 yabai -m rule --add app="ClashX"         manage=off layer=above
 yabai -m rule --add app="Stretchly"      manage=off layer=above
-yabai -m rule --add app="系统偏好设置"   manage=off layer=above
-yabai -m rule --add app="系统信息"       manage=off layer=above
 yabai -m rule --add app="词典"           manage=off layer=above
 yabai -m rule --add app="计算器"         manage=off layer=above
+yabai -m rule --add app="Python"         manage=off layer=above
 yabai -m rule --add subrole="AXDialog"   manage=off layer=above
 # subrole is supported in a fork version: https://github.com/yangtau/yabai
 
@@ -59,7 +57,6 @@ yabai -m signal --add event=display_removed      action="$REFRESH_YABAR"
 yabai -m signal --add event=display_changed      action="$REFRESH_YABAR"
 yabai -m signal --add event=display_moved        action="$REFRESH_YABAR"
 yabai -m signal --add event=mission_control_exit action="$REFRESH_YABAR"
-# yabai -m signal --add event=system_woke          action="$REFRESH_YABAR"
 
 # signals:
 yabai -m signal --add event=window_destroyed       action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
