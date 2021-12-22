@@ -1,0 +1,10 @@
+# /etc/sudoers.d/limitedadmins
+# Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11/bin"
+# Defaults!/etc/init.d/kinto setenv,env_reset,env_delete+=PATH,env_delete+=LD_PRELOAD,env_delete+=LD_LIBRARY_PATH,env_delete+=SSH_AUTH_SOCK,env_delete+=PYTHONPATH,env_delete+=PERL5LIB
+%tau ALL=NOPASSWD: /usr/bin/systemctl restart xkeysnail
+%tau ALL=NOPASSWD: /usr/bin/systemctl start xkeysnail
+%tau ALL=NOPASSWD: /usr/bin/systemctl stop xkeysnail
+%tau ALL=NOPASSWD: /usr/bin/systemctl status xkeysnail
+# %tau ALL=NOPASSWD: /usr/local/bin/xkeysnail *
+# %tau ALL=NOPASSWD: /usr/bin/systemctl is-active --quiet xkeysnail
+# %tau ALL=NOPASSWD: /usr/lib/systemd/system/xkeysnail.service
