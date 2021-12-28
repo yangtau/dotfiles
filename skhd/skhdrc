@@ -97,12 +97,13 @@ shift + alt - l : yabai -m window --swap east
 # make floating window fill left-half of screen
 # shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
-# destory desktop
-# shift + alt - d : yabai -m space --destory
+# destory spaces
+shift + alt - d : indexs=($(yabai -m query --spaces | jq -r '[.[] | select(.windows==[]) | .index] | sort | reverse | join(" ")')) && \
+                  for i in ${indexs[@]}; do yabai -m space --destroy ${i}; done
 
-# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
+# create a new space, move window and follow focus - uses jq for parsing json (brew install jq)
 shift + alt - n : yabai -m space --create && \
-                  index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                  index=$(yabai -m query --spaces --display | jq 'max_by(.index).index') && \
                   yabai -m window --space "${index}" && \
                   yabai -m space --focus "${index}"
 
