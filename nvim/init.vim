@@ -312,8 +312,8 @@ require("zen-mode").setup {
       -- list = false, -- disable whitespace characters
     },
   },
-  plugins = {
-    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-  },
+  -- plugins = {
+  --  twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+  -- },
 }
 EOF

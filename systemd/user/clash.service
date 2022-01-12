@@ -1,0 +1,10 @@
+[Unit]
+Description=Clash
+
+[Service]
+ExecStartPre=%h/.config/clash/set_proxy.sh
+ExecStart=/usr/bin/clash
+ExecStopPost=%h/.config/clash/set_proxy.sh disable
+
+[Install]
+WantedBy=default.target
