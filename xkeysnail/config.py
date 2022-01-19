@@ -49,12 +49,13 @@ define_keymap(re.compile(termStr, re.IGNORECASE), {
 
 # Keybindings for General Web Browsers
 define_keymap(re.compile(browserStr, re.IGNORECASE), {
-    K("M-W"):     K("C-W"),
-    K("M-F"):     K("C-F"),
-    K("M-Tab"):   K("C-Tab"),
-    K("M-MINUS"): K("C-MINUS"),
-    K("M-EQUAL"): K("C-EQUAL"),
-    K("M-Shift-T"):     K("C-Shift-T"),
+    K("M-W"):       K("C-W"),
+    K("M-F"):       K("C-F"),
+    K("M-Tab"):     K("C-Tab"),
+    K("M-MINUS"):   K("C-MINUS"),
+    K("M-EQUAL"):   K("C-EQUAL"),
+    K("M-Shift-T"): K("C-Shift-T"),
+    K("M-T"):       K("C-T"),
 }, "General Web Browsers")
 
 # Keybindings for lark
