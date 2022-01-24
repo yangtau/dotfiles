@@ -30,31 +30,25 @@ yabai -m config mouse_modifier          fn
 yabai -m config mouse_action1           move
 yabai -m config mouse_action2           resize
 yabai -m config layout                  bsp
-yabai -m config top_padding             8
-yabai -m config bottom_padding          8
-yabai -m config left_padding            8
-yabai -m config right_padding           8
+yabai -m config top_padding             4
+yabai -m config bottom_padding          4
+yabai -m config left_padding            4
+yabai -m config right_padding           4
 yabai -m config window_gap              6
+
+# add 30 padding to the top and bottom of all spaces regardless of the display it belongs to
+yabai -m config external_bar all:32:00
 
 yabai -m config --space 1 layout float
 
 ## setting or information
 yabai -m rule --add app="飞书*"          manage=off
+yabai -m rule --add app="微信*"          manage=off
 yabai -m rule --add app="ClashX"         manage=off layer=above
 yabai -m rule --add app="Stretchly"      manage=off layer=above
 yabai -m rule --add app="词典"           manage=off layer=above
 yabai -m rule --add app="计算器"         manage=off layer=above
 yabai -m rule --add app="Python"         manage=off layer=above
-
-# signals for yabar:
-# yabar is a xbar plugin for yabai, more abort yabar: https://github.com/yangtau/dotfiles/tree/main/yabai/yabar
-REFRESH_YABAR="$HOME/.config/yabai/yabar/yabar && open -gj 'xbar://app.xbarapp.com/refreshPlugin?path=yabar.1d.sh'"
-yabai -m signal --add event=space_changed        action="$REFRESH_YABAR"
-yabai -m signal --add event=display_added        action="$REFRESH_YABAR"
-yabai -m signal --add event=display_removed      action="$REFRESH_YABAR"
-yabai -m signal --add event=display_changed      action="$REFRESH_YABAR"
-yabai -m signal --add event=display_moved        action="$REFRESH_YABAR"
-yabai -m signal --add event=mission_control_exit action="$REFRESH_YABAR"
 
 # signals:
 yabai -m signal --add event=window_destroyed       action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
