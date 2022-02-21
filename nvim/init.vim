@@ -6,7 +6,7 @@ set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set spelllang=en,cjk
-" set mouse=a
+set fillchars=stlnc:-
 
 call plug#begin('~/.vim/plugged')
 
@@ -38,6 +38,9 @@ set background=light
 highlight SignColumn ctermbg=None
 highlight VertSplit  cterm=None
 
+" set hg file type
+autocmd BufNewFile,BufRead *.hg setf hedgehog
+
 " NERDTree 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -45,7 +48,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " coc-extensions
-let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json', 'coc-smartf', 'coc-tabnine']
+let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json', 'coc-tabnine']
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -56,18 +59,6 @@ nnoremap <silent><nowait> <space>b  :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
 " show directory files
 nnoremap <silent><nowait> <space>f  :<C-u>CocCommand fzf-preview.Lines<CR>
-
-" coc-smartf
-" press <esc> to cancel.
-nmap f <Plug>(coc-smartf-forward)
-nmap F <Plug>(coc-smartf-backward)
-nmap ; <Plug>(coc-smartf-repeat)
-nmap , <Plug>(coc-smartf-repeat-opposite)
-
-augroup Smartf
-  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
-  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
-augroup end
 
 " lightline
 let g:lightline = {
@@ -111,16 +102,6 @@ set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-set signcolumn=yes " bad experience fo seting signcolumn=number in nvim-0.5.0
-"  Always show the signcolumn, otherwise it would shift the text each time
-"" diagnostics appear/become resolved.
-"if has("nvim-0.5.0") || has("patch-8.1.1564")
-"  " Recently vim can merge signcolumn and number column into one
-"  set signcolumn=number
-"else
-"  set signcolumn=yes
-"endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
