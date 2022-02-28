@@ -38,6 +38,8 @@ set background=light
 highlight SignColumn ctermbg=None
 highlight VertSplit  cterm=None
 
+set signcolumn=yes
+
 " set hg file type
 autocmd BufNewFile,BufRead *.hg setf hedgehog
 
