@@ -166,7 +166,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-alt - b : yabai -m window --toggle float; yabai -m window --grid 8:8:2:1:4:4
+alt - b : yabai -m window --toggle float; yabai -m window --grid 8:8:1:1:6:6
 
 # toggle sticky(+float), topmost, picture-in-picture
 alt - p : yabai -m window --toggle sticky;\
