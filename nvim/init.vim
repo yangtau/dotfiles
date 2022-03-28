@@ -30,6 +30,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
 Plug 'folke/zen-mode.nvim',
 
+Plug 'github/copilot.vim',
+
 call plug#end()
 
 " colorscheme
@@ -50,7 +52,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 
 " coc-extensions
-let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json', 'coc-tabnine']
+let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json']
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
