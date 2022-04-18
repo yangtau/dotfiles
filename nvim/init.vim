@@ -1,7 +1,7 @@
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
+" set tabstop=4
+" set shiftwidth=4
+" set expandtab
+" set softtabstop=4
 set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
@@ -11,8 +11,6 @@ set fillchars=stlnc:-
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible',
-
-Plug 'scrooloose/nerdtree',
 
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
@@ -28,9 +26,11 @@ Plug 'ojroques/vim-oscyank', " copy text over ssh
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
-Plug 'folke/zen-mode.nvim',
-
 Plug 'github/copilot.vim',
+
+Plug 'tpope/vim-surround',
+
+Plug 'rhysd/vim-llvm',
 
 call plug#end()
 
@@ -45,11 +45,12 @@ set signcolumn=yes
 " set hg file type
 autocmd BufNewFile,BufRead *.hg setf hedgehog
 
-" NERDTree 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" llvm gd
+autocmd FileType llvm nmap <buffer><silent>gd <Plug>(llvm-goto-definition)
 
-" autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
+" coc explorer
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer --toggle --sources=buffer+,file+' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " coc-extensions
 let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json']
@@ -69,15 +70,15 @@ let g:lightline = {
   \ 'active': {
   \   'left': [
   \     [ 'mode', 'paste' ],
-  \     [ 'ctrlpmark', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+  \     [ 'ctrlpmark', 'gitbranch', 'diagnostic', 'cocstatus', 'filename', 'method' ]
   \   ],
   \   'right':[
   \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
-  \     [ 'blame' ]
+  \     [ 'gitblame' ]
   \   ],
   \ },
   \ 'component_function': {
-  \   'blame': 'LightlineGitBlame',
+  \   'gitblame': 'LightlineGitBlame',
   \ },
   \ 'colorscheme': 'PaperColor',
 \ }
@@ -271,34 +272,5 @@ require'nvim-treesitter.configs'.setup {
       node_incremental = "grm",
     },
   },
-}
-
-require("zen-mode").setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  -- refer to the configuration section below
-  window = {
-    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-    -- height and width can be:
-    -- * an absolute number of cells when > 1
-    -- * a percentage of the width / height of the editor when <= 1
-    -- * a function that returns the width or the height
-    width = 120, -- width of the Zen window
-    height = 1, -- height of the Zen window
-    -- by default, no options are changed for the Zen window
-    -- uncomment any of the options below, or add other vim.wo options you want to apply
-    options = {
-      -- signcolumn = "no", -- disable signcolumn
-      -- number = false, -- disable number column
-      -- relativenumber = false, -- disable relative numbers
-      -- cursorline = false, -- disable cursorline
-      -- cursorcolumn = false, -- disable cursor column
-      -- foldcolumn = "0", -- disable fold column
-      -- list = false, -- disable whitespace characters
-    },
-  },
-  -- plugins = {
-  --  twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-  -- },
 }
 EOF
