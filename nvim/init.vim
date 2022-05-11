@@ -1,6 +1,6 @@
-" set tabstop=4
-" set shiftwidth=4
-" set expandtab
+set tabstop=4
+set shiftwidth=4
+set expandtab
 " set softtabstop=4
 set number
 set relativenumber
@@ -32,6 +32,10 @@ Plug 'tpope/vim-surround',
 
 Plug 'rhysd/vim-llvm',
 
+Plug 'preservim/nerdtree',
+
+Plug 'tpope/vim-fugitive',
+
 call plug#end()
 
 " colorscheme
@@ -48,9 +52,10 @@ autocmd BufNewFile,BufRead *.hg setf hedgehog
 " llvm gd
 autocmd FileType llvm nmap <buffer><silent>gd <Plug>(llvm-goto-definition)
 
-" coc explorer
+" Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer --toggle --sources=buffer+,file+' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
 " coc-extensions
 let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json']
