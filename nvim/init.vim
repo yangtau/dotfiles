@@ -1,12 +1,13 @@
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
-" set softtabstop=4
 set number
 set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set spelllang=en,cjk
 set fillchars=stlnc:-
+set mouse=i
 
 call plug#begin('~/.vim/plugged')
 
@@ -25,12 +26,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'},
 Plug 'ojroques/vim-oscyank', " copy text over ssh
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
-
-Plug 'github/copilot.vim',
-
-Plug 'tpope/vim-surround',
-
-Plug 'rhysd/vim-llvm',
 
 Plug 'preservim/nerdtree',
 
