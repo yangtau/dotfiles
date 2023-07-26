@@ -7,7 +7,7 @@ set relativenumber
 set fileencodings=utf-8,gb18030,gbk,gb2312
 set spelllang=en,cjk
 set fillchars=stlnc:-
-set mouse=i
+set mouse=""
 
 call plug#begin('~/.vim/plugged')
 
@@ -27,9 +27,11 @@ Plug 'ojroques/vim-oscyank', " copy text over ssh
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
-Plug 'preservim/nerdtree',
+Plug 'nvim-tree/nvim-tree.lua'
 
 Plug 'tpope/vim-fugitive',
+
+Plug 'Exafunction/codeium.vim'
 
 call plug#end()
 
@@ -44,16 +46,16 @@ set signcolumn=yes
 " set hg file type
 autocmd BufNewFile,BufRead *.hg setf hedgehog
 
-" llvm gd
-autocmd FileType llvm nmap <buffer><silent>gd <Plug>(llvm-goto-definition)
+autocmd TextYankPost *
+    \ if v:event.operator is 'y' && v:event.regname is '+' |
+    \ execute 'OSCYankRegister +' |
+    \ endif
 
-" Start NERDTree when Vim starts with a directory argument.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 " coc-extensions
-let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git', 'coc-json']
+let g:coc_global_extensions = ['coc-fzf-preview', 'coc-pairs', 'coc-yank', 'coc-git']
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -277,5 +279,47 @@ require'nvim-treesitter.configs'.setup {
       node_incremental = "grm",
     },
   },
+}
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+local function my_on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- use all default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- override default:
+  vim.keymap.del('n', 's', { buffer = bufnr })
+  vim.keymap.del('n', '<C-k>', { buffer = bufnr })
+  vim.keymap.set('n', 'C', api.tree.change_root_to_node,          opts('CD'))
+  vim.keymap.set('n', '<C-t>', api.node.open.tab,                     opts('Open: New Tab'))
+  vim.keymap.set('n', 's', api.node.open.vertical,                opts('Open: Vertical Split'))
+  vim.keymap.set('n', 'a',     api.fs.create,                         opts('Create'))
+
+end
+
+
+-- empty setup using defaults
+require("nvim-tree").setup {
+  renderer = {
+    indent_markers = { enable = true},
+    icons = {
+        show = {
+            file = false,
+            folder = false,
+            git = false,
+            folder_arrow = false,
+            modified = false,
+        },
+    },
+  },
+
+  on_attach = my_on_attach,
 }
 EOF
