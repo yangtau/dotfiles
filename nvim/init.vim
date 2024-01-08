@@ -23,7 +23,7 @@ Plug 'christoomey/vim-tmux-navigator',
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'},
 
-Plug 'ojroques/vim-oscyank', " copy text over ssh
+Plug 'ojroques/nvim-osc52', " copy text over ssh
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 
@@ -45,11 +45,6 @@ set signcolumn=yes
 
 " set hg file type
 autocmd BufNewFile,BufRead *.hg setf hedgehog
-
-autocmd TextYankPost *
-    \ if v:event.operator is 'y' && v:event.regname is '+' |
-    \ execute 'OSCYankRegister +' |
-    \ endif
 
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
@@ -255,8 +250,27 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" treesitter modules
 lua <<EOF
+-- copy over ssh
+local function copy(lines, _)
+  require('osc52').copy(table.concat(lines, '\n'))
+end
+
+local function paste()
+  return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
+end
+
+vim.g.clipboard = {
+  name = 'osc52',
+  copy = {['+'] = copy, ['*'] = copy},
+  paste = {['+'] = paste, ['*'] = paste},
+}
+
+-- Now the '+' register will copy to system clipboard using OSC52
+vim.keymap.set('n', '<leader>c', '"+y')
+vim.keymap.set('n', '<leader>cc', '"+yy')
+
+-- treesitter modules
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
