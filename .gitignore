@@ -1,33 +1,6 @@
 .DS_Store
-
 coc/
-gh/
+git/
+tmux/
 htop/
 iterm2/
-neofetch/
-nvim/.netrwhist
-TabNine/
-go/
-ranger/
-configstore/
-nvim/coc-settings.json
-tmux/plugins/
-Code/
-LarkShell/
-Seal/
-sogoupinyin/
-fcitx5/
-clangd/
-microsoft-edge/
-gtk-3.0/
-
-# clash
-clash/Country.mmdb
-clash/cache.db
-clash/config.yaml
-clash/config.yaml.bak
-clash/dashboard/
-clash/url
-
-# systemd
-systemd/user/default.target.wants/
