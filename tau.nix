@@ -18,14 +18,18 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
+    settings.MaxAuthTries = 3;
+    settings.MaxStartups = "5:30:10";
   };
 
   virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
-    wget
     pciutils
     usbutils
+    iputils
+    usbutils
+    wget
     lsof
     neovim
     tmux
@@ -138,7 +142,7 @@
     linger = true;
     home = "/home/tau";
     hashedPassword = "$y$j9T$sZr2BQVoFnR8Pld1OgGs5.$rhMjy2zg1Qm42ytLh8x.DN5V09NLwIP5ts6xz7sWkeB";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       clang-tools
       python3
@@ -150,5 +154,11 @@
       htop
       gcc
     ];
+  };
+
+  fileSystems."/pan" = {
+    device = "/dev/disk/by-label/pan";
+    fsType = "ext4";
+    options = [ "uid=tau" "gid=users" ];
   };
 }
