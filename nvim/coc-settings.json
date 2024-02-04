@@ -1,7 +1,0 @@
-{
-    "go.goplsOptions": {
-        "gofumpt": true
-    },
-    "git.addGBlameToBufferVar": true,
-    "languageserver": {}
-}
