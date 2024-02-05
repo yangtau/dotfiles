@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  username = (import ./config.nix).username;
+in
 {
-  imports = [ <home-manager/nix-darwin> ];
+  imports = [
+    <home-manager/nix-darwin>
+  ];
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -32,6 +37,7 @@
     brews = [ ];
     casks = [
       { name = "alt-tab"; }
+      { name = "scroll-reverser"; }
       { name = "amethyst"; }
       { name = "arc"; }
       { name = "iterm2"; }
@@ -39,15 +45,19 @@
     ];
   };
 
-  users.users.tau = {
-    name = "tau";
-    home = "/Users/tau";
+  users.users.${username} = {
+    name = "${username}";
+    home = "/Users/${username}";
   };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.users.tau = { pkgs, ... }: {
+  home-manager.users.${username} = { pkgs, ... }: {
     imports = [ ./home-manager/home.nix ];
+    # Home Manager needs a bit of information about you and the paths it should
+    # manage.
+    home.username = "${username}";
+    home.homeDirectory = "/Users/${username}";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
