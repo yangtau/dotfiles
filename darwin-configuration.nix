@@ -2,6 +2,7 @@
 
 let
   username = (import ./config.nix).username;
+  hostname = (import ./config.nix).hostname;
 in
 {
   imports = [
@@ -23,6 +24,9 @@ in
   # Keyboard
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
+
+  # networking
+  networking.hostName = "${hostname}";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
