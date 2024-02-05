@@ -5,3 +5,5 @@ tmux/
 htop/
 iterm2/
 nvim/
+host.nix
+vars.nix

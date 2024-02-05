@@ -1,12 +1,14 @@
 { config, pkgs, ... }:
 
 let
-  username = (import ./config.nix).username;
-  hostname = (import ./config.nix).hostname;
+  # vars.nix defines some variables for this host
+  username = (import ./vars.nix).username;
+  hostname = (import ./vars.nix).hostname;
 in
 {
   imports = [
     <home-manager/nix-darwin>
+    ./host.nix # config for this host only
   ];
 
   # Use a custom configuration.nix location.
