@@ -67,6 +67,7 @@
   #  /etc/profiles/per-user/tau/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+    LANG = "en_US.UTF-8";
     EDITOR = "nvim";
   };
 
