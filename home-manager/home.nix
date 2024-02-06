@@ -14,12 +14,12 @@
   # environment.
   home.packages = with pkgs; [
     gnused
-    direnv
     git
     htop
     jq
+
+    # TODO: remove qemu and rust
     qemu
-    go
     rustup
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -439,13 +439,16 @@
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
   programs.zsh = {
     enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       rm = "rm -i";
       mv = "mv -i";
       cp = "cp -i";
+      ls = "ls --color=auto";
     };
     oh-my-zsh = {
       enable = true;

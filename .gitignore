@@ -1,9 +1,14 @@
 .DS_Store
 coc/
-git/
-tmux/
 htop/
 iterm2/
+
+# managed by nix home manager
+git/
 nvim/
+direnv/
+tmux/
+
+# host specifed config
 host.nix
 vars.nix
