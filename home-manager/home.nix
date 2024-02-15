@@ -18,6 +18,10 @@
     htop
     jq
 
+    neovim
+    nil # nix lsp
+
+
     # TODO: remove qemu and rust
     qemu
     rustup
@@ -83,6 +87,8 @@
       sensible
     ];
     extraConfig = ''
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
       bind \\ split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
@@ -110,7 +116,9 @@
       rm = "rm -i";
       mv = "mv -i";
       cp = "cp -i";
-      ls = "ls --color=auto";
+      vim = "nvim";
+      v = "nvim";
+      ls = "ls --color=auto -G";
     };
     oh-my-zsh = {
       enable = true;
@@ -128,6 +136,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  imports = [ ./nvim.nix ];
 }

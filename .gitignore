@@ -5,7 +5,6 @@ iterm2/
 
 # managed by nix home manager
 git/
-nvim/
 direnv/
 tmux/
 
