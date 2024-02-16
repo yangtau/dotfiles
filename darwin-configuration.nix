@@ -42,6 +42,9 @@ in
   homebrew = {
     enable = true;
     brews = [ ];
+    taps = [
+      { name = "homebrew/cask-fonts"; }
+    ];
     casks = [
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
@@ -49,6 +52,8 @@ in
       { name = "arc"; }
       { name = "iterm2"; }
       { name = "motrix"; }
+      { name = "motrix"; }
+      { name = "font-hack-nerd-font"; }
     ];
   };
 
