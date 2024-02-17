@@ -1,6 +1,7 @@
 vim.opt.termguicolors = true
 vim.opt.background = "light"
 vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.signcolumn = "yes"
 vim.opt.fileencodings="utf-8,gb18030,gbk,gb2312"
 vim.opt.mouse=""
@@ -37,35 +38,55 @@ require("lazy").setup({
     "folke/which-key.nvim",
     event = "VeryLazy",
   },
-	{
-		"ojroques/nvim-osc52",
-	},
-	{
-	  "lewis6991/gitsigns.nvim",
-	},
-  -- "williamboman/mason.nvim",
   {
-		'neovim/nvim-lspconfig',
-	},
-	{
+    "norcalli/nvim-colorizer.lua",
+    lazy = true,
+  },
+  {
+    "ojroques/nvim-osc52",
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+  },
+  {
+    'neovim/nvim-lspconfig',
+    -- "williamboman/mason.nvim",
+  },
+  {
     "christoomey/vim-tmux-navigator",
-	},
-	{
+    lazy = false,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    -- load cmp on InsertEnter
+    event = "InsertEnter",
+    -- these dependencies will only be loaded when cmp loads
+    -- dependencies are always lazy-loaded unless specified otherwise
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+    },
+    config = function()
+    end,
+  },
+  {
     "nvim-tree/nvim-tree.lua",
-	},
-	{
-    "nvim-tree/nvim-web-devicons",
-	},
+    dependencies = {
+      -- "nvim-tree/nvim-web-devicons",
+    },
+    lazy = true,
+  },
   {
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		lazy = false
-	},
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    lazy = false,
+  },
   {
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate"
-	},
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = true,
+  },
 })
 ---- end ----
 
@@ -102,7 +123,32 @@ require("catppuccin").setup({
     },
     color_overrides = {
         latte = {
-	   base = "#ffffff",
+            rosewater = "#cc7983",
+            flamingo = "#bb5d60",
+            pink = "#d54597",
+            mauve = "#a65fd5",
+            red = "#b7242f",
+            maroon = "#db3e68",
+            peach = "#e46f2a",
+            yellow = "#bc8705",
+            green = "#1a8e32",
+            teal = "#00a390",
+            sky = "#089ec0",
+            sapphire = "#0ea0a0",
+            blue = "#017bca",
+            lavender = "#855497",
+            text = "#444444",
+            subtext1 = "#555555",
+            subtext0 = "#666666",
+            overlay2 = "#777777",
+            overlay1 = "#888888",
+            overlay0 = "#999999",
+            surface2 = "#aaaaaa",
+            surface1 = "#bbbbbb",
+            surface0 = "#cccccc",
+            base = "#fffffd",
+            mantle = "#eeeeee",
+            crust = "#dddddd",
         },
     },
     custom_highlights = {},
@@ -117,7 +163,7 @@ require("catppuccin").setup({
         --     indentscope_color = "",
         -- },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-	      native_lsp = {
+        native_lsp = {
           enabled = true,
           virtual_text = {
               errors = { "italic" },
@@ -182,8 +228,8 @@ require("nvim-tree").setup {
             -- file = false,
             -- folder = false,
             -- git = false,
-            folder_arrow = false,
-            modified = false,
+            -- folder_arrow = false,
+            -- modified = false,
         },
     },
   },
@@ -308,4 +354,8 @@ vim.g.clipboard = {
 -- Now the '+' register will copy to system clipboard using OSC52
 vim.keymap.set('n', '<leader>c', '"+y')
 vim.keymap.set('n', '<leader>cc', '"+yy')
+---- end ----
+
+---- color ----
+require('colorizer').setup { '*', }
 ---- end ----

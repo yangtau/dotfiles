@@ -53,7 +53,7 @@ in
       { name = "iterm2"; }
       { name = "motrix"; }
       { name = "motrix"; }
-      { name = "font-hack-nerd-font"; }
+      { name = "font-jetbrains-mono-nerd-font"; }
     ];
   };
 
