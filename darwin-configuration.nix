@@ -21,7 +21,7 @@ in
   nix.gc.automatic = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
+  # nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
@@ -52,7 +52,7 @@ in
       { name = "arc"; }
       { name = "iterm2"; }
       { name = "motrix"; }
-      { name = "font-jetbrains-mono-nerd-font"; }
+      { name = "font-jetbrains-mono"; }
     ];
   };
 
