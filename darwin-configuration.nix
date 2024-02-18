@@ -52,7 +52,6 @@ in
       { name = "arc"; }
       { name = "iterm2"; }
       { name = "motrix"; }
-      { name = "motrix"; }
       { name = "font-jetbrains-mono-nerd-font"; }
     ];
   };
