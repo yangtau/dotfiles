@@ -20,6 +20,7 @@
 
     neovim
     nil # nix lsp
+    nixpkgs-fmt # nix formatter
 
 
     # TODO: remove qemu and rust
