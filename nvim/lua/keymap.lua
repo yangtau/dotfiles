@@ -1,5 +1,4 @@
-vim.keymap.set('n', '<leader>q', '<cmd>q<cr>')
-vim.keymap.set('n', '<leader>qa', '<cmd>wqa<cr>')
+vim.keymap.set('n', '<leader>q', '<cmd>wqa<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>wa<cr>')
 
 ---- key mappings for LSP ----
@@ -35,6 +34,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     -- TODO: 'v' not work?
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, opts)
+    vim.keymap.set('n', '<leader>f', function()
+      print "format buffer"
+      vim.lsp.buf.format { async = true }
+    end, opts)
   end,
 })

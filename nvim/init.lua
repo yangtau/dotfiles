@@ -112,25 +112,25 @@ local plugins = {
       require('colorizer').setup { '*', }
     end
   },
-  {
-    'ojroques/nvim-osc52',
-    lazy = false,
-    config = function()
-      local function copy(lines, _)
-        require('osc52').copy(table.concat(lines, '\n'))
-      end
+  -- {
+  --   'ojroques/nvim-osc52',
+  --   lazy = false,
+  --   config = function()
+  --     local function copy(lines, _)
+  --       require('osc52').copy(table.concat(lines, '\n'))
+  --     end
 
-      local function paste()
-        return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
-      end
+  --     local function paste()
+  --       return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
+  --     end
 
-      vim.g.clipboard = {
-        name  = 'osc52',
-        copy  = { ['+'] = copy, ['*'] = copy },
-        paste = { ['+'] = paste, ['*'] = paste },
-      }
-    end
-  },
+  --     vim.g.clipboard = {
+  --       name  = 'osc52',
+  --       copy  = { ['+'] = copy, ['*'] = copy },
+  --       paste = { ['+'] = paste, ['*'] = paste },
+  --     }
+  --   end
+  -- },
   {
     'lewis6991/gitsigns.nvim',
     lazy = false,
@@ -370,7 +370,6 @@ local plugins = {
       require('telescope').setup {}
     end,
     keys = {
-
       --
       -- local telescope = require('telescope.builtin')
       -- vim.keymap.set('n', '<space>f', telescope.find_files, {})
@@ -381,17 +380,44 @@ local plugins = {
       --   telescope.lsp_dynamic_workspace_symbols({
       --     symbols = require("lazyvim.config").get_kind_filter(),
       --   }), {})
-      { "<space>f", "<cmd>Telescope find_files<cr>",                    desc = "Find Files" },
-      { "<space>g", "<cmd>Telescope live_grep<cr>",                     desc = "Live Grep" },
-      { "<space>b", "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
-      { "<space>s", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols" },
-      { "<space>o", "<cmd>Telescope lsp_document_symbols<cr>",          desc = "Outlines" },
+      { "<space><space>", "<cmd>Telescope<cr>",                               desc = "Open Telescope" },
+      { "<space>f",       "<cmd>Telescope find_files<cr>",                    desc = "Find Files" },
+      { "<space>g",       "<cmd>Telescope live_grep<cr>",                     desc = "Live Grep" },
+      { "<space>b",       "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
+      { "<space>s",       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols" },
+      { "<space>o",       "<cmd>Telescope lsp_document_symbols<cr>",          desc = "Outlines" },
     },
   },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {} -- this is equalent to setup({}) function
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    opts = {
+      --open_mapping = '<space>t',
+      direction = 'horizontal',
+      shade_terminals = true
+    },
+    keys = {
+      { "<space>t", "<cmd>ToggleTerm<cr>", desc = "Open Terminal" },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("TermOpen", {
+        pattern = "term://*",
+        callback = function()
+          local opts = { buffer = 0 }
+          -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+          -- vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+          vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+          vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+          vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+          vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+        end,
+      })
+    end
   },
 }
 

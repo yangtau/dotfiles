@@ -121,6 +121,7 @@
       vim = "nvim";
       v = "nvim";
       ls = "ls --color=auto -G";
+      q = "exit";
     };
     oh-my-zsh = {
       enable = true;
