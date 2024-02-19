@@ -1,20 +1,22 @@
-vim.opt.termguicolors = true
-vim.opt.background = 'light'
+vim.opt.termguicolors  = true
+vim.opt.background     = 'light'
 vim.opt.relativenumber = true
-vim.opt.number = true
-vim.opt.signcolumn = 'yes'
-vim.opt.fileencodings = 'utf-8,gb18030,gbk,gb2312'
-vim.opt.mouse = ''
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.breakindent = true
+vim.opt.number         = true
+vim.opt.signcolumn     = 'yes'
+vim.opt.fileencodings  = 'utf-8,gb18030,gbk,gb2312'
+vim.opt.mouse          = ''
+vim.opt.tabstop        = 2
+vim.opt.shiftwidth     = 2
+vim.opt.expandtab      = true
+vim.opt.breakindent    = true
 
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 30
-vim.g.loaded_netrw = 1
+
+vim.g.netrw_banner       = 0
+vim.g.netrw_winsize      = 30
+vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.mapleader = '\\'
+vim.g.mapleader          = '\\'
+
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -123,8 +125,8 @@ local plugins = {
       end
 
       vim.g.clipboard = {
-        name = 'osc52',
-        copy = { ['+'] = copy, ['*'] = copy },
+        name  = 'osc52',
+        copy  = { ['+'] = copy, ['*'] = copy },
         paste = { ['+'] = paste, ['*'] = paste },
       }
 
@@ -139,43 +141,30 @@ local plugins = {
     lazy = false,
     opts = {
       signs = {
-        add = { text = "" },
-        change = { text = "" },
-        delete = { text = "" },
-        topdelete = { text = "" },
+        add          = { text = "▎" },
+        change       = { text = "▎" },
+        delete       = { text = "" },
+        topdelete    = { text = "" },
         changedelete = { text = "▎" },
-        untracked = { text = "▎" },
+        untracked    = { text = "▎" },
       },
-      signcolumn = true,         -- Toggle with `:Gitsigns toggle_signs`
-      numhl = false,             -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false,            -- Toggle with `:Gitsigns toggle_linehl`
-      word_diff = false,         -- Toggle with `:Gitsigns toggle_word_diff`
       current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-        delay = 1000,
-        ignore_whitespace = false,
-        virt_text_priority = 100,
-      },
-      -- TODO: put blame info in status line
-      current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+        end
+
+        map("n", "]h", gs.next_hunk, "Next Hunk")
+        map("n", "[h", gs.prev_hunk, "Prev Hunk")
+        map("n", "<leader>ghu", gs.reset_hunk, "Undo Hunk")
+        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+        map("n", "<leader>ghd", gs.diffthis, "Diff This")
+        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+      end,
     },
-    on_attach = function(buffer)
-      local gs = package.loaded.gitsigns
-
-      local function map(mode, l, r, desc)
-        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-      end
-
-      -- stylua: ignore start
-      map("n", "]h", gs.next_hunk, "Next Hunk")
-      map("n", "[h", gs.prev_hunk, "Prev Hunk")
-      map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-      map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
-      map("n", "<leader>ghd", gs.diffthis, "Diff This")
-      map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-    end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -387,14 +376,14 @@ require('lazy').setup {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
-        "gzip",
+        -- "gzip",
         -- "matchit",
         -- "matchparen",
         -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
+        -- "tarPlugin",
+        -- "tohtml",
+        -- "tutor",
+        -- "zipPlugin",
       },
     },
   },
