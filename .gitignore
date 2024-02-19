@@ -11,3 +11,6 @@ tmux/
 # host specifed config
 host.nix
 vars.nix
+
+# astro nvim
+nvim/

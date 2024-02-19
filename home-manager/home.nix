@@ -19,10 +19,7 @@
     jq
 
     neovim
-    nil # nix lsp
-    nixpkgs-fmt # nix formatter
-    ripgrep # telescope
-
+    ripgrep
 
     # TODO: remove qemu and rust
     qemu
