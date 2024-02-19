@@ -2,8 +2,6 @@ vim.keymap.set('n', '<space>b', '<cmd>buffers<cr>:buffer<Space>')
 vim.keymap.set('n', '<leader>q', '<cmd>wqa<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>wa<cr>')
 
-vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
-
 ---- key mappings for LSP ----
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -34,9 +32,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.keymap.set('n', '<space>wl', function()
     --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+    -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    -- TODO: 'v' not work?
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, opts)
   end,
 })

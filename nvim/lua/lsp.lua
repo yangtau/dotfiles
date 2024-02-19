@@ -1,15 +1,29 @@
 -- looks batter
+local function sign_define(args)
+  vim.fn.sign_define(args.name, {
+    texthl = args.name,
+    text = args.text,
+    numhl = ''
+  })
+end
+
+sign_define({ name = 'DiagnosticSignError', text = '✘' })
+sign_define({ name = 'DiagnosticSignWarn', text = '▲' })
+sign_define({ name = 'DiagnosticSignHint', text = '⚑' })
+sign_define({ name = 'DiagnosticSignInfo', text = '»' })
+
 vim.diagnostic.config({
   float = {
     border = 'rounded',
   },
   signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '✘',
-      [vim.diagnostic.severity.WARN] = '▲',
-      [vim.diagnostic.severity.HINT] = '⚑',
-      [vim.diagnostic.severity.INFO] = '»',
-    },
+    -- after nvim 0.10
+    -- text = {
+    --   [vim.diagnostic.severity.ERROR] = '✘',
+    --   [vim.diagnostic.severity.WARN] = '▲',
+    --   [vim.diagnostic.severity.HINT] = '⚑',
+    --   [vim.diagnostic.severity.INFO] = '»',
+    -- },
   },
 })
 
@@ -20,7 +34,6 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 
 -- highlight symbol under cursor
 vim.opt.updatetime = 400
-
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Setup highlight symbol',
   callback = function(event)
@@ -48,6 +61,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- after nvim 0.10
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   desc = 'Enable inlay hints',
 --   callback = function(event)
@@ -65,7 +79,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 ---- cmp config ----
-local lspconfig = require('lspconfig')
 local luasnip = require('luasnip') -- luasnip setup
 local cmp = require('cmp')         -- nvim-cmp setup
 cmp.setup {
@@ -75,8 +88,8 @@ cmp.setup {
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     -- ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Up
@@ -132,6 +145,7 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
 
 lspconfig.lua_ls.setup({
   capabilities = capabilities,
@@ -185,4 +199,26 @@ lspconfig.gopls.setup {
       -- gofumpt = true,
     },
   },
+}
+
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  }
 }

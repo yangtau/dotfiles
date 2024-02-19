@@ -28,7 +28,67 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
 require('lazy').setup({
+  {
+    "echasnovski/mini.indentscope",
+    version = false, -- wait till new 0.7.0 release to put it back on semver
+    -- event = "LazyFile",
+    opts = {
+      -- symbol = "▏",
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+          "NvimTree",
+        },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    -- event = "LazyFile",
+    opts = {
+      indent = {
+        char = "│",
+        tab_char = "│",
+      },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+          "NvimTree",
+        },
+      },
+    },
+    main = "ibl",
+  },
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -241,6 +301,11 @@ require('lazy').setup({
         treesitter = true,
         gitsigns = true,
         which_key = true,
+        indent_blankline = {
+          enabled = true,
+          scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+          colored_indent_levels = false,
+        },
         -- notify = false,
         -- mini = {
         --     enabled = true,
