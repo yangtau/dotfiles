@@ -29,35 +29,51 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+local filetype_ignore_indent = {
+  "help",
+  "alpha",
+  "dashboard",
+  "Trouble",
+  "trouble",
+  "lazy",
+  "mason",
+  "notify",
+  "toggleterm",
+  "lazyterm",
+  "NvimTree",
+  "netrw",
+  "tutor",
+}
+
+local plugins = {
+  {
+    "nmac427/guess-indent.nvim",
+    config = function()
+      require('guess-indent').setup {
+        auto_cmd = true,                           -- Set to false to disable automatic execution
+        override_editorconfig = false,             -- Set to true to override settings set by .editorconfig
+        filetype_exclude = filetype_ignore_indent, -- A list of filetypes for which the auto command gets disabled
+        buftype_exclude = {                        -- A list of buffer types for which the auto command gets disabled
+          "help",
+          "nofile",
+          "terminal",
+          "prompt",
+        },
+      }
+    end
+  },
   {
     "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
+    -- version = false, -- wait till new 0.7.0 release to put it back on semver
     -- event = "LazyFile",
     opts = {
-      -- symbol = "▏",
       symbol = "│",
       options = { try_as_border = true },
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-          "NvimTree",
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
+        pattern = filetype_ignore_indent,
+        callback = function() vim.b.miniindentscope_disable = true end,
       })
     end,
   },
@@ -70,22 +86,7 @@ require('lazy').setup({
         tab_char = "│",
       },
       scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-          "NvimTree",
-        },
-      },
+      exclude = { filetypes = filetype_ignore_indent, },
     },
     main = "ibl",
   },
@@ -137,25 +138,20 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     lazy = false,
     opts = {
-      signs                        = {
-        add          = { text = '+' },
-        change       = { text = '~' },
-        delete       = { text = '_' },
-        topdelete    = { text = '‾' },
-        changedelete = { text = '~' },
-        untracked    = { text = '┆' },
+      signs = {
+        add = { text = "" },
+        change = { text = "" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
       },
-      signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-      numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
-      word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
-      watch_gitdir                 = {
-        follow_files = true
-      },
-      auto_attach                  = true,
-      attach_to_untracked          = false,
-      current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts      = {
+      signcolumn = true,         -- Toggle with `:Gitsigns toggle_signs`
+      numhl = false,             -- Toggle with `:Gitsigns toggle_numhl`
+      linehl = false,            -- Toggle with `:Gitsigns toggle_linehl`
+      word_diff = false,         -- Toggle with `:Gitsigns toggle_word_diff`
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
         delay = 1000,
@@ -164,19 +160,22 @@ require('lazy').setup({
       },
       -- TODO: put blame info in status line
       current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-      sign_priority                = 6,
-      update_debounce              = 100,
-      status_formatter             = nil,   -- Use default
-      max_file_length              = 40000, -- Disable if file is longer than this (in lines)
-      preview_config               = {
-        -- Options passed to nvim_open_win
-        border = 'single',
-        style = 'minimal',
-        relative = 'cursor',
-        row = 0,
-        col = 1
-      },
     },
+    on_attach = function(buffer)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+      end
+
+      -- stylua: ignore start
+      map("n", "]h", gs.next_hunk, "Next Hunk")
+      map("n", "[h", gs.prev_hunk, "Prev Hunk")
+      map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+      map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
+      map("n", "<leader>ghd", gs.diffthis, "Diff This")
+      map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+    end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -197,11 +196,10 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
       'L3MON4D3/LuaSnip',
     },
-    config = function()
-    end,
   },
   {
     'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     opts = {
       renderer = {
@@ -236,11 +234,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'catppuccin'
     end,
     opts = {
-      flavour = 'latte', -- latte, frappe, macchiato, mocha
-      background = {     -- :h background
-        light = 'latte',
-        dark = 'mocha',
-      },
+      flavour = 'latte',              -- latte, frappe, macchiato, mocha
       transparent_background = false, -- disables setting the background color.
       show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
       term_colors = false,            -- sets terminal colors (e.g. `g:terminal_color_0`)
@@ -255,7 +249,7 @@ require('lazy').setup({
         conditionals = { 'italic' },
         loops = {},
         functions = {},
-        keywords = {},
+        keywords = { 'bold' },
         strings = {},
         variables = {},
         numbers = {},
@@ -299,7 +293,7 @@ require('lazy').setup({
         cmp = true,
         nvimtree = false,
         treesitter = true,
-        gitsigns = true,
+        gitsigns = false,
         which_key = true,
         indent_blankline = {
           enabled = true,
@@ -335,6 +329,7 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    version = '*',
     build = ':TSUpdate',
     config = function()
       local opts = {
@@ -343,6 +338,7 @@ require('lazy').setup({
           'go', 'gosum', 'gomod',
           'c', 'query', 'rust', 'bash',
           'html', 'markdown',
+          'yaml', 'json',
         },
         sync_install = false,
 
@@ -372,7 +368,37 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-})
+}
+
+require('lazy').setup {
+  spec = plugins,
+  defaults = {
+    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+    lazy = false,
+    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+    -- have outdated releases, which may break your Neovim install.
+    version = false, -- always use the latest git commit
+    -- version = "*", -- try installing the latest stable version for plugins that support semver
+  },
+  install = { colorscheme = { "catppuccin", } },
+  checker = { enabled = false }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      -- disable some rtp plugins
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+}
 
 require('lsp')
 require('keymap')

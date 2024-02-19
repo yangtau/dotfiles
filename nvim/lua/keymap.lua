@@ -2,6 +2,8 @@ vim.keymap.set('n', '<space>b', '<cmd>buffers<cr>:buffer<Space>')
 vim.keymap.set('n', '<leader>q', '<cmd>wqa<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>wa<cr>')
 
+--
+
 ---- key mappings for LSP ----
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
