@@ -21,6 +21,7 @@
     neovim
     nil # nix lsp
     nixpkgs-fmt # nix formatter
+    ripgrep # telescope
 
 
     # TODO: remove qemu and rust

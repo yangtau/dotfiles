@@ -129,11 +129,6 @@ local plugins = {
         copy  = { ['+'] = copy, ['*'] = copy },
         paste = { ['+'] = paste, ['*'] = paste },
       }
-
-      -- Now the '+' register will copy to system clipboard using OSC52
-      -- TODO: why use these key mappings?
-      vim.keymap.set('n', '<leader>c', '\'+y')
-      vim.keymap.set('n', '<leader>cc', '\'+yy')
     end
   },
   {
@@ -220,7 +215,7 @@ local plugins = {
     priority = 1000,
     lazy = false,
     init = function()
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin-latte'
     end,
     opts = {
       flavour = 'latte',              -- latte, frappe, macchiato, mocha
@@ -250,31 +245,31 @@ local plugins = {
       color_overrides = {
         latte = {
           rosewater = '#cc7983',
-          flamingo = '#bb5d60',
-          pink = '#d54597',
-          mauve = '#a65fd5',
-          red = '#b7242f',
-          maroon = '#db3e68',
-          peach = '#e46f2a',
-          yellow = '#bc8705',
-          green = '#1a8e32',
-          teal = '#00a390',
-          sky = '#089ec0',
-          sapphire = '#0ea0a0',
-          blue = '#017bca',
-          lavender = '#855497',
-          text = '#444444',
-          subtext1 = '#555555',
-          subtext0 = '#666666',
-          overlay2 = '#777777',
-          overlay1 = '#888888',
-          overlay0 = '#999999',
-          surface2 = '#aaaaaa',
-          surface1 = '#bbbbbb',
-          surface0 = '#cccccc',
-          base = '#ffffff',
-          mantle = '#eeeeee',
-          crust = '#dddddd',
+          flamingo  = '#bb5d60',
+          pink      = '#d54597',
+          mauve     = '#a65fd5',
+          red       = '#b7242f',
+          maroon    = '#db3e68',
+          peach     = '#e46f2a',
+          yellow    = '#bc8705',
+          green     = '#1a8e32',
+          teal      = '#00a390',
+          sky       = '#089ec0',
+          sapphire  = '#0ea0a0',
+          blue      = '#017bca',
+          lavender  = '#855497',
+          text      = '#444444',
+          subtext1  = '#555555',
+          subtext0  = '#666666',
+          overlay2  = '#777777',
+          overlay1  = '#888888',
+          overlay0  = '#999999',
+          surface2  = '#aaaaaa',
+          surface1  = '#bbbbbb',
+          surface0  = '#cccccc',
+          base      = '#ffffff',
+          mantle    = '#eeeeee',
+          crust     = '#dddddd',
         },
       },
       custom_highlights = {},
@@ -357,7 +352,44 @@ local plugins = {
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    dependencies = {
+      {
+        "nvim-lua/plenary.nvim",
+      },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        enabled = vim.fn.executable("make") == 1,
+        config = function() require("telescope").load_extension("fzf") end,
+      },
+    },
+    config = function()
+      require('telescope').setup {}
+    end,
+    keys = {
+
+      --
+      -- local telescope = require('telescope.builtin')
+      -- vim.keymap.set('n', '<space>f', telescope.find_files, {})
+      -- vim.keymap.set('n', '<space>g', telescope.live_grep, {})
+      -- vim.keymap.set('n', '<space>b', telescope.buffers, {})
+      -- vim.keymap.set('n', '<space>h', telescope.help_tags, {})
+      -- vim.keymap.set('n', '<space>s',
+      --   telescope.lsp_dynamic_workspace_symbols({
+      --     symbols = require("lazyvim.config").get_kind_filter(),
+      --   }), {})
+      { "<space>f", "<cmd>Telescope find_files<cr>",                    desc = "Find Files" },
+      { "<space>g", "<cmd>Telescope live_grep<cr>",                     desc = "Live Grep" },
+      { "<space>b", "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
+      { "<space>s", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols" },
+      { "<space>o", "<cmd>Telescope lsp_document_symbols<cr>",          desc = "Outlines" },
+    },
+  },
 }
+
 
 require('lazy').setup {
   spec = plugins,
@@ -370,7 +402,7 @@ require('lazy').setup {
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "catppuccin", } },
+  install = { colorscheme = { "catppuccin-latte", } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {
     rtp = {

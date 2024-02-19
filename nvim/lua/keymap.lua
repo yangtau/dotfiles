@@ -1,16 +1,12 @@
-vim.keymap.set('n', '<space>b', '<cmd>buffers<cr>:buffer<Space>')
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>')
 vim.keymap.set('n', '<leader>qa', '<cmd>wqa<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>wa<cr>')
-
---
 
 ---- key mappings for LSP ----
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>a', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
