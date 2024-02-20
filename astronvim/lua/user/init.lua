@@ -1,10 +1,11 @@
 return {
   options = {
     opt = {
-      showtabline = 0,
       mouse = "",
-      foldcolumn = nil,
       clipboard = "",
+    },
+    g = {
+      autoformat_enabled = false,
     },
   },
   colorscheme = "catppuccin-latte",
