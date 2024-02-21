@@ -4,6 +4,7 @@ return {
       mouse = "",
       clipboard = "",
       showtabline = 0,
+      fixendofline = false,
     },
   },
   colorscheme = "catppuccin-latte",
@@ -11,5 +12,13 @@ return {
     formatting = {
       format_on_save = false, -- enable or disable automatic formatting on save
     },
+  },
+  diagnostics	={
+    update_in_insert = false,
+  },
+  mappings = {
+    n = {
+      ["<leader>w"] = { "<cmd>Format<cr><cmd>w<cr>", desc = "Format and save" },
+    }
   },
 }

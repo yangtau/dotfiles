@@ -26,6 +26,24 @@ local excluded_buftypes = {
 
 return {
   {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "User AstroFile",
+    opts = {
+      indent = {
+        char = "▏",
+      },
+      scope = {
+        enabled = false,
+      },
+      exclude = {
+        filetypes = excluded_filetypes,
+      },
+      whitespace = {
+        remove_blankline_trail = true,
+      },
+    },
+  },
+  {
     "echasnovski/mini.indentscope",
     event = "User AstroFile",
     opts = { symbol = "▏", options = { try_as_border = true } },
