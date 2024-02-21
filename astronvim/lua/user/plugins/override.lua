@@ -19,10 +19,13 @@ return {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
       local status = require "astronvim.utils.status"
-      opts.statusline = {                                                            -- statusline
+      local hl = require "astronvim.utils.status.hl"
+      opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode { mode_text = { padding = { left = 1, right = 1 } } }, -- add the mode text
-        status.component.file_info {},
+        status.component.file_info {
+          file_icon = { hl = hl.file_icon "statusline", padding = { left = 0, right = 1 } }
+        },
         status.component.diagnostics(),
         status.component.fill(),
         status.component.cmd_info(),
@@ -30,21 +33,10 @@ return {
         status.component.lsp(),
         status.component.nav { scrollbar = false },
       }
-      opts.statusline = nil
-      opts.winbar = nil
+      -- opts.winbar = nil
       -- opts.statuscolumn = nil
       return opts
     end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        theme = "catppuccin-latte"
-        -- ... the rest of your lualine config
-      },
-    },
   },
   {
     "nvim-telescope/telescope.nvim",
