@@ -3,9 +3,23 @@ return {
   name = "catppuccin",
   priority = 1000,
   lazy = false,
-  -- init = function() vim.cmd.colorscheme "catppuccin-latte" end,
   opts = {
     flavour = "latte", -- latte, frappe, macchiato, mocha
+    integrations = {
+      alpha = true,
+      aerial = true,
+      dap = true,
+      dap_ui = true,
+      mason = true,
+      neotree = false,
+      notify = true,
+      nvimtree = false,
+      semantic_tokens = true,
+      symbols_outline = true,
+      telescope = true,
+      ts_rainbow = false,
+      which_key = true,
+    },
     color_overrides = {
       latte = {
         rosewater = "#cc7983",

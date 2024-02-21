@@ -30,9 +30,29 @@ return {
         status.component.lsp(),
         status.component.nav { scrollbar = false },
       }
+      opts.statusline = nil
       opts.winbar = nil
       -- opts.statuscolumn = nil
       return opts
     end,
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        theme = "catppuccin-latte"
+        -- ... the rest of your lualine config
+      },
+    },
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+    },
   },
 }
