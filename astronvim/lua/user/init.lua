@@ -3,6 +3,7 @@ return {
     opt = {
       mouse = "",
       clipboard = "",
+      showtabline = 0,
     },
   },
   colorscheme = "catppuccin-latte",
