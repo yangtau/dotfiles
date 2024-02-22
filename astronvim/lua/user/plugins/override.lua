@@ -24,7 +24,7 @@ return {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode { mode_text = { padding = { left = 1, right = 1 } } }, -- add the mode text
         status.component.file_info {
-          file_icon = { hl = hl.file_icon "statusline", padding = { left = 0, right = 1 } }
+          file_icon = { hl = hl.file_icon "statusline", padding = { left = 0, right = 1 } },
         },
         status.component.diagnostics(),
         status.component.fill(),
