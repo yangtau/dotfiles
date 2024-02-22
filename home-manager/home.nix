@@ -18,7 +18,7 @@
     htop
     jq
 
-    neovim
+    neovim-nightly
     ripgrep
 
     qemu

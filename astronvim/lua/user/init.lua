@@ -1,4 +1,5 @@
 return {
+  colorscheme = "catppuccin-latte",
   options = {
     opt = {
       mouse = "",
@@ -8,7 +9,9 @@ return {
       cmdheight = 1,
     },
   },
-  colorscheme = "catppuccin-latte",
+  g = {
+    inlay_hints_enabled = true,
+  },
   lsp = {
     formatting = {
       format_on_save = false, -- enable or disable automatic formatting on save
