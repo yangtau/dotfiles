@@ -151,8 +151,8 @@
       delta.navigate = true;
       delta.light = true;
 
-      url."https://github.com".insteadOf = "git://github.com";
-      url."https://gitlab.com".insteadOf = "git://gitlab.com";
+      url."git@github.com:".insteadOf = "https://github.com";
+      url."git@gitlab.com:".insteadOf = "https://gitlab.com";
     };
   };
 
