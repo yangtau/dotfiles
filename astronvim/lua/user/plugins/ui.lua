@@ -79,6 +79,14 @@ return {
           crust = "#dddddd",
         },
       },
+      custom_highlights = function(colors)
+        return {
+          StatusLine = { bg = "#eff1f5" },
+          HeirlineNormal = { bg = colors.lavender },
+          HeirlineInsert = { bg = colors.green },
+          HeirlineVisual = { bg = colors.blue },
+        }
+      end,
     },
   },
   {
