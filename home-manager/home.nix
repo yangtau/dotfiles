@@ -15,6 +15,7 @@
   home.packages = with pkgs; [
     gnused
     git
+    delta
     htop
     jq
 
@@ -130,6 +131,29 @@
     enable = true;
     userName = "yangtau";
     userEmail = "yanggtau@gmail.com";
+    extraConfig = {
+      diff.algorithm = "histogram";
+      diff.tool = "nvimdiff";
+      difftool.nvimdiff.cmd = "nvim -d $LOCAL $REMOTE";
+      difftool.prompt = true;
+
+
+      pull.rebase = true;
+      push.default = "current";
+
+      merge.conflictstyle = "zdiff3";
+      commit.verbose = true;
+
+      rerere.enabled = true;
+      help.autocorrect = 1;
+
+      core.pager = "delta";
+      delta.navigate = true;
+      delta.light = true;
+
+      url."https://github.com".insteadOf = "git://github.com";
+      url."https://gitlab.com".insteadOf = "git://gitlab.com";
+    };
   };
 
 
