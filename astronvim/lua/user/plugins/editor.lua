@@ -22,19 +22,19 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, {
         -- go
-        "gopls",
-        "gomodifytags",
-        "iferr",
-        "impl",
-        "goimports",
-        "staticcheck",
+        -- "gopls",
+        -- "gomodifytags",
+        -- "iferr",
+        -- "impl",
+        -- "goimports",
+        -- "staticcheck",
         -- "gofumpt",
         -- nix
-        "nixpkgs-fmt",
-        "nil",
+        -- "nixpkgs-fmt",
+        -- "nil",
         -- lua
-        "lua-language-server",
-        "stylua",
+        -- "lua-language-server",
+        -- "stylua",
       })
     end,
   },
