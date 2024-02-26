@@ -11,3 +11,4 @@ tmux/
 # host specifed config
 host.nix
 vars.nix
+home.nix

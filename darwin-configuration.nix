@@ -3,6 +3,7 @@
 let
   # vars.nix defines some variables for this host
   username = (import ./vars.nix).username;
+  homeDirectory = (import ./vars.nix).homeDirectory;
   hostname = (import ./vars.nix).hostname;
 in
 {
@@ -33,12 +34,6 @@ in
   # networking
   networking.hostName = "${hostname}";
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-    }))
-  ];
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -64,18 +59,14 @@ in
   };
 
   users.users.${username} = {
-    name = "${username}";
-    home = "/Users/${username}";
+    name = username;
+    home = homeDirectory;
   };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.${username} = { pkgs, ... }: {
     imports = [ ./home-manager/home.nix ];
-    # Home Manager needs a bit of information about you and the paths it should
-    # manage.
-    home.username = "${username}";
-    home.homeDirectory = "/Users/${username}";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
