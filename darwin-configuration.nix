@@ -42,6 +42,11 @@ in
 
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "uninstall";
+    };
     brews = [ ];
     taps = [
       { name = "homebrew/cask-fonts"; }
