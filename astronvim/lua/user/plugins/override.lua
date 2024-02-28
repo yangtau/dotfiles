@@ -53,6 +53,14 @@ return {
     },
   },
   {
+    "akinsho/toggleterm.nvim",
+    opts = {
+      highlights = {
+        NormalFloat = { link = "Normal" },
+      },
+    },
+  },
+  {
     "goolord/alpha-nvim",
     enabled = false,
   },
