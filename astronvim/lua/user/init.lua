@@ -29,6 +29,35 @@ for _, mode in ipairs { "n", "i", "t" } do
   maps[mode]["<C-/>"] = { opentermcmd(mode, "vertical"), desc = "ToggleTerm vertical split" }
 end
 
+maps.n["<leader>lo"] = {
+  function()
+    require("telescope.builtin").lsp_document_symbols {
+      symbol_width = 50,
+      ignore_symbols = {
+        "field",
+      },
+    }
+  end,
+  desc = "Search ducument symbols",
+}
+
+maps.n["<leader>lO"] = {
+  function() require("aerial").toggle() end,
+  desc = "Symbols outline",
+}
+
+maps.n["<leader>ls"] = {
+  function()
+    require("telescope.builtin").lsp_dynamic_workspace_symbols {
+      fname_width = 50,
+      ignore_symbols = {
+        "field",
+      },
+    }
+  end,
+  desc = "Search workspace symbols",
+}
+
 return {
   colorscheme = "catppuccin-latte",
   options = {
@@ -39,6 +68,9 @@ return {
       fixendofline = false,
       cmdheight = 1,
       background = "light",
+      wrap = true,
+      foldcolumn = "0",
+      numberwidth = 1,
     },
   },
   g = {

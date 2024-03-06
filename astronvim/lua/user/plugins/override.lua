@@ -40,6 +40,8 @@ return {
         },
         status.component.nav { scrollbar = false },
       }
+
+      opts.statuscolumn = nil
       return opts
     end,
   },
@@ -49,6 +51,18 @@ return {
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
+      },
+      defaults = {
+        -- path_display = {
+        --   truncate = 6,
+        -- },
+        layout_config = {
+          horizontal = { prompt_position = "top", preview_width = 0.45 },
+          vertical = { mirror = false },
+          width = 0.9,
+          height = 0.80,
+          preview_cutoff = 100,
+        },
       },
     },
   },
