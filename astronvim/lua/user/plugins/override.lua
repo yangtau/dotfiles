@@ -12,6 +12,9 @@ return {
         hide_dotfiles = false,
         hide_gitignored = false,
       }
+      opts.popup_border_style = "rounded"
+      opts.enable_git_status = false
+      opts.enable_diagnostics = false
       return opts
     end,
   },
@@ -85,6 +88,22 @@ return {
   {
 
     "max397574/better-escape.nvim",
+    enabled = false,
+  },
+  {
+    "b0o/SchemaStore.nvim",
+    enabled = false,
+  },
+  {
+    "Shatur/neovim-session-manager",
+    enabled = false,
+  },
+  {
+    "stevearc/resession.nvim",
+    enabled = false,
+  },
+  {
+    "rcarriga/nvim-notify",
     enabled = false,
   },
 }

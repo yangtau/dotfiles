@@ -29,7 +29,7 @@ for _, mode in ipairs { "n", "i", "t" } do
   maps[mode]["<C-/>"] = { opentermcmd(mode, "vertical"), desc = "ToggleTerm vertical split" }
 end
 
-maps.n["<leader>lo"] = {
+maps.n["<leader>o"] = {
   function()
     require("telescope.builtin").lsp_document_symbols {
       symbol_width = 50,
@@ -41,12 +41,12 @@ maps.n["<leader>lo"] = {
   desc = "Search ducument symbols",
 }
 
-maps.n["<leader>lO"] = {
+maps.n["<leader>O"] = {
   function() require("aerial").toggle() end,
   desc = "Symbols outline",
 }
 
-maps.n["<leader>ls"] = {
+maps.n["<leader>s"] = {
   function()
     require("telescope.builtin").lsp_dynamic_workspace_symbols {
       fname_width = 50,
@@ -75,6 +75,7 @@ return {
   },
   g = {
     inlay_hints_enabled = true,
+    resession_enabled = false,
   },
   lsp = {
     formatting = {
