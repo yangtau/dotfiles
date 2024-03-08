@@ -49,6 +49,7 @@ return {
         ts_rainbow = false,
         which_key = true,
       },
+      transparent_background = true,
       color_overrides = {
         latte = {
           rosewater = "#cc7983",
