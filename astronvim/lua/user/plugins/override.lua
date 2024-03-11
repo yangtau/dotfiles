@@ -7,7 +7,7 @@ return {
       opts.window.position = "left"
       opts.window.mappings.o = false
       opts.window.mappings.C = "set_root"
-      opts.filesystem.hijack_netrw_behavior = "open_default"
+      -- opts.filesystem.hijack_netrw_behavior = "open_default"
       opts.filesystem.filtered_items = {
         hide_dotfiles = false,
         hide_gitignored = false,
