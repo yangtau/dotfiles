@@ -144,7 +144,17 @@ return {
       },
 
       ---@type lc.highlights
-      theme = {},
+      theme = {
+        ["alt"] = {
+          bg = "#FFFFFF",
+        },
+        ["normal"] = {
+          bg = "#FFFFFF",
+        },
+        ["all"] = {
+          bg = "#FFFFFF",
+        },
+      },
 
       ---@type boolean
       image_support = false,

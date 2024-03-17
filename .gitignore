@@ -2,6 +2,7 @@
 coc/
 htop/
 iterm2/
+gh/
 
 # managed by nix home manager
 git/

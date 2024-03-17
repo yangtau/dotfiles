@@ -45,13 +45,15 @@ in
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      cleanup = "uninstall";
+      # cleanup = "uninstall";
     };
     brews = [ ];
     taps = [
       { name = "homebrew/cask-fonts"; }
     ];
     casks = [
+      { name = "typora"; }
+      { name = "monitorcontrol"; }
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
       { name = "amethyst"; }
