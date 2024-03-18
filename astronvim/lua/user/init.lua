@@ -32,7 +32,8 @@ end
 maps.n["<leader>o"] = {
   function()
     require("telescope.builtin").lsp_document_symbols {
-      symbol_width = 50,
+      symbol_width = 60,
+      showline = false,
       ignore_symbols = {
         "field",
       },
@@ -71,6 +72,7 @@ return {
       wrap = true,
       foldcolumn = "0",
       numberwidth = 1,
+      signcolumn = "auto",
     },
   },
   g = {
