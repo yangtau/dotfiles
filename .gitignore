@@ -3,6 +3,10 @@ coc/
 htop/
 iterm2/
 gh/
+nix/
+go/
+dlv/
+environment.d/
 
 # managed by nix home manager
 git/
