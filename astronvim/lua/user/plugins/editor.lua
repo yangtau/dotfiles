@@ -78,95 +78,15 @@ return {
         home = vim.env.HOME .. "/Workspaces/rustal/src",
         cache = vim.fn.stdpath "cache" .. "/leetcode",
       },
-
-      ---@type table<string, boolean>
-      plugins = {
-        non_standalone = false,
-      },
-
-      ---@type boolean
-      logging = true,
-
-      injector = {}, ---@type table<lc.lang, lc.inject>
-
-      cache = {
-        update_interval = 60 * 60 * 24 * 7, ---@type integer 7 days
-      },
-
-      console = {
-        open_on_runcode = true, ---@type boolean
-
-        dir = "row", ---@type lc.direction
-
-        size = { ---@type lc.size
-          width = "90%",
-          height = "75%",
-        },
-
-        result = {
-          size = "60%", ---@type lc.size
-        },
-
-        testcase = {
-          virt_text = true, ---@type boolean
-
-          size = "40%", ---@type lc.size
-        },
-      },
-
-      description = {
-        position = "left", ---@type lc.position
-
-        width = "40%", ---@type lc.size
-
-        show_stats = true, ---@type boolean
-      },
-
-      hooks = {
-        ---@type fun()[]
-        ["enter"] = {},
-
-        ---@type fun(question: lc.ui.Question)[]
-        ["question_enter"] = {},
-
-        ---@type fun()[]
-        ["leave"] = {},
-      },
-
-      keys = {
-        toggle = { "q" }, ---@type string|string[]
-        confirm = { "<CR>" }, ---@type string|string[]
-
-        reset_testcases = "r", ---@type string
-        use_testcase = "U", ---@type string
-        focus_testcases = "H", ---@type string
-        focus_result = "L", ---@type string
-      },
-
-      ---@type lc.highlights
-      theme = {
-        ["alt"] = {
-          bg = "#FFFFFF",
-        },
-        ["normal"] = {
-          bg = "#FFFFFF",
-        },
-        ["all"] = {
-          bg = "#FFFFFF",
-        },
-      },
-
-      ---@type boolean
-      image_support = false,
     },
   },
   {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    "folke/todo-comments.nvim",
+    event = "User AstroFile",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
+      vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
+    end,
   },
 }
