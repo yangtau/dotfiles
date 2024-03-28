@@ -62,6 +62,7 @@ in
       { name = "motrix"; }
       { name = "font-fira-code-nerd-font"; }
       { name = "font-jetbrains-mono-nerd-font"; }
+      { name = "wezterm"; }
     ];
   };
 
