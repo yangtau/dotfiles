@@ -4,9 +4,12 @@ local act = wezterm.action
 local M = {}
 
 -- smart-split should not be lazy
-local function is_vim(pane)
+local function is_vim_or_tmux(pane)
 	-- this is set by the plugin, and unset on ExitPre in Neovim
-	return pane:get_user_vars().IS_NVIM == "true"
+	-- wezterm.log_warn("user: ", pane:get_user_vars())
+	-- wezterm.log_warn("progress: ", pane:get_foreground_process_name())
+	local process = string.gsub(pane:get_foreground_process_name(), "(.*[/\\])(.*)", "%2")
+	return pane:get_user_vars().IS_NVIM == "true" or process == "tmux"
 end
 
 local function split_nav(key, resize_or_move, direction)
@@ -14,7 +17,7 @@ local function split_nav(key, resize_or_move, direction)
 		key = key,
 		mods = "CTRL",
 		action = wezterm.action_callback(function(win, pane)
-			if is_vim(pane) then
+			if is_vim_or_tmux(pane) then
 				-- pass the keys through to vim/nvim
 				win:perform_action({ SendKey = { key = key, mods = "CTRL" } }, pane)
 			else
@@ -53,10 +56,7 @@ function M.append(config)
 			{ key = "4", mods = "SUPER", action = act({ ActivateTab = 3 }) },
 			{ key = "5", mods = "SUPER", action = act({ ActivateTab = 4 }) },
 			{ key = "6", mods = "SUPER", action = act({ ActivateTab = 5 }) },
-			{ key = "7", mods = "SUPER", action = act({ ActivateTab = 6 }) },
-			{ key = "7", mods = "SUPER", action = act({ ActivateTab = 7 }) },
-			{ key = "9", mods = "SUPER", action = act({ ActivateTab = -1 }) },
-			{ key = "t", mods = "SUPER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+			{ key = "t", mods = "SUPER", action = act({ SpawnCommandInNewTab = { cwd = "~" } }) },
 			{ key = "w", mods = "SUPER", action = act({ CloseCurrentTab = { confirm = true } }) },
 
 			-- pane
