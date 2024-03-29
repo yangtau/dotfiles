@@ -41,7 +41,7 @@ function M.append(config)
 		show_new_tab_button_in_tab_bar = true,
 
 		window_background_opacity = 0.95,
-		macos_window_background_blur = 20,
+		macos_window_background_blur = 10,
 		window_decorations = "RESIZE",
 	}
 
