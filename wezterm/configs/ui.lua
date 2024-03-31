@@ -17,7 +17,7 @@ function M.append(config)
 	-- theme
 	local catppuccin = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
 	catppuccin.background = "#ffffff"
-	catppuccin.tab_bar.active_tab.bg_color = "#82aaff"
+	catppuccin.tab_bar.active_tab.bg_color = "#8282ff"
 
 	local options = {
 		default_cursor_style = "BlinkingBlock", -- default: 'SteadyBlock'
@@ -28,6 +28,11 @@ function M.append(config)
 			["catppuccin"] = catppuccin,
 		},
 		color_scheme = "catppuccin",
+
+		inactive_pane_hsb = {
+			saturation = 0.92,
+			brightness = 0.92,
+		},
 
 		enable_scroll_bar = true, -- default: false
 		scrollback_lines = 100000, --defauls: 3500
