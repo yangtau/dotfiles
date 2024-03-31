@@ -6,22 +6,24 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
 	-- if the tab title is explicitly set, take that
 	if title and #title > 0 then
 	else
-		title = "Tab #" .. tab.tab_index + 1
+		title = " Tab #" .. tab.tab_index + 1 .. " "
 	end
-	return {
-		{ Text = " " .. title .. " " },
-	}
+
+	return { { Text = title } }
 end)
 
 function M.append(config)
 	-- theme
 	local catppuccin = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
 	catppuccin.background = "#ffffff"
-	catppuccin.tab_bar.active_tab.bg_color = "#8282ff"
+	catppuccin.tab_bar.active_tab.bg_color = "#c2c2df"
+	catppuccin.tab_bar.active_tab.fg_color = "#111"
+	catppuccin.tab_bar.active_tab.intensity = "Bold"
+	catppuccin.tab_bar.inactive_tab.fg_color = "#7c7f99"
 
 	local options = {
-		default_cursor_style = "BlinkingBlock", -- default: 'SteadyBlock'
-		font_size = 16,                       -- default: 12.0
+		default_cursor_style = "BlinkingBlock",
+		font_size = 16,
 		font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Noto Color Emoji" }),
 
 		color_schemes = {
@@ -43,11 +45,12 @@ function M.append(config)
 		use_fancy_tab_bar = false,         -- default: true
 		tab_bar_at_bottom = false,
 		hide_tab_bar_if_only_one_tab = true, -- default: false
-		show_new_tab_button_in_tab_bar = true,
+		show_new_tab_button_in_tab_bar = false,
+		text_background_opacity = 0.85,    -- tab bar opacity
 
 		window_background_opacity = 0.95,
 		macos_window_background_blur = 10,
-		window_decorations = "RESIZE",
+		window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	}
 
 	for key, value in pairs(options) do
