@@ -16,15 +16,16 @@ function M.append(config)
 	-- theme
 	local catppuccin = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
 	catppuccin.background = "#ffffff"
+	catppuccin.tab_bar.background = "#f0f0f0"
 	catppuccin.tab_bar.active_tab.bg_color = "#c2c2df"
-	catppuccin.tab_bar.active_tab.fg_color = "#111"
+	catppuccin.tab_bar.active_tab.fg_color = "#111111"
 	catppuccin.tab_bar.active_tab.intensity = "Bold"
 	catppuccin.tab_bar.inactive_tab.fg_color = "#7c7f99"
 
 	local options = {
 		default_cursor_style = "BlinkingBlock",
 		font_size = 16,
-		font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "Noto Color Emoji" }),
+		font = wezterm.font_with_fallback({ "Firacode Nerd Font Mono" }),
 
 		color_schemes = {
 			["catppuccin"] = catppuccin,
@@ -42,13 +43,13 @@ function M.append(config)
 		-- Tab bar can't have padding https://github.com/wez/wezterm/issues/3077
 		window_padding = { left = 6, right = 6, top = 6, bottom = 6 },
 
-		use_fancy_tab_bar = false,         -- default: true
+		use_fancy_tab_bar = false, -- default: true
 		tab_bar_at_bottom = false,
 		hide_tab_bar_if_only_one_tab = true, -- default: false
 		show_new_tab_button_in_tab_bar = false,
-		text_background_opacity = 0.85,    -- tab bar opacity
+		text_background_opacity = 0.95, -- tab bar opacity
 
-		window_background_opacity = 0.95,
+		window_background_opacity = 0.96,
 		macos_window_background_blur = 10,
 		window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	}
