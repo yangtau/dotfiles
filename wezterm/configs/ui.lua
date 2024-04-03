@@ -32,16 +32,8 @@ function M.append(config)
 		},
 		color_scheme = "catppuccin",
 
-		inactive_pane_hsb = {
-			saturation = 0.92,
-			brightness = 0.92,
-		},
-
 		enable_scroll_bar = true, -- default: false
 		scrollback_lines = 100000, --defauls: 3500
-
-		-- Tab bar can't have padding https://github.com/wez/wezterm/issues/3077
-		window_padding = { left = 6, right = 6, top = 6, bottom = 6 },
 
 		use_fancy_tab_bar = false, -- default: true
 		tab_bar_at_bottom = false,
@@ -50,8 +42,16 @@ function M.append(config)
 		text_background_opacity = 0.95, -- tab bar opacity
 
 		window_background_opacity = 0.96,
-		macos_window_background_blur = 10,
+
+		inactive_pane_hsb = {
+			saturation = 0.92,
+			brightness = 0.92,
+		},
+
+		-- Tab bar can't have padding https://github.com/wez/wezterm/issues/3077
+		window_padding = { left = 6, right = 6, top = 6, bottom = 6 },
 		window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
+		macos_window_background_blur = 10,
 	}
 
 	for key, value in pairs(options) do

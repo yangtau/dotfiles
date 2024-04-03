@@ -3,23 +3,26 @@ local act = wezterm.action
 
 local M = {}
 
--- smart-split should not be lazy
 local function is_vim_or_tmux(pane)
-	-- this is set by the plugin, and unset on ExitPre in Neovim
-	-- wezterm.log_warn("user: ", pane:get_user_vars())
-	-- wezterm.log_warn("progress: ", pane:get_foreground_process_name())
-	local process = string.gsub(pane:get_foreground_process_name(), "(.*[/\\])(.*)", "%2")
-	return pane:get_user_vars().IS_NVIM == "true" or process == "tmux"
+	local process = pane:get_foreground_process_name()
+	local title = pane:get_title()
+	-- wezterm.log_info("process: ", process)
+	-- wezterm.log_info("title: ", title)
+	return string.find(title, "NVIM")
+		or string.find(title, "tmux")
+		or string.find(process, "nvim")
+		or string.find(process, "tmux")
 end
 
 local function split_nav(key, resize_or_move, direction)
+	local mod = "CTRL"
 	return {
 		key = key,
-		mods = "CTRL",
+		mods = mod,
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim_or_tmux(pane) then
 				-- pass the keys through to vim/nvim
-				win:perform_action({ SendKey = { key = key, mods = "CTRL" } }, pane)
+				win:perform_action({ SendKey = { key = key, mods = mod } }, pane)
 			else
 				if resize_or_move == "resize" then
 					win:perform_action({ AdjustPaneSize = { direction, 3 } }, pane)
@@ -56,7 +59,7 @@ function M.append(config)
 			{ key = "4", mods = "SUPER", action = act({ ActivateTab = 3 }) },
 			{ key = "5", mods = "SUPER", action = act({ ActivateTab = 4 }) },
 			{ key = "6", mods = "SUPER", action = act({ ActivateTab = 5 }) },
-			{ key = "t", mods = "SUPER", action = act({ SpawnCommandInNewTab = { cwd = "~" } }) },
+			{ key = "t", mods = "SUPER", action = act({ SpawnCommandInNewTab = { cwd = os.getenv("HOME") } }) },
 			{ key = "w", mods = "SUPER", action = act({ CloseCurrentTab = { confirm = true } }) },
 
 			-- pane
