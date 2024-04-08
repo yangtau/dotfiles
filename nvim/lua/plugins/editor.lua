@@ -16,7 +16,26 @@ return {
         },
         timeout_ms = 1000, -- default format timeout
       },
+      servers = { "nil_ls", "nixpkgs-fmt" },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      local utils = require "astrocore"
+      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, {
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
+        "rust",
+        "bash",
+        "sql",
+        "nix",
+        "json",
+        "yaml",
+      })
+    end,
   },
   {
     "Exafunction/codeium.vim",
@@ -24,37 +43,5 @@ return {
     config = function()
       vim.keymap.set("i", "<C-]>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
     end,
-  },
-  {
-    "kawre/leetcode.nvim",
-    cmd = "Leet",
-    build = ":TSUpdate html",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim", -- required by telescope
-      "MunifTanjim/nui.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      -- configuration goes here
-      ---@type string
-      arg = "leetcode.nvim",
-
-      ---@type lc.lang
-      lang = "rust",
-
-      cn = { -- leetcode.cn
-        enabled = true, ---@type boolean
-        translator = true, ---@type boolean
-        translate_problems = true, ---@type boolean
-      },
-
-      ---@type lc.storage
-      storage = {
-        home = vim.env.HOME .. "/Workspaces/rustal/src",
-        cache = vim.fn.stdpath "cache" .. "/leetcode",
-      },
-    },
   },
 }
