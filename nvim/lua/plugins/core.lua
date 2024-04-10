@@ -1,67 +1,6 @@
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 
-local maps = {
-  n = {
-    ["<Leader>w"] = { "<cmd>Format<cr><cmd>w<cr>", desc = "Format and save buffer" },
-    ["<Leader>W"] = { "<cmd>wqa<cr>", desc = "Save and quit all" },
-  },
-  i = {},
-  v = {},
-  t = {},
-}
-
-local function opentermcmd(mode, direction)
-  local pre = ""
-  if mode == "i" then pre = "<Esc>" end
-
-  local args = ""
-  if direction == "float" then
-    args = "direction=float"
-  elseif direction == "horizontal" then
-    args = "size=10 direction=horizontal"
-  elseif direction == "vertical" then
-    args = "size=80 direction=vertical"
-  end
-  return pre .. "<cmd>ToggleTerm " .. args .. "<cr>"
-end
-
-for _, mode in ipairs { "n", "i", "t" } do
-  maps[mode]["<C-'>"] = { opentermcmd(mode, "float"), desc = "ToggleTerm float" }
-  maps[mode]["<C-`>"] = { opentermcmd(mode, "horizontal"), desc = "ToggleTerm horizontal split" }
-  maps[mode]["<C-/>"] = { opentermcmd(mode, "vertical"), desc = "ToggleTerm vertical split" }
-end
-
-maps.n["<Leader>o"] = {
-  function()
-    require("telescope.builtin").lsp_document_symbols {
-      symbol_width = 60,
-      showline = false,
-      ignore_symbols = {
-        "field",
-      },
-    }
-  end,
-  desc = "Search ducument symbols",
-}
-
-maps.n["<Leader>O"] = {
-  function() require("aerial").toggle() end,
-  desc = "Symbols outline",
-}
-
-maps.n["<Leader>s"] = {
-  function()
-    require("telescope.builtin").lsp_dynamic_workspace_symbols {
-      fname_width = 50,
-      ignore_symbols = {
-        "field",
-      },
-    }
-  end,
-  desc = "Search workspace symbols",
-}
-
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -104,6 +43,40 @@ return {
     },
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = maps,
+    mappings = {
+      n = {
+        ["<Leader>w"] = { "<cmd>Format<cr><cmd>w<cr>", desc = "Format and save buffer" },
+        ["<Leader>W"] = { "<cmd>wqa<cr>", desc = "Save and quit all" },
+
+        -- lsp
+        ["<Leader>o"] = {
+          function()
+            require("telescope.builtin").lsp_document_symbols {
+              symbol_width = 60,
+              showline = false,
+            }
+          end,
+          desc = "Search ducument symbols",
+        },
+        ["<Leader>O"] = {
+          function() require("aerial").toggle() end,
+          desc = "Symbols outline",
+        },
+        ["<Leader>s"] = {
+          function()
+            require("telescope.builtin").lsp_dynamic_workspace_symbols {
+              -- fname_width = 60,
+            }
+          end,
+          desc = "Search workspace symbols",
+        },
+
+        -- todo
+        -- override default mappings
+        ["<Leader>ft"] = { "<Cmd>TodoTelescope<CR>", desc = "Find TODOs" },
+        ["]t"] = { function() require("todo-comments").jump_next() end, desc = "Next TODO comment" },
+        ["[t"] = { function() require("todo-comments").jump_prev() end, desc = "Previous TODO comment" },
+      },
+    },
   },
 }

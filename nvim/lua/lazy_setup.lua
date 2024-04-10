@@ -15,7 +15,10 @@ local plugins = {
 
 require("lazy").setup(plugins, {
   install = { colorscheme = { "catppuccin-latte" } },
-  ui = { backdrop = 100 },
+  ui = {
+    backdrop = 100,
+    border = "rounded",
+  },
   performance = {
     rtp = {
       -- disable some rtp plugins, add more to your liking

@@ -16,7 +16,7 @@ return {
         },
         timeout_ms = 1000, -- default format timeout
       },
-      servers = { "nil_ls", "nixpkgs-fmt" },
+      servers = { "nil_ls", "gopls", "rust_analyzer" },
     },
   },
   {
@@ -34,6 +34,7 @@ return {
         "nix",
         "json",
         "yaml",
+        "markdown",
       })
     end,
   },
