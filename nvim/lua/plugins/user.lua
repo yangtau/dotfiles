@@ -52,19 +52,11 @@ return {
     },
   },
   {
-    "goolord/alpha-nvim",
-    enabled = false,
-  },
-  {
     "AstroNvim/astrotheme",
     enabled = false,
   },
   {
     "max397574/better-escape.nvim",
-    enabled = false,
-  },
-  {
-    "rcarriga/nvim-notify",
     enabled = false,
   },
   {
