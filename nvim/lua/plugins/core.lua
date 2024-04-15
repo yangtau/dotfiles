@@ -33,7 +33,7 @@ return {
         wrap = true,
         foldcolumn = "0",
         numberwidth = 1,
-        signcolumn = "auto",
+        -- signcolumn = "auto",
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
