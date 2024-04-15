@@ -82,8 +82,8 @@
     keyMode = "vi";
     baseIndex = 1; # start window numbering at 1
     plugins = with pkgs.tmuxPlugins; [
-      # vim-tmux-navigator
-      mode-indicator
+      vim-tmux-navigator
+      # mode-indicator
       sensible
     ];
     extraConfig = ''
@@ -92,23 +92,6 @@
       set -ag terminal-overrides ",xterm-256color:RGB"
       bind \\ split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
-
-      # Smart pane switching with awareness of Neovim splits.
-      bind-key -n C-h if -F "#{@pane-is-vim}" 'send-keys C-h'  'select-pane -L'
-      bind-key -n C-j if -F "#{@pane-is-vim}" 'send-keys C-j'  'select-pane -D'
-      bind-key -n C-k if -F "#{@pane-is-vim}" 'send-keys C-k'  'select-pane -U'
-      bind-key -n C-l if -F "#{@pane-is-vim}" 'send-keys C-l'  'select-pane -R'
-
-      # Smart pane resizing with awareness of Neovim splits.
-      bind-key -n C-Left if -F "#{@pane-is-vim}" 'send-keys M-h' 'resize-pane -L 3'
-      bind-key -n C-Down if -F "#{@pane-is-vim}" 'send-keys M-j' 'resize-pane -D 3'
-      bind-key -n C-Up if -F "#{@pane-is-vim}" 'send-keys M-k' 'resize-pane -U 3'
-      bind-key -n C-Right if -F "#{@pane-is-vim}" 'send-keys M-l' 'resize-pane -R 3'
-
-      bind-key -T copy-mode-vi 'C-h' select-pane -L
-      bind-key -T copy-mode-vi 'C-j' select-pane -D
-      bind-key -T copy-mode-vi 'C-k' select-pane -U
-      bind-key -T copy-mode-vi 'C-l' select-pane -R
 
       # vi mode
       list-keys -T copy-mode-vi
@@ -119,6 +102,9 @@
       set -g status-bg colour60
       set -g status-fg colour254
       set -g status-right '%Y-%m-%d %H:%M #{tmux_mode_indicator}'
+
+      # mouse
+      setw -g mouse on
     '';
   };
 

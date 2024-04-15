@@ -15,20 +15,20 @@ local function is_vim_or_tmux(pane)
 end
 
 local function split_nav(key, resize_or_move, direction)
-  local mod = "CTRL"
+  local mod = "SUPER"
   return {
     key = key,
     mods = mod,
     action = wezterm.action_callback(function(win, pane)
-      if is_vim_or_tmux(pane) then
-        -- pass the keys through to vim/nvim
-        win:perform_action({ SendKey = { key = key, mods = mod } }, pane)
+      -- if is_vim_or_tmux(pane) then
+      --   -- pass the keys through to vim/nvim
+      --   win:perform_action({ SendKey = { key = key, mods = mod } }, pane)
+      -- else
+      -- end
+      if resize_or_move == "resize" then
+        win:perform_action({ AdjustPaneSize = { direction, 3 } }, pane)
       else
-        if resize_or_move == "resize" then
-          win:perform_action({ AdjustPaneSize = { direction, 3 } }, pane)
-        else
-          win:perform_action({ ActivatePaneDirection = direction }, pane)
-        end
+        win:perform_action({ ActivatePaneDirection = direction }, pane)
       end
     end),
   }
@@ -60,12 +60,12 @@ function M.append(config)
       { key = "5", mods = "SUPER", action = act { ActivateTab = 4 } },
       { key = "6", mods = "SUPER", action = act { ActivateTab = 5 } },
       { key = "t", mods = "SUPER", action = act { SpawnCommandInNewTab = { cwd = os.getenv "HOME" } } },
-      { key = "w", mods = "SUPER", action = act { CloseCurrentTab = { confirm = true } } },
 
       -- pane
+      { key = "w", mods = "SUPER", action = act { CloseCurrentPane = { confirm = true } } },
       { key = "z", mods = "SUPER", action = act.TogglePaneZoomState },
-      { key = "-", mods = "CTRL", action = act { SplitVertical = { domain = "CurrentPaneDomain" } } },
-      { key = "\\", mods = "CTRL", action = act { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
+      { key = "-", mods = "SUPER", action = act { SplitVertical = { domain = "CurrentPaneDomain" } } },
+      { key = "\\", mods = "SUPER", action = act { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
       split_nav("h", "move", "Left"),
       split_nav("j", "move", "Down"),
       split_nav("k", "move", "Up"),
@@ -74,6 +74,24 @@ function M.append(config)
       split_nav("DownArrow", "resize", "Down"),
       split_nav("UpArrow", "resize", "Up"),
       split_nav("RightArrow", "resize", "Right"),
+      {
+        key = "`",
+        mods = "CTRL",
+        action = wezterm.action.SplitPane {
+          direction = "Down",
+          -- command = { args = { "top" } },
+          size = { Percent = 30 },
+        },
+      },
+      {
+        key = "/",
+        mods = "CTRL",
+        action = wezterm.action.SplitPane {
+          direction = "Right",
+          -- command = { args = { "htop" } },
+          size = { Percent = 30 },
+        },
+      },
     },
   }
 
