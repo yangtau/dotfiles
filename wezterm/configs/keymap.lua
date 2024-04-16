@@ -1,5 +1,4 @@
 local wezterm = require "wezterm"
-local act = wezterm.action
 
 local M = {}
 
@@ -14,30 +13,12 @@ local function is_vim_or_tmux(pane)
     or string.find(process, "tmux")
 end
 
-local function split_nav(key, resize_or_move, direction)
-  local mod = "SUPER"
-  return {
-    key = key,
-    mods = mod,
-    action = wezterm.action_callback(function(win, pane)
-      -- if is_vim_or_tmux(pane) then
-      --   -- pass the keys through to vim/nvim
-      --   win:perform_action({ SendKey = { key = key, mods = mod } }, pane)
-      -- else
-      -- end
-      if resize_or_move == "resize" then
-        win:perform_action({ AdjustPaneSize = { direction, 3 } }, pane)
-      else
-        win:perform_action({ ActivatePaneDirection = direction }, pane)
-      end
-    end),
-  }
-end
-
 function M.append(config)
+  local act = wezterm.action
+
   local options = {
     disable_default_key_bindings = true,
-    disable_default_mouse_bindings = false,
+    disable_default_mouse_bindings = true,
 
     -- quick_select_alphabet = "colemak", -- default: qwerty
 
@@ -45,53 +26,81 @@ function M.append(config)
     -- timeout_milliseconds defaults to 1000
     -- leader = { key = "p", mods = "SUPER", timeout_milliseconds = 5000 },
 
+    mouse_bindings = {
+      -- open link
+      {
+        event = { Up = { streak = 1, button = "Left" } },
+        action = act.OpenLinkAtMouseCursor,
+        mods = "SUPER",
+      },
+
+      -- copy text selected
+      {
+        event = { Up = { streak = 2, button = "Left" } },
+        action = act.CompleteSelection "ClipboardAndPrimarySelection",
+      },
+      {
+        event = { Up = { streak = 1, button = "Left" } },
+        action = act.CompleteSelection "ClipboardAndPrimarySelection",
+      },
+
+      -- select text
+      { event = { Down = { streak = 1, button = "Left" } }, action = act.SelectTextAtMouseCursor "Cell" },
+      { event = { Down = { streak = 2, button = "Left" } }, action = act.SelectTextAtMouseCursor "Word" },
+      { event = { Drag = { streak = 1, button = "Left" } }, action = act.ExtendSelectionToMouseCursor "Cell" },
+
+      -- resize font
+      {
+        event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+        mods = "SUPER",
+        action = act.IncreaseFontSize,
+      },
+      {
+        event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+        mods = "SUPER",
+        action = act.DecreaseFontSize,
+      },
+
+      -- scroll
+      { event = { Down = { streak = 1, button = { WheelUp = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
+      { event = { Down = { streak = 1, button = { WheelDown = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
+    },
+
     keys = {
-      { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
+      { mods = "SUPER", key = "p", action = act.ActivateCommandPalette },
 
       -- copy & paste
-      { key = "c", mods = "SUPER", action = act.CopyTo "Clipboard" },
-      { key = "v", mods = "SUPER", action = act.PasteFrom "Clipboard" },
+      { mods = "SUPER", key = "c", action = act.CopyTo "Clipboard" },
+      { mods = "SUPER", key = "v", action = act.PasteFrom "Clipboard" },
 
       -- tabs
-      { key = "1", mods = "SUPER", action = act { ActivateTab = 0 } },
-      { key = "2", mods = "SUPER", action = act { ActivateTab = 1 } },
-      { key = "3", mods = "SUPER", action = act { ActivateTab = 2 } },
-      { key = "4", mods = "SUPER", action = act { ActivateTab = 3 } },
-      { key = "5", mods = "SUPER", action = act { ActivateTab = 4 } },
-      { key = "6", mods = "SUPER", action = act { ActivateTab = 5 } },
-      { key = "t", mods = "SUPER", action = act { SpawnCommandInNewTab = { cwd = os.getenv "HOME" } } },
+      { mods = "SUPER", key = "1", action = act.ActivateTab(0) },
+      { mods = "SUPER", key = "2", action = act.ActivateTab(1) },
+      { mods = "SUPER", key = "3", action = act.ActivateTab(2) },
+      { mods = "SUPER", key = "4", action = act.ActivateTab(3) },
+      { mods = "SUPER", key = "5", action = act.ActivateTab(4) },
+      { mods = "SUPER", key = "6", action = act.ActivateTab(5) },
+      { mods = "SUPER", key = "7", action = act.ActivateTab(6) },
+      { mods = "SUPER", key = "8", action = act.ActivateTab(7) },
+      { mods = "SUPER", key = "9", action = act.ActivateTab(8) },
+      { mods = "SUPER", key = "0", action = act.ActivateTab(9) },
+      { mods = "SUPER", key = "t", action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
 
       -- pane
-      { key = "w", mods = "SUPER", action = act { CloseCurrentPane = { confirm = true } } },
-      { key = "z", mods = "SUPER", action = act.TogglePaneZoomState },
-      { key = "-", mods = "SUPER", action = act { SplitVertical = { domain = "CurrentPaneDomain" } } },
-      { key = "\\", mods = "SUPER", action = act { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
-      split_nav("h", "move", "Left"),
-      split_nav("j", "move", "Down"),
-      split_nav("k", "move", "Up"),
-      split_nav("l", "move", "Right"),
-      split_nav("LeftArrow", "resize", "Left"),
-      split_nav("DownArrow", "resize", "Down"),
-      split_nav("UpArrow", "resize", "Up"),
-      split_nav("RightArrow", "resize", "Right"),
-      {
-        key = "`",
-        mods = "CTRL",
-        action = wezterm.action.SplitPane {
-          direction = "Down",
-          -- command = { args = { "top" } },
-          size = { Percent = 30 },
-        },
-      },
-      {
-        key = "/",
-        mods = "CTRL",
-        action = wezterm.action.SplitPane {
-          direction = "Right",
-          -- command = { args = { "htop" } },
-          size = { Percent = 30 },
-        },
-      },
+      { mods = "SUPER", key = "w", action = act.CloseCurrentPane { confirm = true } },
+      { mods = "SUPER", key = "z", action = act.TogglePaneZoomState },
+      { mods = "SUPER", key = "-", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
+      { mods = "SUPER", key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
+      { mods = "SUPER", key = "h", action = act.ActivatePaneDirection "Left" },
+      { mods = "SUPER", key = "j", action = act.ActivatePaneDirection "Down" },
+      { mods = "SUPER", key = "k", action = act.ActivatePaneDirection "Up" },
+      { mods = "SUPER", key = "l", action = act.ActivatePaneDirection "Right" },
+      { mods = "SUPER", key = "LeftArrow", action = act.AdjustPaneSize { "Left", 3 } },
+      { mods = "SUPER", key = "DownArrow", action = act.AdjustPaneSize { "Down", 3 } },
+      { mods = "SUPER", key = "UpArrow", action = act.AdjustPaneSize { "Up", 3 } },
+      { mods = "SUPER", key = "RightArrow", action = act.AdjustPaneSize { "Right", 3 } },
+      { mods = "SUPER", key = "`", action = act.SplitPane { direction = "Down", size = { Percent = 30 } } },
+      { mods = "SUPER", key = "/", action = act.SplitPane { direction = "Right", size = { Percent = 30 } } },
     },
   }
 
