@@ -8,17 +8,86 @@ local function is_vim_or_tmux(pane)
   -- wezterm.log_info("process: ", process)
   -- wezterm.log_info("title: ", title)
   return string.find(title, "NVIM")
-    or string.find(title, "tmux")
-    or string.find(process, "nvim")
-    or string.find(process, "tmux")
+      or string.find(title, "tmux")
+      or string.find(process, "nvim")
+      or string.find(process, "tmux")
+end
+
+local function split_nav(m)
+  local direction = m.action[2]
+  local op = m.action[1]
+  m.action = wezterm.action_callback(function(win, pane)
+    if is_vim_or_tmux(pane) then
+      -- pass the keys through to vim/nvim
+      win:perform_action({ SendKey = { key = m.key, mods = m.mods } }, pane)
+    else
+      if op == "resize" then
+        win:perform_action({ AdjustPaneSize = { direction, 3 } }, pane)
+      else
+        win:perform_action({ ActivatePaneDirection = direction }, pane)
+      end
+    end
+  end)
+  return m
+end
+
+local function check_pane_in_tab(pane, tab)
+  if pane == nil then
+    return nil
+  end
+
+  for _, item in ipairs(tab:panes()) do
+    if item:pane_id() == pane:pane_id() then
+      return pane
+    end
+  end
+  return nil
+end
+
+local function open_or_focus_pane(
+  tab_to_panes --[[ tab_id= {bottom=, last=} ]],
+  arg
+)
+  return wezterm.action_callback(function(win, pane)
+    local tab = win:active_tab()
+    local panes = tab_to_panes[tab:tab_id()]
+
+    local bottom_pane, last_pane
+    if panes then
+      bottom_pane = panes.bottom
+      last_pane = panes.last
+    end
+
+    -- check if the bottom pane is still valid
+    bottom_pane = check_pane_in_tab(bottom_pane, tab)
+    last_pane = check_pane_in_tab(last_pane, tab)
+
+    if not bottom_pane then -- no bottom pane, open one
+      win:perform_action({ SplitPane = arg }, pane)
+      tab_to_panes[tab:tab_id()] = { bottom = tab:active_pane(), last = pane }
+    elseif pane:pane_id() == bottom_pane:pane_id() then -- on bottom pane, switch to last
+      if last_pane then
+        last_pane:activate()
+      end
+    else -- switch to bottom and set last
+      bottom_pane:activate()
+      tab_to_panes[tab:tab_id()] = { bottom = bottom_pane, last = pane }
+    end
+  end)
 end
 
 function M.append(config)
   local act = wezterm.action
 
+  -- pane opend by `
+  local tab_to_grave_pane = {} --[[ tab_id= {bottom=, last=} ]]
+  -- pane opend by /
+  local tab_to_left_pane = {}
+
   local options = {
     disable_default_key_bindings = true,
     disable_default_mouse_bindings = true,
+    unzoom_on_switch_pane = true,
 
     -- quick_select_alphabet = "colemak", -- default: qwerty
 
@@ -62,45 +131,54 @@ function M.append(config)
       },
 
       -- scroll
-      { event = { Down = { streak = 1, button = { WheelUp = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
+      { event = { Down = { streak = 1, button = { WheelUp = 1 } } },   action = act.ScrollByCurrentEventWheelDelta },
       { event = { Down = { streak = 1, button = { WheelDown = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
     },
 
     keys = {
-      { mods = "SUPER", key = "p", action = act.ActivateCommandPalette },
+      { mods = "SUPER", key = "p",  action = act.ActivateCommandPalette },
 
       -- copy & paste
-      { mods = "SUPER", key = "c", action = act.CopyTo "Clipboard" },
-      { mods = "SUPER", key = "v", action = act.PasteFrom "Clipboard" },
+      { mods = "SUPER", key = "c",  action = act.CopyTo "Clipboard" },
+      { mods = "SUPER", key = "v",  action = act.PasteFrom "Clipboard" },
 
       -- tabs
-      { mods = "SUPER", key = "1", action = act.ActivateTab(0) },
-      { mods = "SUPER", key = "2", action = act.ActivateTab(1) },
-      { mods = "SUPER", key = "3", action = act.ActivateTab(2) },
-      { mods = "SUPER", key = "4", action = act.ActivateTab(3) },
-      { mods = "SUPER", key = "5", action = act.ActivateTab(4) },
-      { mods = "SUPER", key = "6", action = act.ActivateTab(5) },
-      { mods = "SUPER", key = "7", action = act.ActivateTab(6) },
-      { mods = "SUPER", key = "8", action = act.ActivateTab(7) },
-      { mods = "SUPER", key = "9", action = act.ActivateTab(8) },
-      { mods = "SUPER", key = "0", action = act.ActivateTab(9) },
-      { mods = "SUPER", key = "t", action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
+      { mods = "SUPER", key = "1",  action = act.ActivateTab(0) },
+      { mods = "SUPER", key = "2",  action = act.ActivateTab(1) },
+      { mods = "SUPER", key = "3",  action = act.ActivateTab(2) },
+      { mods = "SUPER", key = "4",  action = act.ActivateTab(3) },
+      { mods = "SUPER", key = "5",  action = act.ActivateTab(4) },
+      { mods = "SUPER", key = "6",  action = act.ActivateTab(5) },
+      { mods = "SUPER", key = "7",  action = act.ActivateTab(6) },
+      { mods = "SUPER", key = "8",  action = act.ActivateTab(7) },
+      { mods = "SUPER", key = "9",  action = act.ActivateTab(8) },
+      { mods = "SUPER", key = "0",  action = act.ActivateTab(9) },
+      { mods = "SUPER", key = "t",  action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
 
       -- pane
-      { mods = "SUPER", key = "w", action = act.CloseCurrentPane { confirm = true } },
-      { mods = "SUPER", key = "z", action = act.TogglePaneZoomState },
-      { mods = "SUPER", key = "-", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
-      { mods = "SUPER", key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
-      { mods = "SUPER", key = "h", action = act.ActivatePaneDirection "Left" },
-      { mods = "SUPER", key = "j", action = act.ActivatePaneDirection "Down" },
-      { mods = "SUPER", key = "k", action = act.ActivatePaneDirection "Up" },
-      { mods = "SUPER", key = "l", action = act.ActivatePaneDirection "Right" },
-      { mods = "SUPER", key = "LeftArrow", action = act.AdjustPaneSize { "Left", 3 } },
-      { mods = "SUPER", key = "DownArrow", action = act.AdjustPaneSize { "Down", 3 } },
-      { mods = "SUPER", key = "UpArrow", action = act.AdjustPaneSize { "Up", 3 } },
-      { mods = "SUPER", key = "RightArrow", action = act.AdjustPaneSize { "Right", 3 } },
-      { mods = "SUPER", key = "`", action = act.SplitPane { direction = "Down", size = { Percent = 30 } } },
-      { mods = "SUPER", key = "/", action = act.SplitPane { direction = "Right", size = { Percent = 30 } } },
+      { mods = "SUPER", key = "w",  action = act.CloseCurrentPane { confirm = true } },
+      { mods = "SUPER", key = "z",  action = act.TogglePaneZoomState },
+      { mods = "CTRL",  key = "-",  action = act.SplitVertical { domain = "CurrentPaneDomain" } },
+      { mods = "CTRL",  key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
+      split_nav { mods = "CTRL", key = "h", action = { "move", "Left" } },
+      split_nav { mods = "CTRL", key = "j", action = { "move", "Down" } },
+      split_nav { mods = "CTRL", key = "k", action = { "move", "Up" } },
+      split_nav { mods = "CTRL", key = "l", action = { "move", "Right" } },
+      split_nav { mods = "CTRL", key = "LeftArrow", action = { "resize", "Left" } },
+      split_nav { mods = "CTRL", key = "DownArrow", action = { "resize", "Down" } },
+      split_nav { mods = "CTRL", key = "UpArrow", action = { "resize", "Up" } },
+      split_nav { mods = "CTRL", key = "RightArrow", action = { "resize", "Right" } },
+
+      {
+        mods = "CTRL",
+        key = "`",
+        action = open_or_focus_pane(tab_to_grave_pane, { direction = "Down", size = { Percent = 30 } }),
+      },
+      {
+        mods = "CTRL",
+        key = "/",
+        action = open_or_focus_pane(tab_to_left_pane, { direction = "Right", size = { Percent = 30 } }),
+      },
     },
   }
 
