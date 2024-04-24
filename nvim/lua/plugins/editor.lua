@@ -16,7 +16,7 @@ return {
         },
         timeout_ms = 1000, -- default format timeout
       },
-      servers = { "nil_ls", "gopls", "rust_analyzer" },
+      servers = { "nil_ls", "gopls", "rust_analyzer", "jqls" },
     },
   },
   {

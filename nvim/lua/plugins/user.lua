@@ -68,4 +68,15 @@ return {
       },
     },
   },
+  {
+
+    "folke/todo-comments.nvim",
+    opts = {
+      highlight = {
+        keyword = "bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+        after = "fg", -- "fg" or "bg" or empty
+        pattern = [[.*<(KEYWORDS)(\(.+\))?:]], -- pattern or table of patterns, used for highlighting (vim regex)
+      },
+    },
+  },
 }
