@@ -8,9 +8,10 @@ local function is_vim_or_tmux(pane)
   -- wezterm.log_info("process: ", process)
   -- wezterm.log_info("title: ", title)
   return string.find(title, "NVIM")
-      or string.find(title, "tmux")
-      or string.find(process, "nvim")
-      or string.find(process, "tmux")
+    or string.find(title, "tmux")
+    or string.find(process, "nvim")
+    or string.find(process, "tmux")
+    or string.find(process, "ssh")
 end
 
 local function split_nav(m)
@@ -31,14 +32,14 @@ local function split_nav(m)
   return m
 end
 
-local function check_pane_in_tab(pane, tab)
+local function get_pane_info(pane, tab)
   if pane == nil then
     return nil
   end
 
-  for _, item in ipairs(tab:panes()) do
-    if item:pane_id() == pane:pane_id() then
-      return pane
+  for _, item in ipairs(tab:panes_with_info()) do
+    if item.pane:pane_id() == pane then
+      return item
     end
   end
   return nil
@@ -59,19 +60,19 @@ local function open_or_focus_pane(
     end
 
     -- check if the bottom pane is still valid
-    bottom_pane = check_pane_in_tab(bottom_pane, tab)
-    last_pane = check_pane_in_tab(last_pane, tab)
+    local bottom_pane_info = get_pane_info(bottom_pane, tab)
+    local last_pane_info = get_pane_info(last_pane, tab)
 
-    if not bottom_pane then -- no bottom pane, open one
+    tab:set_zoomed(false)
+
+    if not bottom_pane_info or not last_pane_info then -- no bottom pane, open one
       win:perform_action({ SplitPane = arg }, pane)
-      tab_to_panes[tab:tab_id()] = { bottom = tab:active_pane(), last = pane }
-    elseif pane:pane_id() == bottom_pane:pane_id() then -- on bottom pane, switch to last
-      if last_pane then
-        last_pane:activate()
-      end
+      tab_to_panes[tab:tab_id()] = { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
+    elseif pane:pane_id() == bottom_pane then -- on bottom pane, switch to last
+      last_pane_info.pane:activate()
     else -- switch to bottom and set last
-      bottom_pane:activate()
-      tab_to_panes[tab:tab_id()] = { bottom = bottom_pane, last = pane }
+      bottom_pane_info.pane:activate()
+      tab_to_panes[tab:tab_id()].last = pane:pane_id()
     end
   end)
 end
@@ -131,35 +132,35 @@ function M.append(config)
       },
 
       -- scroll
-      { event = { Down = { streak = 1, button = { WheelUp = 1 } } },   action = act.ScrollByCurrentEventWheelDelta },
+      { event = { Down = { streak = 1, button = { WheelUp = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
       { event = { Down = { streak = 1, button = { WheelDown = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
     },
 
     keys = {
-      { mods = "SUPER", key = "p",  action = act.ActivateCommandPalette },
+      { mods = "SUPER", key = "p", action = act.ActivateCommandPalette },
 
       -- copy & paste
-      { mods = "SUPER", key = "c",  action = act.CopyTo "Clipboard" },
-      { mods = "SUPER", key = "v",  action = act.PasteFrom "Clipboard" },
+      { mods = "SUPER", key = "c", action = act.CopyTo "Clipboard" },
+      { mods = "SUPER", key = "v", action = act.PasteFrom "Clipboard" },
 
       -- tabs
-      { mods = "SUPER", key = "1",  action = act.ActivateTab(0) },
-      { mods = "SUPER", key = "2",  action = act.ActivateTab(1) },
-      { mods = "SUPER", key = "3",  action = act.ActivateTab(2) },
-      { mods = "SUPER", key = "4",  action = act.ActivateTab(3) },
-      { mods = "SUPER", key = "5",  action = act.ActivateTab(4) },
-      { mods = "SUPER", key = "6",  action = act.ActivateTab(5) },
-      { mods = "SUPER", key = "7",  action = act.ActivateTab(6) },
-      { mods = "SUPER", key = "8",  action = act.ActivateTab(7) },
-      { mods = "SUPER", key = "9",  action = act.ActivateTab(8) },
-      { mods = "SUPER", key = "0",  action = act.ActivateTab(9) },
-      { mods = "SUPER", key = "t",  action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
+      { mods = "SUPER", key = "1", action = act.ActivateTab(0) },
+      { mods = "SUPER", key = "2", action = act.ActivateTab(1) },
+      { mods = "SUPER", key = "3", action = act.ActivateTab(2) },
+      { mods = "SUPER", key = "4", action = act.ActivateTab(3) },
+      { mods = "SUPER", key = "5", action = act.ActivateTab(4) },
+      { mods = "SUPER", key = "6", action = act.ActivateTab(5) },
+      { mods = "SUPER", key = "7", action = act.ActivateTab(6) },
+      { mods = "SUPER", key = "8", action = act.ActivateTab(7) },
+      { mods = "SUPER", key = "9", action = act.ActivateTab(8) },
+      { mods = "SUPER", key = "0", action = act.ActivateTab(9) },
+      { mods = "SUPER", key = "t", action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
 
       -- pane
-      { mods = "SUPER", key = "w",  action = act.CloseCurrentPane { confirm = true } },
-      { mods = "SUPER", key = "z",  action = act.TogglePaneZoomState },
-      { mods = "CTRL",  key = "-",  action = act.SplitVertical { domain = "CurrentPaneDomain" } },
-      { mods = "CTRL",  key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
+      { mods = "SUPER", key = "w", action = act.CloseCurrentPane { confirm = true } },
+      { mods = "SUPER", key = "z", action = act.TogglePaneZoomState },
+      { mods = "CTRL", key = "-", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
+      { mods = "CTRL", key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
       split_nav { mods = "CTRL", key = "h", action = { "move", "Left" } },
       split_nav { mods = "CTRL", key = "j", action = { "move", "Down" } },
       split_nav { mods = "CTRL", key = "k", action = { "move", "Up" } },
@@ -168,7 +169,6 @@ function M.append(config)
       split_nav { mods = "CTRL", key = "DownArrow", action = { "resize", "Down" } },
       split_nav { mods = "CTRL", key = "UpArrow", action = { "resize", "Up" } },
       split_nav { mods = "CTRL", key = "RightArrow", action = { "resize", "Right" } },
-
       {
         mods = "CTRL",
         key = "`",
@@ -178,6 +178,13 @@ function M.append(config)
         mods = "CTRL",
         key = "/",
         action = open_or_focus_pane(tab_to_left_pane, { direction = "Right", size = { Percent = 30 } }),
+      },
+      {
+        key = "!",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action_callback(function(_, pane)
+          pane:move_to_new_tab()
+        end),
       },
     },
   }
