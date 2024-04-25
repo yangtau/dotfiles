@@ -7,6 +7,7 @@ nix/
 go/
 dlv/
 environment.d/
+wireshark/
 
 # managed by nix home manager
 git/
