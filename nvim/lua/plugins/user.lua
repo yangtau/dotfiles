@@ -127,9 +127,9 @@ return {
       lang = "rust",
 
       cn = { -- leetcode.cn
-        enabled = true, ---@type boolean
-        translator = true, ---@type boolean
-        translate_problems = true, ---@type boolean
+        enabled = false, ---@type boolean
+        translator = false, ---@type boolean
+        translate_problems = false, ---@type boolean
       },
 
       ---@type lc.storage
