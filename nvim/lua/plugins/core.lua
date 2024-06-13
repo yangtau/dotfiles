@@ -33,6 +33,7 @@ return {
         wrap = true,
         foldcolumn = "0",
         numberwidth = 1,
+        spell = true,
         -- signcolumn = "auto",
       },
       g = { -- vim.g.<key>
@@ -49,26 +50,21 @@ return {
         ["<Leader>W"] = { "<cmd>wqa<cr>", desc = "Save and quit all" },
 
         -- lsp
-        ["<Leader>o"] = {
-          function()
-            require("telescope.builtin").lsp_document_symbols {
-              symbol_width = 60,
-              showline = false,
-            }
-          end,
-          desc = "Search ducument symbols",
-        },
         ["<Leader>O"] = {
           function() require("aerial").toggle() end,
           desc = "Symbols outline",
         },
+        ["<Leader>o"] = {
+          function() require("telescope.builtin").lsp_document_symbols { symbol_width = 60 } end,
+          desc = "Search ducument symbols",
+        },
         ["<Leader>s"] = {
-          function()
-            require("telescope.builtin").lsp_dynamic_workspace_symbols {
-              -- fname_width = 60,
-            }
-          end,
+          function() require("telescope.builtin").lsp_dynamic_workspace_symbols { fname_width = 50 } end,
           desc = "Search workspace symbols",
+        },
+        ["gr"] = {
+          function() require("telescope.builtin").lsp_references { include_declaration = false, fname_width = 50 } end,
+          desc = "vim.lsp.buf.references()",
         },
 
         -- todo
