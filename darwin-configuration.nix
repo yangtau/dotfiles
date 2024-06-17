@@ -48,9 +48,7 @@ in
       # cleanup = "uninstall";
     };
     brews = [ ];
-    taps = [
-      { name = "homebrew/cask-fonts"; }
-    ];
+    taps = [ ];
     casks = [
       { name = "typora"; }
       { name = "monitorcontrol"; }
