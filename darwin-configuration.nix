@@ -45,22 +45,29 @@ in
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      # cleanup = "uninstall";
+      cleanup = "uninstall";
     };
-    brews = [ ];
+    brews = [
+    ];
     taps = [ ];
     casks = [
+      # browser
+      { name = "arc"; }
+      # md editor
       { name = "typora"; }
-      { name = "monitorcontrol"; }
+      # terminal
+      { name = "wezterm"; }
+      # develop tools
+      { name = "orbstack"; }
+      # tools
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
       { name = "amethyst"; }
-      { name = "arc"; }
-      { name = "iterm2"; }
-      { name = "motrix"; }
+      { name = "hiddenbar"; }
+      { name = "stretchly"; }
+      # font
       { name = "font-fira-code-nerd-font"; }
       { name = "font-jetbrains-mono-nerd-font"; }
-      { name = "wezterm"; }
     ];
   };
 
