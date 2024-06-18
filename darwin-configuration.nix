@@ -9,7 +9,7 @@ in
 {
   imports = [
     <home-manager/nix-darwin>
-    ./host.nix # config for this host only
+    ./darwin-configuration.local.nix # config for this host only
   ];
 
   # Use a custom configuration.nix location.

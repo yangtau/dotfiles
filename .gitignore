@@ -16,6 +16,5 @@ tmux/
 neofetch/
 
 # host specifed config
-host.nix
 vars.nix
-home.nix
+*local.nix
