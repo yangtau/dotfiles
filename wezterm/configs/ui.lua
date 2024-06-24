@@ -24,8 +24,8 @@ function M.append(config)
 
   local options = {
     default_cursor_style = "BlinkingBlock",
-    font_size = 16,
-    font = wezterm.font_with_fallback { "FiraCode Nerd Font", "Apple Color Emoji" },
+    font_size = 20,
+    font = wezterm.font_with_fallback { "UbuntuMono Nerd Font", "Apple Color Emoji" },
     color_schemes = {
       ["catppuccin"] = catppuccin,
     },
