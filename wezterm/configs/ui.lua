@@ -17,30 +17,30 @@ function M.append(config)
   local catppuccin = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
   catppuccin.background = "#ffffff"
   catppuccin.tab_bar.background = "#f0f0f0"
+  catppuccin.tab_bar.inactive_tab.bg_color = catppuccin.tab_bar.background
   catppuccin.tab_bar.active_tab.bg_color = "#c2c2df"
-  catppuccin.tab_bar.active_tab.fg_color = "#111111"
-  catppuccin.tab_bar.active_tab.intensity = "Bold"
-  catppuccin.tab_bar.inactive_tab.fg_color = "#7c7f99"
+  catppuccin.tab_bar.active_tab.fg_color = "#323222"
 
   local options = {
     default_cursor_style = "BlinkingBlock",
     font_size = 20,
-    font = wezterm.font_with_fallback { "UbuntuMono Nerd Font", "Apple Color Emoji" },
+    -- Ll1 Oo0 \ | /
+    font = wezterm.font_with_fallback { "Inconsolata Nerd Font Mono", "Apple Color Emoji" },
     color_schemes = {
       ["catppuccin"] = catppuccin,
     },
     color_scheme = "catppuccin",
 
-    enable_scroll_bar = true, -- default: false
-    scrollback_lines = 100000, --defauls: 3500
+    enable_scroll_bar = true,
+    scrollback_lines = 100000,
 
-    use_fancy_tab_bar = false, -- default: true
-    tab_bar_at_bottom = false,
-    hide_tab_bar_if_only_one_tab = true, -- default: false
+    use_fancy_tab_bar = false,
+    tab_bar_at_bottom = true,
+    hide_tab_bar_if_only_one_tab = true,
     show_new_tab_button_in_tab_bar = false,
-    text_background_opacity = 0.95, -- tab bar opacity
+    text_background_opacity = 0.9,
 
-    window_background_opacity = 0.96,
+    window_background_opacity = 1,
 
     inactive_pane_hsb = {
       saturation = 0.92,
@@ -48,9 +48,9 @@ function M.append(config)
     },
 
     -- Tab bar can't have padding https://github.com/wez/wezterm/issues/3077
-    window_padding = { left = 6, right = 6, top = 6, bottom = 6 },
+    window_padding = { left = 6, right = 6, top = 6, bottom = 1 },
     window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
-    macos_window_background_blur = 10,
+    -- macos_window_background_blur = 5,
   }
 
   for key, value in pairs(options) do
