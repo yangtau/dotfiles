@@ -46,32 +46,8 @@ return {
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
       n = {
-        ["<Leader>w"] = { "<cmd>Format<cr><cmd>w<cr>", desc = "Format and save buffer" },
+        ["<Leader>w"] = { "<cmd>w<cr>", desc = "Save buffer" },
         ["<Leader>W"] = { "<cmd>wqa<cr>", desc = "Save and quit all" },
-
-        -- lsp
-        ["<Leader>O"] = {
-          function() require("aerial").toggle() end,
-          desc = "Symbols outline",
-        },
-        ["<Leader>o"] = {
-          function() require("telescope.builtin").lsp_document_symbols { symbol_width = 60 } end,
-          desc = "Search ducument symbols",
-        },
-        ["<Leader>s"] = {
-          function() require("telescope.builtin").lsp_dynamic_workspace_symbols { fname_width = 50 } end,
-          desc = "Search workspace symbols",
-        },
-        ["gr"] = {
-          function() require("telescope.builtin").lsp_references { include_declaration = false, fname_width = 50 } end,
-          desc = "vim.lsp.buf.references()",
-        },
-
-        -- todo
-        -- override default mappings
-        ["<Leader>ft"] = { "<Cmd>TodoTelescope<CR>", desc = "Find TODOs" },
-        ["]t"] = { function() require("todo-comments").jump_next() end, desc = "Next TODO comment" },
-        ["[t"] = { function() require("todo-comments").jump_prev() end, desc = "Previous TODO comment" },
       },
     },
   },

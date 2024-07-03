@@ -1,30 +1,23 @@
-local excluded_filetypes = {
-  "Trouble",
-  "aerial",
-  "alpha",
-  "checkhealth",
-  "dashboard",
-  "fzf",
-  "help",
-  "lazy",
-  "lspinfo",
-  "man",
-  "mason",
-  "neo-tree",
-  "notify",
-  "null-ls-info",
-  "starter",
-  "toggleterm",
-  "undotree",
-}
-local excluded_buftypes = {
-  "nofile",
-  "prompt",
-  "quickfix",
-  "terminal",
-}
-
 return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      local utils = require "astrocore"
+      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, {
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
+        "rust",
+        "bash",
+        "sql",
+        "nix",
+        "json",
+        "yaml",
+        "markdown",
+      })
+    end,
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)
@@ -46,15 +39,6 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ui = {
-        border = "rounded",
-        height = 0.8,
-      },
-    },
-  },
-  {
     "folke/todo-comments.nvim",
     opts = {
       highlight = {
@@ -63,45 +47,25 @@ return {
         pattern = [[.*<(KEYWORDS)(\(.+\))?:]], -- pattern or table of patterns, used for highlighting (vim regex)
       },
     },
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "User AstroFile",
-    opts = {
-      indent = {
-        char = "▏",
+    keys = {
+      -- todo
+      -- override default mappings
+      { "<Leader>ft", "<Cmd>TodoTelescope<CR>", desc = "Find TODOs" },
+      {
+        "]t",
+        function()
+          require("todo-comments").jump_next()
+        end,
+        desc = "Next TODO comment",
       },
-      scope = {
-        enabled = false,
-      },
-      whitespace = {
-        remove_blankline_trail = true,
+      {
+        "[t",
+        function()
+          require("todo-comments").jump_prev()
+        end,
+        desc = "Previous TODO comment",
       },
     },
-  },
-  {
-    "echasnovski/mini.indentscope",
-    event = "User AstroFile",
-    opts = { symbol = "▏", options = { try_as_border = true } },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        desc = "Disable indentscope for certain filetypes",
-        pattern = excluded_filetypes,
-        callback = function(event) vim.b[event.buf].miniindentscope_disable = true end,
-      })
-      vim.api.nvim_create_autocmd("BufWinEnter", {
-        desc = "Disable indentscope for certain buftypes",
-        callback = function(event)
-          if vim.tbl_contains(excluded_buftypes, vim.bo[event.buf].buftype) then
-            vim.b[event.buf].miniindentscope_disable = true
-          end
-        end,
-      })
-      vim.api.nvim_create_autocmd("TermOpen", {
-        desc = "Disable indentscope for terminals",
-        callback = function(event) vim.b[event.buf].miniindentscope_disable = true end,
-      })
-    end,
   },
   {
     "max397574/better-escape.nvim",
@@ -142,9 +106,16 @@ return {
   {
     "Exafunction/codeium.vim",
     event = "User AstroFile",
-    config = function()
-      vim.keymap.set("i", "<C-]>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-    end,
+    keys = {
+      {
+        "<C-]>",
+        function()
+          return vim.fn["codeium#Accept"]()
+        end,
+        "i",
+        { expr = true },
+      },
+    },
   },
   {
     "nvim-telescope/telescope.nvim",
