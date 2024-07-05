@@ -72,38 +72,6 @@ return {
     enabled = false,
   },
   {
-    "kawre/leetcode.nvim",
-    cmd = "Leet",
-    build = ":TSUpdate html",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim", -- required by telescope
-      "MunifTanjim/nui.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      -- configuration goes here
-      ---@type string
-      arg = "leetcode.nvim",
-
-      ---@type lc.lang
-      lang = "rust",
-
-      cn = { -- leetcode.cn
-        enabled = false, ---@type boolean
-        translator = false, ---@type boolean
-        translate_problems = false, ---@type boolean
-      },
-
-      ---@type lc.storage
-      storage = {
-        home = vim.env.HOME .. "/Workspaces/rustal/src",
-        cache = vim.fn.stdpath "cache" .. "/leetcode",
-      },
-    },
-  },
-  {
     "Exafunction/codeium.vim",
     event = "User AstroFile",
     keys = {
