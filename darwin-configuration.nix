@@ -66,8 +66,6 @@ in
       { name = "hiddenbar"; }
       { name = "stretchly"; }
       # fonts
-      { name = "font-jetbrains-mono-nerd-font"; }
-      { name = "font-inconsolata-nerd-font"; }
       { name = "font-ubuntu-mono-nerd-font"; }
       # IM
       { name = "wechat"; }
