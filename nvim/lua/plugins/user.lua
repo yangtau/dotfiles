@@ -33,7 +33,7 @@ return {
         hide_gitignored = false,
       }
       opts.popup_border_style = "rounded"
-      opts.enable_git_status = false
+      -- opts.enable_git_status = false
       opts.enable_diagnostics = false
       return opts
     end,
