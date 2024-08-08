@@ -62,7 +62,6 @@ in
       # tools
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
-      { name = "amethyst"; }
       { name = "hiddenbar"; }
       { name = "stretchly"; }
       # fonts
