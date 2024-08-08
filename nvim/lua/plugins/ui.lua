@@ -116,7 +116,9 @@ return {
       local hl = require "astroui.status.hl"
       opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
-        status.component.mode { mode_text = { padding = { left = 1, right = 1 } } }, -- add the mode text
+        status.component.mode {
+          mode_text = { padding = { left = 1, right = 1 } },
+        }, -- add the mode text
         status.component.git_branch {},
         status.component.file_info {
           file_icon = {

@@ -27,31 +27,44 @@ return {
           },
           ["<Leader>o"] = {
             function()
-              require("telescope.builtin").lsp_document_symbols { symbol_width = 60 }
+              require("telescope.builtin").lsp_document_symbols {
+                symbol_width = 60,
+              }
             end,
             desc = "Search ducument symbols",
           },
           ["<Leader>s"] = {
             function()
-              require("telescope.builtin").lsp_dynamic_workspace_symbols { fname_width = 50 }
+              require("telescope.builtin").lsp_dynamic_workspace_symbols {
+                fname_width = 50,
+              }
             end,
             desc = "Search workspace symbols",
           },
           ["gd"] = {
             function()
-              require("telescope.builtin").lsp_definitions { jump_type = "nerver", fname_width = 50 }
+              require("telescope.builtin").lsp_definitions {
+                jump_type = "nerver",
+                fname_width = 50,
+              }
             end,
             desc = "Search Definitions",
           },
           ["gI"] = {
             function()
-              require("telescope.builtin").lsp_implementations { jump_type = "nerver", fname_width = 50 }
+              require("telescope.builtin").lsp_implementations {
+                jump_type = "nerver",
+                fname_width = 50,
+              }
             end,
             desc = "Search Implementations",
           },
           ["gr"] = {
             function()
-              require("telescope.builtin").lsp_references { include_declaration = false, fname_width = 50 }
+              require("telescope.builtin").lsp_references {
+                include_declaration = false,
+                fname_width = 50,
+              }
             end,
             desc = "Search References",
           },
