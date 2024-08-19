@@ -12,6 +12,7 @@ return {
       formatting = {
         format_on_save = {
           enabled = true, -- enable or disable format on save globally
+          ignore_filetypes = { "json" },
         },
         timeout_ms = 1000, -- default format timeout
       },
