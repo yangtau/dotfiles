@@ -45,7 +45,6 @@ in
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      cleanup = "uninstall";
     };
     brews = [
     ];
@@ -63,11 +62,6 @@ in
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
       { name = "hiddenbar"; }
-      { name = "stretchly"; }
-      # fonts
-      { name = "font-ubuntu-mono-nerd-font"; }
-      # IM
-      { name = "wechat"; }
     ];
   };
 

@@ -23,13 +23,12 @@ function M.append(config)
 
   local options = {
     default_cursor_style = "BlinkingBlock",
-    font_size = 18,
-    line_height = 1.08,
+    font_size = 20,
+    line_height = 1,
     -- Ll1 Oo0 \ | / 你好 😂 ⚠️
     font = wezterm.font_with_fallback {
       {
-        family = "UbuntuMono Nerd Font Mono",
-        scale = 1.1,
+        family = "M PLUS 1 Code",
       },
       {
         family = "黑体-简",
@@ -48,7 +47,7 @@ function M.append(config)
 
     use_fancy_tab_bar = false,
     tab_bar_at_bottom = false,
-    hide_tab_bar_if_only_one_tab = false,
+    hide_tab_bar_if_only_one_tab = true,
     show_new_tab_button_in_tab_bar = false,
     text_background_opacity = 0.9,
 

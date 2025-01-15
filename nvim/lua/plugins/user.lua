@@ -73,10 +73,9 @@ return {
     enabled = false,
   },
   {
+    -- Add codeium and supermaven
     "nvim-cmp",
     dependencies = {
-      -- codeium
-      -- how are
       {
         "Exafunction/codeium.nvim",
         cmd = "Codeium",
