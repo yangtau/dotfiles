@@ -88,7 +88,7 @@ return {
       table.insert(opts.sources, 1, {
         name = "codeium",
         group_index = 1,
-        priority = 1200,
+        priority = 1000,
       })
       opts.formatting.format = require("lspkind").cmp_format {
         mode = "symbol",
