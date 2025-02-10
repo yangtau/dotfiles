@@ -56,12 +56,9 @@ in
       { name = "typora"; }
       # terminal
       { name = "wezterm"; }
-      # develop tools
-      { name = "orbstack"; }
       # tools
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
-      { name = "hiddenbar"; }
     ];
   };
 
