@@ -8,10 +8,10 @@ local function is_vim_or_tmux(pane)
   -- wezterm.log_info("process: ", process)
   -- wezterm.log_info("title: ", title)
   return string.find(title, "NVIM")
-    or string.find(title, "tmux")
-    or string.find(process, "nvim")
-    or string.find(process, "tmux")
-    or string.find(process, "ssh")
+      or string.find(title, "tmux")
+      or string.find(process, "nvim")
+      or string.find(process, "tmux")
+      or string.find(process, "ssh")
 end
 
 local function split_nav(m)
@@ -46,8 +46,8 @@ local function get_pane_info(pane, tab)
 end
 
 local function open_or_focus_pane(
-  tab_to_panes --[[ tab_id= {bottom=, last=} ]],
-  arg
+    tab_to_panes --[[ tab_id= {bottom=, last=} ]],
+    arg
 )
   return wezterm.action_callback(function(win, pane)
     local tab = win:active_tab()
@@ -67,10 +67,11 @@ local function open_or_focus_pane(
 
     if not bottom_pane_info or not last_pane_info then -- no bottom pane, open one
       win:perform_action({ SplitPane = arg }, pane)
-      tab_to_panes[tab:tab_id()] = { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
+      tab_to_panes[tab:tab_id()] =
+      { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
     elseif pane:pane_id() == bottom_pane then -- on bottom pane, switch to last
       last_pane_info.pane:activate()
-    else -- switch to bottom and set last
+    else                                      -- switch to bottom and set last
       bottom_pane_info.pane:activate()
       tab_to_panes[tab:tab_id()].last = pane:pane_id()
     end
@@ -115,25 +116,28 @@ function M.append(config)
       },
 
       -- select text
-      { event = { Down = { streak = 1, button = "Left" } }, action = act.SelectTextAtMouseCursor "Cell" },
-      { event = { Down = { streak = 2, button = "Left" } }, action = act.SelectTextAtMouseCursor "Word" },
-      { event = { Drag = { streak = 1, button = "Left" } }, action = act.ExtendSelectionToMouseCursor "Cell" },
-
-      -- resize font
       {
-        event = { Down = { streak = 1, button = { WheelUp = 1 } } },
-        mods = "SUPER",
-        action = act.IncreaseFontSize,
+        event = { Down = { streak = 1, button = "Left" } },
+        action = act.SelectTextAtMouseCursor "Cell",
       },
       {
-        event = { Down = { streak = 1, button = { WheelDown = 1 } } },
-        mods = "SUPER",
-        action = act.DecreaseFontSize,
+        event = { Down = { streak = 2, button = "Left" } },
+        action = act.SelectTextAtMouseCursor "Word",
+      },
+      {
+        event = { Drag = { streak = 1, button = "Left" } },
+        action = act.ExtendSelectionToMouseCursor "Cell",
       },
 
       -- scroll
-      { event = { Down = { streak = 1, button = { WheelUp = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
-      { event = { Down = { streak = 1, button = { WheelDown = 1 } } }, action = act.ScrollByCurrentEventWheelDelta },
+      {
+        event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+        action = act.ScrollByCurrentEventWheelDelta,
+      },
+      {
+        event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+        action = act.ScrollByCurrentEventWheelDelta,
+      },
     },
 
     keys = {
@@ -154,30 +158,64 @@ function M.append(config)
       { mods = "SUPER", key = "8", action = act.ActivateTab(7) },
       { mods = "SUPER", key = "9", action = act.ActivateTab(8) },
       { mods = "SUPER", key = "0", action = act.ActivateTab(9) },
-      { mods = "SUPER", key = "t", action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" } },
+      {
+        mods = "SUPER",
+        key = "t",
+        action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" },
+      },
 
       -- pane
-      { mods = "SUPER", key = "w", action = act.CloseCurrentPane { confirm = true } },
+      {
+        mods = "SUPER",
+        key = "w",
+        action = act.CloseCurrentPane { confirm = true },
+      },
       { mods = "SUPER", key = "z", action = act.TogglePaneZoomState },
-      { mods = "CTRL", key = "-", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
-      { mods = "CTRL", key = "\\", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
+      {
+        mods = "CTRL",
+        key = "-",
+        action = act.SplitVertical { domain = "CurrentPaneDomain" },
+      },
+      {
+        mods = "CTRL",
+        key = "\\",
+        action = act.SplitHorizontal { domain = "CurrentPaneDomain" },
+      },
       split_nav { mods = "CTRL", key = "h", action = { "move", "Left" } },
       split_nav { mods = "CTRL", key = "j", action = { "move", "Down" } },
       split_nav { mods = "CTRL", key = "k", action = { "move", "Up" } },
       split_nav { mods = "CTRL", key = "l", action = { "move", "Right" } },
-      split_nav { mods = "CTRL", key = "LeftArrow", action = { "resize", "Left" } },
-      split_nav { mods = "CTRL", key = "DownArrow", action = { "resize", "Down" } },
+      split_nav {
+        mods = "CTRL",
+        key = "LeftArrow",
+        action = { "resize", "Left" },
+      },
+      split_nav {
+        mods = "CTRL",
+        key = "DownArrow",
+        action = { "resize", "Down" },
+      },
       split_nav { mods = "CTRL", key = "UpArrow", action = { "resize", "Up" } },
-      split_nav { mods = "CTRL", key = "RightArrow", action = { "resize", "Right" } },
+      split_nav {
+        mods = "CTRL",
+        key = "RightArrow",
+        action = { "resize", "Right" },
+      },
       {
         mods = "CTRL",
         key = "`",
-        action = open_or_focus_pane(tab_to_grave_pane, { direction = "Down", size = { Percent = 30 } }),
+        action = open_or_focus_pane(
+          tab_to_grave_pane,
+          { direction = "Down", size = { Percent = 30 } }
+        ),
       },
       {
         mods = "CTRL",
         key = "/",
-        action = open_or_focus_pane(tab_to_left_pane, { direction = "Right", size = { Percent = 30 } }),
+        action = open_or_focus_pane(
+          tab_to_left_pane,
+          { direction = "Right", size = { Percent = 30 } }
+        ),
       },
       {
         key = "!",
@@ -185,6 +223,17 @@ function M.append(config)
         action = wezterm.action_callback(function(_, pane)
           pane:move_to_new_tab()
         end),
+      },
+
+      {
+        key = "+",
+        mods = "SUPER",
+        action = act.IncreaseFontSize,
+      },
+      {
+        key = "-",
+        mods = "SUPER",
+        action = act.DecreaseFontSize,
       },
     },
   }
