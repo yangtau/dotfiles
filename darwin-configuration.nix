@@ -59,6 +59,7 @@ in
       # tools
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
+      { name = "hyperconnect"; }
     ];
   };
 
