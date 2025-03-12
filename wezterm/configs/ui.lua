@@ -28,7 +28,7 @@ function M.append(config)
     -- Ll1 Oo0 \ | / 你好 😂 ⚠️
     font = wezterm.font_with_fallback {
       {
-        family = "M PLUS 1 Code",
+        family = "Monaco",
       },
       {
         family = "黑体-简",
