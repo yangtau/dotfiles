@@ -9,8 +9,12 @@ in
 {
   imports = [
     <home-manager/nix-darwin>
-    ./darwin-configuration.local.nix # config for this host only
-  ];
+  ] ++ (
+    # config for this host only
+    if builtins.pathExists ./darwin-configuration.local.nix
+    then [ ./darwin-configuration.local.nix ]
+    else [ ]
+  );
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -50,14 +54,11 @@ in
     casks = [
       # browser
       { name = "arc"; }
-      # md editor
-      { name = "typora"; }
       # terminal
       { name = "wezterm"; }
       # tools
       { name = "alt-tab"; }
       { name = "scroll-reverser"; }
-      { name = "hyperconnect"; }
     ];
   };
 
