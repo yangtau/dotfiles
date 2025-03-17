@@ -73,32 +73,6 @@ return {
     enabled = false,
   },
   {
-    -- Add codeium and supermaven
-    "nvim-cmp",
-    dependencies = {
-      {
-        "Exafunction/codeium.nvim",
-        cmd = "Codeium",
-        build = ":Codeium Auth",
-        opts = {},
-      },
-    },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, 1, {
-        name = "codeium",
-        group_index = 1,
-        priority = 1000,
-      })
-      opts.formatting.format = require("lspkind").cmp_format {
-        mode = "symbol",
-        maxwidth = 50,
-        ellipsis_char = "...",
-        symbol_map = { Codeium = "" },
-      }
-    end,
-  },
-  {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
