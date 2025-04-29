@@ -28,7 +28,7 @@ return {
 
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = false,
-  hide_tab_bar_if_only_one_tab = true,
+  hide_tab_bar_if_only_one_tab = false,
   show_new_tab_button_in_tab_bar = false,
   text_background_opacity = 0.9,
 
