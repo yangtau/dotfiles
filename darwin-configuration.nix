@@ -73,7 +73,6 @@ in
     imports = [ ./home-manager/home.nix ];
   };
 
-  ids.gids.nixbld = 30000;
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
