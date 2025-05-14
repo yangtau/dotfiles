@@ -127,6 +127,7 @@
       v = "nvim";
       ls = "ls --color=auto -G";
       q = "exit";
+      p = "python3";
     };
     oh-my-zsh = {
       enable = true;
