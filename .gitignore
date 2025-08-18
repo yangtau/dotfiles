@@ -8,6 +8,7 @@ go/
 dlv/
 environment.d/
 wireshark/
+trae.vim
 
 # managed by nix home manager
 git/

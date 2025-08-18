@@ -11,15 +11,17 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
   return { { Text = title } }
 end)
 
+local cat = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
+cat.background = "#ffffff"
+cat.tab_bar.background = "#f0f0f0"
+cat.tab_bar.inactive_tab.bg_color = cat.tab_bar.background
+cat.tab_bar.active_tab.bg_color = "#c2c2df"
+cat.tab_bar.active_tab.fg_color = "#323222"
+
 return {
   default_cursor_style = "BlinkingBlock",
   color_schemes = {
-    -- catppuccin.background = "#ffffff"
-    -- catppuccin.tab_bar.background = "#f0f0f0"
-    -- catppuccin.tab_bar.inactive_tab.bg_color = catppuccin.tab_bar.background
-    -- catppuccin.tab_bar.active_tab.bg_color = "#c2c2df"
-    -- catppuccin.tab_bar.active_tab.fg_color = "#323222"
-    ["catppuccin"] = wezterm.color.get_builtin_schemes()["Catppuccin Latte"],
+    ["catppuccin"] = cat,
   },
   color_scheme = "catppuccin",
 

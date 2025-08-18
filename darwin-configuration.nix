@@ -18,7 +18,7 @@ in
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig = "$HOME/.config/darwin-configuration.nix";
+  environment.darwinConfig = "/Users/${username}/.config/darwin-configuration.nix";
 
   # nix.package = pkgs.nix;
   nix.gc.automatic = true;
@@ -72,6 +72,8 @@ in
   home-manager.users.${username} = { pkgs, ... }: {
     imports = [ ./home-manager/home.nix ];
   };
+
+  system.primaryUser = "${username}";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

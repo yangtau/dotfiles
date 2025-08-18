@@ -53,20 +53,8 @@ return {
     opts = {
       flavour = "latte", -- latte, frappe, macchiato, mocha
       integrations = {
-        alpha = true,
-        aerial = true,
-        dap = true,
-        dap_ui = true,
-        mason = true,
-        mini = true,
         neotree = false,
-        notify = true,
-        nvimtree = false,
-        semantic_tokens = true,
-        symbols_outline = true,
-        telescope = true,
-        ts_rainbow = false,
-        which_key = true,
+        telescope = false,
       },
       transparent_background = true,
       color_overrides = {
@@ -203,6 +191,21 @@ return {
     },
   },
   {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        path_display = { "smart" },
+        layout_config = {
+          horizontal = { prompt_position = "top", preview_width = 0.4 },
+          vertical = { mirror = false },
+          width = 0.85,
+          height = 0.80,
+          preview_cutoff = 120,
+        },
+      },
+    },
+  },
+  {
     "sphamba/smear-cursor.nvim",
     opts = {
       stiffness = 0.6, -- 0.6      [0, 1]
@@ -219,6 +222,29 @@ return {
     "karb94/neoscroll.nvim",
     opts = {
       duration_multiplier = 0.4, -- Global duration multiplier
+    },
+  },
+  {
+    "goolord/alpha-nvim",
+    opts = {
+      section = {
+        header = {
+          val = {
+            " █████  ███████ ████████ ██████   ██████",
+            "██   ██ ██         ██    ██   ██ ██    ██",
+            "███████ ███████    ██    ██████  ██    ██",
+            "██   ██      ██    ██    ██   ██ ██    ██",
+            "██   ██ ███████    ██    ██   ██  ██████",
+            " ",
+            "    ███    ██ ██    ██ ██ ███    ███",
+            "    ████   ██ ██    ██ ██ ████  ████",
+            "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
+            "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
+            "    ██   ████   ████   ██ ██      ██",
+            " ",
+          },
+        },
+      },
     },
   },
 }

@@ -73,18 +73,7 @@ return {
     enabled = false,
   },
   {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      defaults = {
-        path_display = { "smart" },
-        layout_config = {
-          horizontal = { prompt_position = "top", preview_width = 0.4 },
-          vertical = { mirror = false },
-          width = 0.85,
-          height = 0.80,
-          preview_cutoff = 120,
-        },
-      },
-    },
+    "rcarriga/nvim-notify",
+    enabled = false,
   },
 }
