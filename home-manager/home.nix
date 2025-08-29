@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    if builtins.pathExists ./home.local.nix
-    then [ ./home.local.nix ]
-    else [ ];
+  imports = if builtins.pathExists ./home.local.nix then [ ./home.local.nix ] else [ ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -131,7 +128,10 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "tmux" "vi-mode" ];
+      plugins = [
+        "tmux"
+        "vi-mode"
+      ];
       theme = "afowler";
     };
   };
@@ -146,11 +146,10 @@
       difftool.nvimdiff.cmd = "nvim -d $LOCAL $REMOTE";
       difftool.prompt = true;
 
-
       pull.rebase = true;
       push.default = "current";
 
-      merge.conflictstyle = "zdiff3";
+      # merge.conflictstyle = "zdiff3";
       commit.verbose = true;
 
       rerere.enabled = true;
@@ -164,7 +163,6 @@
       url."git@gitlab.com:".insteadOf = "https://gitlab.com";
     };
   };
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
