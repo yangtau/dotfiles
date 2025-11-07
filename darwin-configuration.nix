@@ -9,11 +9,13 @@ in
 {
   imports = [
     <home-manager/nix-darwin>
-  ] ++ (
+  ]
+  ++ (
     # config for this host only
-    if builtins.pathExists ./darwin-configuration.local.nix
-    then [ ./darwin-configuration.local.nix ]
-    else [ ]
+    if builtins.pathExists ./darwin-configuration.local.nix then
+      [ ./darwin-configuration.local.nix ]
+    else
+      [ ]
   );
 
   # Use a custom configuration.nix location.
@@ -23,7 +25,10 @@ in
   # nix.package = pkgs.nix;
   nix.gc.automatic = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
@@ -69,9 +74,11 @@ in
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.users.${username} = { pkgs, ... }: {
-    imports = [ ./home-manager/home.nix ];
-  };
+  home-manager.users.${username} =
+    { pkgs, ... }:
+    {
+      imports = [ ./home-manager/home.nix ];
+    };
 
   system.primaryUser = "${username}";
 
