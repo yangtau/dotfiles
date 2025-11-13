@@ -138,9 +138,9 @@
 
   programs.git = {
     enable = true;
-    userName = "yangtau";
-    userEmail = "yanggtau@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "yangtau";
+      user.email = "yanggtau@gmail.com";
       diff.algorithm = "histogram";
       diff.tool = "nvimdiff";
       difftool.nvimdiff.cmd = "nvim -d $LOCAL $REMOTE";
