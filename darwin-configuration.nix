@@ -62,7 +62,7 @@ in
       # terminal
       { name = "wezterm"; }
       # tools
-      { name = "alt-tab"; }
+      # { name = "alt-tab"; }
       { name = "scroll-reverser"; }
     ];
   };
