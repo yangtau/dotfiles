@@ -127,6 +127,22 @@
       ls = "ls --color=auto -G";
       q = "exit";
       p = "python3";
+      wssh = ''
+        _wezsplit_fn()  {
+            if [ -z "$1" ]; then
+                echo "Usage: wssh <domain-name>"
+                return 1
+            fi
+            np=$(wezterm cli spawn --domain-name SSH:$1)
+
+            if [ -n "$np" ]; then
+                wezterm cli split-pane --move-pane-id $np
+                wezterm cli kill-pane
+            else
+                echo "Failed to spawn new pane for domain: $1"
+                return 1
+            fi
+        }; _wezsplit_fn'';
     };
     oh-my-zsh = {
       enable = true;

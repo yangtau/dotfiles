@@ -157,7 +157,10 @@ return {
     {
       mods = "SUPER",
       key = "t",
-      action = act.SpawnCommandInNewTab { cwd = os.getenv "HOME" },
+      action = act.SpawnCommandInNewTab {
+        cwd = os.getenv "HOME",
+        domain = "DefaultDomain",
+      },
     },
 
     -- pane
