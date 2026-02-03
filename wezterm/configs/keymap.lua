@@ -6,10 +6,10 @@ local function is_vim_or_tmux(pane)
   -- wezterm.log_info("process: ", process)
   -- wezterm.log_info("title: ", title)
   return string.find(title, "NVIM")
-      or string.find(title, "tmux")
-      or string.find(process, "nvim")
-      or string.find(process, "tmux")
-      or string.find(process, "ssh")
+    or string.find(title, "tmux")
+    or string.find(process, "nvim")
+    or string.find(process, "tmux")
+  -- or string.find(process, "ssh")
 end
 
 local function split_nav(m)
@@ -44,8 +44,8 @@ local function get_pane_info(pane, tab)
 end
 
 local function open_or_focus_pane(
-    tab_to_panes --[[ tab_id= {bottom=, last=} ]],
-    arg
+  tab_to_panes --[[ tab_id= {bottom=, last=} ]],
+  arg
 )
   return wezterm.action_callback(function(win, pane)
     local tab = win:active_tab()
@@ -66,10 +66,10 @@ local function open_or_focus_pane(
     if not bottom_pane_info or not last_pane_info then -- no bottom pane, open one
       win:perform_action({ SplitPane = arg }, pane)
       tab_to_panes[tab:tab_id()] =
-      { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
+        { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
     elseif pane:pane_id() == bottom_pane then -- on bottom pane, switch to last
       last_pane_info.pane:activate()
-    else                                      -- switch to bottom and set last
+    else -- switch to bottom and set last
       bottom_pane_info.pane:activate()
       tab_to_panes[tab:tab_id()].last = pane:pane_id()
     end
@@ -155,11 +155,20 @@ return {
     { mods = "SUPER", key = "9", action = act.ActivateTab(8) },
     { mods = "SUPER", key = "0", action = act.ActivateTab(9) },
     {
-      mods = "SUPER",
+      mods = "SUPER|SHIFT",
       key = "t",
       action = act.SpawnCommandInNewTab {
         cwd = os.getenv "HOME",
         domain = "DefaultDomain",
+      },
+    },
+
+    {
+      mods = "SUPER",
+      key = "t",
+      action = act.SpawnCommandInNewTab {
+        cwd = os.getenv "HOME",
+        domain = "CurrentPaneDomain",
       },
     },
 

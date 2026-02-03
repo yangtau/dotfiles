@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   imports = if builtins.pathExists ./home.local.nix then [ ./home.local.nix ] else [ ];
@@ -25,9 +28,8 @@
     nil
 
     rustup
-    nodejs_22
 
-    (callPackage ./gemini.nix { })
+    claude-code
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

@@ -64,6 +64,7 @@ in
       # tools
       # { name = "alt-tab"; }
       { name = "scroll-reverser"; }
+      { name = "orbstack"; }
     ];
   };
 
@@ -71,6 +72,8 @@ in
     name = username;
     home = homeDirectory;
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;

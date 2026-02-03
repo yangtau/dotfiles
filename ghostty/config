@@ -1,0 +1,20 @@
+# Font configuration
+font-size = 16
+font-family = "Monaco"
+
+theme = Alabaster
+macos-titlebar-style = tabs
+unfocused-split-opacity = 0.85
+unfocused-split-fill = #bbb
+
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
+
+# keybinds
+keybind = ctrl+`=goto_split:next
+keybind = super+z=toggle_split_zoom
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
+keybind = super+shift+enter=toggle_quick_terminal
+
