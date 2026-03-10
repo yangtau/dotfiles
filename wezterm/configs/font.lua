@@ -6,7 +6,7 @@ return {
   -- LliI1 Oo0 \ | / 你好 😂 ⚠️
   font = wezterm.font_with_fallback {
     {
-      family = "Maple Mono NF CN",
+      family = "JetBrains Mono",
     },
     {
       family = "Apple Color Emoji",
