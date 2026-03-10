@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     claude-code-nix.url = "github:sadjow/claude-code-nix";
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
   };
 
   outputs =
@@ -21,6 +22,7 @@
       nix-darwin,
       home-manager,
       claude-code-nix,
+      codex-cli-nix,
       ...
     }:
     let
@@ -31,7 +33,12 @@
           specialArgs = { inherit vars; };
           modules = [
             home-manager.darwinModules.home-manager
-            { nixpkgs.overlays = [ claude-code-nix.overlays.default ]; }
+            {
+              nixpkgs.overlays = [
+                claude-code-nix.overlays.default
+                codex-cli-nix.overlays.default
+              ];
+            }
             ./darwin-configuration.nix
           ];
         };
