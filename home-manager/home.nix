@@ -18,7 +18,6 @@
   # environment.
   home.packages = with pkgs; [
     gnused
-    git
     delta
     htop
     jq
@@ -29,8 +28,10 @@
 
     rustup
 
-    claude-code
     nodejs
+
+    claude-code
+    codex
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -132,6 +133,7 @@
       p = "python3";
       c = "claude";
       g = "git";
+      darwin-switch = "sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
     };
     oh-my-zsh = {
       enable = true;

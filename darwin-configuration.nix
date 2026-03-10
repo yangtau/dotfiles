@@ -1,35 +1,22 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
-  # vars.nix defines some variables for this host
-  username = (import ./vars.nix).username;
-  homeDirectory = (import ./vars.nix).homeDirectory;
-  hostname = (import ./vars.nix).hostname;
+  username = vars.username;
+  homeDirectory = vars.homeDirectory;
+  hostname = vars.hostname;
 in
 {
-  imports = [
-    <home-manager/nix-darwin>
-  ]
-  ++ (
-    # config for this host only
-    if builtins.pathExists ./darwin-configuration.local.nix then
-      [ ./darwin-configuration.local.nix ]
-    else
-      [ ]
-  );
-
-  # Use a custom configuration.nix location.
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig = "/Users/${username}/.config/darwin-configuration.nix";
-
   # nix.package = pkgs.nix;
   nix.gc.automatic = true;
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-  # nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
@@ -49,10 +36,7 @@ in
 
   homebrew = {
     enable = true;
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-    };
+    # onActivation.cleanup = "zap";
     brews = [
     ];
     taps = [ ];
@@ -61,10 +45,10 @@ in
       { name = "arc"; }
       # terminal
       { name = "wezterm"; }
+      { name = "ghostty"; }
       # tools
-      # { name = "alt-tab"; }
+      { name = "alt-tab"; }
       { name = "scroll-reverser"; }
-      { name = "orbstack"; }
     ];
   };
 
