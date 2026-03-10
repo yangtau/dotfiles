@@ -76,4 +76,10 @@ return {
     "rcarriga/nvim-notify",
     enabled = false,
   },
+  {
+    -- github copilot
+    "github/copilot.vim",
+    cmd = "Copilot",
+    event = "InsertEnter",
+  },
 }
