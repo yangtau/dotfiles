@@ -51,11 +51,11 @@
           homeDirectory = "/Users/bytedance";
           hostname = "m3";
         };
-        # work-mac = mkDarwinSystem {
-        #   username = "yourname";
-        #   homeDirectory = "/Users/yourname";
-        #   hostname = "work-mac";
-        # };
+        mini = mkDarwinSystem {
+          username = "tau";
+          homeDirectory = "/Users/tau";
+          hostname = "mini";
+        };
       };
     };
 }

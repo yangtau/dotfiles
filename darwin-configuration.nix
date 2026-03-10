@@ -42,7 +42,7 @@ in
     taps = [ ];
     casks = [
       # browser
-      { name = "arc"; }
+      # { name = "arc"; }
       # terminal
       { name = "wezterm"; }
       { name = "ghostty"; }
