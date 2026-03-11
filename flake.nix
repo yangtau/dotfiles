@@ -56,6 +56,11 @@
           homeDirectory = "/Users/tau";
           hostname = "mini";
         };
+        air = mkDarwinSystem {
+          username = "tau";
+          homeDirectory = "/Users/tau";
+          hostname = "air";
+        };
       };
     };
 }
