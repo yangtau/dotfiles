@@ -1,7 +1,5 @@
 .DS_Store
-coc/
 htop/
-iterm2/
 gh/
 nix/
 go/
@@ -10,6 +8,7 @@ environment.d/
 wireshark/
 trae.vim
 marscode.vim
+github-copilot/
 
 # managed by nix home manager
 git/
