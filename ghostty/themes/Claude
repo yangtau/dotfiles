@@ -1,0 +1,49 @@
+# Claude - A warm, refined theme inspired by Anthropic's Claude
+# Cream background with terracotta accents
+
+background = #FAF6F1
+foreground = #3D3929
+
+# Cursor
+cursor-color = #D97706
+cursor-text = #FAF6F1
+
+# Selection
+selection-background = #E8DFD3
+selection-foreground = #3D3929
+
+# Normal colors
+# black
+palette = 0=#3D3929
+# red
+palette = 1=#C44A3F
+# green
+palette = 2=#5A8C5E
+# yellow / orange (Claude terracotta)
+palette = 3=#D97706
+# blue
+palette = 4=#4A7FB5
+# magenta
+palette = 5=#9B6B9E
+# cyan
+palette = 6=#4A9B8E
+# white
+palette = 7=#E8DFD3
+
+# Bright colors
+# bright black
+palette = 8=#6B6456
+# bright red
+palette = 9=#E05A4F
+# bright green
+palette = 10=#6FA873
+# bright yellow / orange
+palette = 11=#E89B3E
+# bright blue
+palette = 12=#5A9AD5
+# bright magenta
+palette = 13=#B580B8
+# bright cyan
+palette = 14=#5AB8A8
+# bright white
+palette = 15=#FAF6F1

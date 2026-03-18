@@ -1,8 +1,8 @@
 # Font configuration
 font-size = 16
-font-family = "Monaco"
+# font-family = "Monaco"
 
-theme = Alabaster
+theme = Claude
 macos-titlebar-style = tabs
 unfocused-split-opacity = 0.85
 unfocused-split-fill = #bbb
