@@ -84,18 +84,22 @@
 
   programs.tmux = {
     enable = true;
-    shortcut = "s"; # CTRL + s set-option -g prefix C-s
+    shortcut = "s"; # CTRL + s
     keyMode = "vi";
-    baseIndex = 1; # start window numbering at 1
+    baseIndex = 1;
+    escapeTime = 10; # near-instant ESC response for vi mode
+    historyLimit = 500000;
+    terminal = "xterm-ghostty";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       sensible
     ];
     extraConfig = ''
       set -g allow-passthrough on
-      # set -g default-terminal "tmux-256color"
-      # set -ag terminal-overrides ",xterm-256color:RGB"
-      set -g history-limit 500000
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
+
+      # -- key bindings --
       bind \\ split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
@@ -109,8 +113,13 @@
       set -g status-fg colour254
       set -g status-right '%Y-%m-%d %H:%M'
 
-      # mouse
-      setw -g mouse on
+      # -- mouse & smooth scroll --
+      set -g mouse on
+
+      # -- pane borders --
+      set -g pane-active-border-style "fg=#89b4fa"
+      set -g pane-border-style "fg=#45475a"
+      set -g pane-border-lines heavy
     '';
   };
 
