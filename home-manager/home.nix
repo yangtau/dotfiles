@@ -89,13 +89,13 @@
     baseIndex = 1; # start window numbering at 1
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
-      # mode-indicator
       sensible
     ];
     extraConfig = ''
       set -g allow-passthrough on
-      set -g default-terminal "tmux-256color"
-      set -ag terminal-overrides ",xterm-256color:RGB"
+      # set -g default-terminal "tmux-256color"
+      # set -ag terminal-overrides ",xterm-256color:RGB"
+      set -g history-limit 500000
       bind \\ split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
 
@@ -107,7 +107,7 @@
       # status bar color
       set -g status-bg colour60
       set -g status-fg colour254
-      set -g status-right '%Y-%m-%d %H:%M #{tmux_mode_indicator}'
+      set -g status-right '%Y-%m-%d %H:%M'
 
       # mouse
       setw -g mouse on

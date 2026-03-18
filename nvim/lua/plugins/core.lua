@@ -34,8 +34,8 @@ return {
         wrap = true,
         foldcolumn = "0",
         numberwidth = 1,
-        spell = true,
-        foldmethod = "manual",
+        spell = false,
+        -- foldmethod = "manual",
         -- signcolumn = "auto",
       },
       g = { -- vim.g.<key>

@@ -42,9 +42,9 @@ in
     taps = [ ];
     casks = [
       # browser
-      # { name = "arc"; }
+      { name = "arc"; }
       # terminal
-      { name = "wezterm"; }
+      # { name = "wezterm"; }
       { name = "ghostty"; }
       # tools
       { name = "alt-tab"; }
