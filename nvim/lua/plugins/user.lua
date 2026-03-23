@@ -84,14 +84,7 @@ return {
       vim.g.copilot_no_tab_map = true
     end,
     config = function()
-      -- Use Tab to accept copilot suggestion if available, otherwise insert a Tab character
-      vim.keymap.set("i", "<Tab>", function()
-        if vim.fn["copilot#GetDisplayedSuggestion"]().text ~= "" then
-          return vim.fn["copilot#Accept"]()
-        else
-          return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
-        end
-      end, { expr = true, silent = true, replace_keycodes = false })
+      vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', { expr = true, silent = true, replace_keycodes = false })
     end,
   },
 }
