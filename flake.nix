@@ -2,7 +2,8 @@
   description = "nix-darwin + home-manager config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,8 +12,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code-nix.url = "github:sadjow/claude-code-nix";
-    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -21,8 +21,7 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      claude-code-nix,
-      codex-cli-nix,
+      llm-agents,
       ...
     }:
     let
@@ -35,8 +34,7 @@
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [
-                claude-code-nix.overlays.default
-                codex-cli-nix.overlays.default
+                llm-agents.overlays.default
               ];
             }
             ./darwin-configuration.nix
