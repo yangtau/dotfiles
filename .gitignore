@@ -13,7 +13,6 @@ github-copilot/
 # managed by nix home manager
 git/
 direnv/
-tmux/
 neofetch/
 
 # host specifed config

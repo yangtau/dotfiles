@@ -7,6 +7,8 @@ macos-titlebar-style = tabs
 unfocused-split-opacity = 0.85
 unfocused-split-fill = #bbb
 
+macos-option-as-alt = left
+
 copy-on-select = clipboard
 shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
 

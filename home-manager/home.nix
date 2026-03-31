@@ -21,6 +21,7 @@
     delta
     htop
     jq
+    tmux
 
     neovim
     ripgrep
@@ -39,6 +40,18 @@
     (runCommand "telnet" { } ''
       mkdir -p $out/bin
       ln -s ${pkgs.inetutils}/bin/telnet $out/bin/telnet
+    '')
+
+    # pin smux's tmux bridge as a standalone executable
+    (runCommand "tmux-bridge" { } ''
+      mkdir -p $out/bin
+      cp ${
+        fetchurl {
+          url = "https://raw.githubusercontent.com/ShawnPana/smux/main/scripts/tmux-bridge";
+          hash = "sha256-7WaGK/fTOmB9oUt8AEaUnYy7g7GlgpF6yk3GyTBYOV0=";
+        }
+      } $out/bin/tmux-bridge
+      chmod +x $out/bin/tmux-bridge
     '')
   ];
 
@@ -77,46 +90,47 @@
     EDITOR = "nvim";
   };
 
-  programs.tmux = {
-    enable = true;
-    shortcut = "s"; # CTRL + s
-    keyMode = "vi";
-    baseIndex = 1;
-    escapeTime = 10; # near-instant ESC response for vi mode
-    historyLimit = 500000;
-    terminal = "xterm-ghostty";
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-      sensible
-    ];
-    extraConfig = ''
-      set -g allow-passthrough on
-      set -ga update-environment TERM
-      set -ga update-environment TERM_PROGRAM
-
-      # -- key bindings --
-      bind \\ split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
-
-      # vi mode
-      list-keys -T copy-mode-vi
-      bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
-
-      # status bar color
-      set -g status-bg colour60
-      set -g status-fg colour254
-      set -g status-right '%Y-%m-%d %H:%M'
-
-      # -- mouse & smooth scroll --
-      set -g mouse on
-
-      # -- pane borders --
-      set -g pane-active-border-style "fg=#89b4fa"
-      set -g pane-border-style "fg=#45475a"
-      set -g pane-border-lines heavy
-    '';
-  };
+  # Original tmux config kept here for reference while evaluating smux.
+  # programs.tmux = {
+  #   enable = true;
+  #   shortcut = "s"; # CTRL + s
+  #   keyMode = "vi";
+  #   baseIndex = 1;
+  #   escapeTime = 10; # near-instant ESC response for vi mode
+  #   historyLimit = 500000;
+  #   terminal = "xterm-ghostty";
+  #   plugins = with pkgs.tmuxPlugins; [
+  #     vim-tmux-navigator
+  #     sensible
+  #   ];
+  #   extraConfig = ''
+  #     set -g allow-passthrough on
+  #     set -ga update-environment TERM
+  #     set -ga update-environment TERM_PROGRAM
+  #
+  #     # -- key bindings --
+  #     bind \\ split-window -h -c "#{pane_current_path}"
+  #     bind - split-window -v -c "#{pane_current_path}"
+  #
+  #     # vi mode
+  #     list-keys -T copy-mode-vi
+  #     bind-key -T copy-mode-vi 'v' send -X begin-selection
+  #     bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+  #
+  #     # status bar color
+  #     set -g status-bg colour60
+  #     set -g status-fg colour254
+  #     set -g status-right '%Y-%m-%d %H:%M'
+  #
+  #     # -- mouse & smooth scroll --
+  #     set -g mouse on
+  #
+  #     # -- pane borders --
+  #     set -g pane-active-border-style "fg=#89b4fa"
+  #     set -g pane-border-style "fg=#45475a"
+  #     set -g pane-border-lines heavy
+  #   '';
+  # };
 
   programs.direnv = {
     enable = true;
