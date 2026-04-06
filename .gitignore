@@ -1,7 +1,6 @@
 .DS_Store
 htop/
 gh/
-nix/
 go/
 dlv/
 environment.d/

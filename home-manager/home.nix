@@ -27,6 +27,8 @@
     ripgrep
     nil
 
+    gh
+
     rustup
 
     nodejs
@@ -41,6 +43,22 @@
       mkdir -p $out/bin
       ln -s ${pkgs.inetutils}/bin/telnet $out/bin/telnet
     '')
+
+    # lark-cli: https://github.com/larksuite/cli
+    (
+      let
+        version = "1.0.4";
+      in
+      runCommand "lark-cli" { } ''
+        mkdir -p $out/bin
+        tar xzf ${
+          fetchurl {
+            url = "https://github.com/larksuite/cli/releases/download/v${version}/lark-cli-${version}-darwin-arm64.tar.gz";
+            hash = "sha256-mqCmPk6E8t84yNoPIhyHigxclp4U9hGFJJ9a5hBUKH4=";
+          }
+        } -C $out/bin lark-cli
+      ''
+    )
 
     # pin smux's tmux bridge as a standalone executable
     (runCommand "tmux-bridge" { } ''
