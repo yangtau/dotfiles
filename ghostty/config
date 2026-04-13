@@ -21,3 +21,4 @@ keybind = ctrl+shift+k=goto_split:top
 keybind = ctrl+shift+l=goto_split:right
 keybind = super+shift+enter=toggle_quick_terminal
 
+mouse-scroll-multiplier = 0.5
