@@ -38,6 +38,7 @@
     llm-agents.cursor-agent
     llm-agents.agent-browser
     llm-agents.happy-coder
+    llm-agents.amp
 
     # install only telnet
     (runCommand "telnet" { } ''
