@@ -37,6 +37,7 @@
     llm-agents.codex
     llm-agents.cursor-agent
     llm-agents.agent-browser
+    llm-agents.happy-coder
 
     # install only telnet
     (runCommand "telnet" { } ''
