@@ -21,8 +21,6 @@
     delta
     nil
 
-    gitbutler
-
     gh
 
     rustup
