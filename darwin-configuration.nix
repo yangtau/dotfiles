@@ -18,8 +18,9 @@ in
     "flakes"
   ];
 
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;
+  # Create /etc/fish/config.fish that loads the nix-darwin environment.
+  programs.fish.enable = true;
+  environment.shells = [ pkgs.fish ];
 
   # Keyboard
   system.keyboard.enableKeyMapping = true;
@@ -60,6 +61,7 @@ in
   users.users.${username} = {
     name = username;
     home = homeDirectory;
+    shell = pkgs.fish;
   };
 
   nixpkgs.config.allowUnfree = true;

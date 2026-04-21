@@ -23,6 +23,8 @@
 
     gh
 
+    orbstack
+
     rustup
     nodejs
 
@@ -90,31 +92,29 @@
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-  programs.zsh = {
+  programs.fish = {
     enable = true;
-    syntaxHighlighting.enable = true;
     shellAliases = {
       rm = "rm -i";
       mv = "mv -i";
       cp = "cp -i";
       vim = "nvim";
       v = "nvim";
-      ls = "ls --color=auto -G";
       c = "claude";
       g = "git";
-      darwin-switch = "sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
     };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "tmux"
-        "vi-mode"
-      ];
-      theme = "afowler";
+    functions = {
+      darwin-switch = ''
+        sudo darwin-rebuild switch --flake path:$HOME/.config#(scutil --get LocalHostName) $argv
+      '';
     };
+    interactiveShellInit = ''
+      fish_vi_key_bindings
+      set -g __fish_git_prompt_showdirtystate 1
+      set -g __fish_git_prompt_showuntrackedfiles 1
+    '';
   };
 
   programs.git = {
