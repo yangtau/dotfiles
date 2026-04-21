@@ -21,6 +21,8 @@
     delta
     nil
 
+    gitbutler
+
     gh
 
     rustup
@@ -32,6 +34,7 @@
     llm-agents.agent-browser
     llm-agents.happy-coder
     llm-agents.amp
+    llm-agents.openspec
 
     # install only telnet
     (runCommand "telnet" { } ''
