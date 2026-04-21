@@ -31,7 +31,12 @@ in
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    htop
     wget
+    tmux
+    jq
+    ripgrep
+    neovim
   ];
 
   homebrew = {
