@@ -1,3 +1,9 @@
+local function snacks_picker(method, opts)
+  return function()
+    require("snacks").picker[method](opts or {})
+  end
+end
+
 return {
   {
     "AstroNvim/astrolsp",
@@ -28,50 +34,38 @@ return {
             desc = "Symbols outline",
           },
           ["<Leader>o"] = {
-            function()
-              require("telescope.builtin").lsp_document_symbols {
-                symbol_width = 60,
-              }
-            end,
-            desc = "Search ducument symbols",
+            snacks_picker "lsp_symbols",
+            desc = "Search document symbols",
           },
           ["<Leader>s"] = {
-            function()
-              require("telescope.builtin").lsp_dynamic_workspace_symbols {
-                fname_width = 50,
-              }
-            end,
+            snacks_picker "lsp_workspace_symbols",
             desc = "Search workspace symbols",
           },
           ["gd"] = {
-            function()
-              require("telescope.builtin").lsp_definitions {
-                jump_type = "nerver",
-                fname_width = 50,
-              }
-            end,
+            snacks_picker "lsp_definitions",
             desc = "Search Definitions",
           },
-          ["gI"] = {
-            function()
-              require("telescope.builtin").lsp_implementations {
-                jump_type = "nerver",
-                fname_width = 50,
-              }
-            end,
+          ["gri"] = {
+            snacks_picker "lsp_implementations",
             desc = "Search Implementations",
           },
           ["gr"] = {
-            function()
-              require("telescope.builtin").lsp_references {
-                include_declaration = false,
-                fname_width = 50,
-              }
-            end,
+            snacks_picker("lsp_references", { include_declaration = false }),
             desc = "Search References",
           },
         },
       },
     },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = function(_, opts)
+      local astrocore = require "astrocore"
+      opts.ensure_installed =
+        astrocore.list_insert_unique(opts.ensure_installed, {
+          "nil",
+          "rust-analyzer",
+        })
+    end,
   },
 }

@@ -11,7 +11,7 @@ return {
       large_buf = { size = 1024 * 200, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = true, -- enable diagnostics on start
       highlighturl = true, -- highlight URLs at start
       -- notifications = false, -- enable notifications at start
     },
@@ -44,12 +44,26 @@ return {
         -- This can be found in the `lua/lazy_setup.lua` file
       },
     },
+    treesitter = {
+      ensure_installed = {
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
+        "rust",
+        "bash",
+        "sql",
+        "nix",
+        "json",
+        "yaml",
+        "markdown",
+      },
+    },
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
       n = {
         ["<Leader>w"] = { "<cmd>w<cr>", desc = "Save buffer" },
-        ["<Leader>W"] = { "<cmd>wqa<cr>", desc = "Save and quit all" },
       },
     },
   },

@@ -1,24 +1,5 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      local utils = require "astrocore"
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, {
-        "go",
-        "gomod",
-        "gosum",
-        "gowork",
-        "rust",
-        "bash",
-        "sql",
-        "nix",
-        "json",
-        "yaml",
-        "markdown",
-      })
-    end,
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)
       opts.sources = { "filesystem" }
@@ -26,21 +7,20 @@ return {
       opts.window.position = "left"
       opts.window.mappings.o = false
       opts.window.mappings.C = "set_root"
-      opts.window.mappings["/"] = "find_in_dir"
       opts.filesystem.hijack_netrw_behavior = "open_default"
+      opts.filesystem.window = opts.filesystem.window or {}
+      opts.filesystem.window.mappings = opts.filesystem.window.mappings or {}
+      opts.filesystem.window.mappings["/"] = "fuzzy_finder"
       opts.filesystem.filtered_items = {
         hide_dotfiles = false,
         hide_gitignored = false,
       }
-      opts.popup_border_style = "rounded"
-      -- opts.enable_git_status = false
-      opts.enable_diagnostics = false
+      opts.enable_diagnostics = true
       return opts
     end,
   },
   {
     "folke/todo-comments.nvim",
-    version = "1.1.0",
     opts = {
       highlight = {
         keyword = "bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
@@ -51,29 +31,22 @@ return {
     keys = {
       -- todo
       -- override default mappings
-      { "<Leader>ft", "<Cmd>TodoTelescope<CR>", desc = "Find TODOs" },
       {
-        "]t",
+        "<Leader>ft",
         function()
-          require("todo-comments").jump_next()
+          local ok, snacks = pcall(require, "snacks")
+          if ok and snacks.picker.todo_comments then
+            snacks.picker.todo_comments()
+          else
+            vim.cmd.TodoQuickFix()
+          end
         end,
-        desc = "Next TODO comment",
-      },
-      {
-        "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        desc = "Previous TODO comment",
+        desc = "Find TODOs",
       },
     },
   },
   {
     "max397574/better-escape.nvim",
-    enabled = false,
-  },
-  {
-    "rcarriga/nvim-notify",
     enabled = false,
   },
   {
@@ -84,7 +57,12 @@ return {
       vim.g.copilot_no_tab_map = true
     end,
     config = function()
-      vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', { expr = true, silent = true, replace_keycodes = false })
+      vim.keymap.set(
+        "i",
+        "<C-y>",
+        'copilot#Accept("\\<CR>")',
+        { expr = true, silent = true, replace_keycodes = false }
+      )
     end,
   },
 }
