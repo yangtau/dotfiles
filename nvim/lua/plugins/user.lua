@@ -15,7 +15,6 @@ return {
         hide_dotfiles = false,
         hide_gitignored = false,
       }
-      opts.enable_diagnostics = true
       return opts
     end,
   },
@@ -44,10 +43,6 @@ return {
         desc = "Find TODOs",
       },
     },
-  },
-  {
-    "max397574/better-escape.nvim",
-    enabled = false,
   },
   {
     "github/copilot.vim",

@@ -4,13 +4,6 @@ return {
     ---@type AstroUIOpts
     opts = {
       colorscheme = "claude",
-      status = {
-        attributes = {
-          mode = {
-            bold = true,
-          },
-        },
-      },
     },
   },
   {

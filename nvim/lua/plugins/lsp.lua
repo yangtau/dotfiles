@@ -11,17 +11,16 @@ return {
     opts = {
       -- Configuration table of features provided by AstroLSP
       features = {
-        codelens = true, -- enable/disable codelens refresh on start
-        inlay_hints = true, -- enable/disable inlay hints on start
-        semantic_tokens = true, -- enable/disable semantic token highlighting
+        codelens = false,
+        inlay_hints = true,
+        semantic_tokens = true,
         signature_help = true,
+        inline_completion = true,
+        linked_editing_range = true,
       },
       formatting = {
-        format_on_save = {
-          enabled = true, -- enable or disable format on save globally
-          ignore_filetypes = {},
-        },
-        timeout_ms = 1000, -- default format timeout
+        format_on_save = { enabled = true },
+        timeout_ms = 1000,
       },
       servers = { "nil_ls", "rust_analyzer" },
       mappings = {
@@ -45,7 +44,7 @@ return {
             snacks_picker "lsp_definitions",
             desc = "Search Definitions",
           },
-          ["gri"] = {
+          ["gi"] = {
             snacks_picker "lsp_implementations",
             desc = "Search Implementations",
           },
@@ -56,16 +55,5 @@ return {
         },
       },
     },
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    opts = function(_, opts)
-      local astrocore = require "astrocore"
-      opts.ensure_installed =
-        astrocore.list_insert_unique(opts.ensure_installed, {
-          "nil",
-          "rust-analyzer",
-        })
-    end,
   },
 }
