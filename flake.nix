@@ -1,8 +1,12 @@
 {
   description = "nix-darwin + home-manager config";
 
+  nixConfig = {
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+  };
+
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -13,16 +17,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
-    # nixpkgs-nvim11.url = "github:NixOS/nixpkgs/nixos-25.11";
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , nix-darwin
-    , home-manager
-    , llm-agents
-    , # nixpkgs-nvim11,
+    {
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      llm-agents,
       ...
     }:
     let
@@ -36,16 +39,6 @@
             {
               nixpkgs.overlays = [
                 llm-agents.overlays.default
-                # (
-                #   final: prev:
-                #   let
-                #     pkgs-nvim11 = import nixpkgs-nvim11 { system = "aarch64-darwin"; };
-                #   in
-                #   {
-                #     neovim = pkgs-nvim11.neovim;
-                #     neovim-unwrapped = pkgs-nvim11.neovim-unwrapped;
-                #   }
-                # )
               ];
             }
             ./darwin-configuration.nix
