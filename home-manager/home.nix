@@ -30,11 +30,6 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.cursor-agent
-    llm-agents.agent-browser
-    # llm-agents.happy-coder
-    llm-agents.amp
-    llm-agents.droid
-    llm-agents.openspec
 
     # install only telnet
     (runCommand "telnet" { } ''
