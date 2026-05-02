@@ -16,8 +16,8 @@ return {
     diagnostics = {
       severity_sort = true,
       virtual_text = true,
-      underline = true,
-      signs = true,
+      underline = false,
+      signs = false,
       update_in_insert = false,
     },
     options = {
