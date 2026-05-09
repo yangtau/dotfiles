@@ -106,7 +106,7 @@
       '';
 
       # Vi mode indicator disabled — empty function suppresses the [N]/[I]/[V]/[R] bracket.
-      fish_mode_prompt = "";
+      # fish_mode_prompt = "";
     };
     interactiveShellInit = ''
       fish_vi_key_bindings
