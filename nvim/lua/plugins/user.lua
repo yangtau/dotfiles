@@ -45,19 +45,31 @@ return {
     },
   },
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    init = function()
-      vim.g.copilot_no_tab_map = true
-    end,
-    config = function()
-      vim.keymap.set(
-        "i",
-        "<C-y>",
-        'copilot#Accept("\\<CR>")',
-        { expr = true, silent = true, replace_keycodes = false }
-      )
-    end,
+    opts = {
+      -- blink-cmp drives the UI, so disable copilot.lua's own ghost text / panel
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "fang2hou/blink-copilot" },
+    opts = {
+      sources = {
+        -- `opts_extend` in AstroNvim appends this to the default sources list
+        default = { "copilot" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
+        },
+      },
+    },
   },
 }
