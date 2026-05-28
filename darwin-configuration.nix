@@ -1,8 +1,6 @@
-{
-  config,
-  pkgs,
-  vars,
-  ...
+{ pkgs
+, vars
+, ...
 }:
 
 let
@@ -18,9 +16,8 @@ in
     "flakes"
   ];
 
-  # Create /etc/fish/config.fish that loads the nix-darwin environment.
-  programs.fish.enable = true;
-  environment.shells = [ pkgs.fish ];
+  programs.zsh.enable = true;
+  environment.shells = [ pkgs.zsh ];
 
   # Keyboard
   system.keyboard.enableKeyMapping = true;
@@ -40,28 +37,10 @@ in
     neovim
   ];
 
-  homebrew = {
-    enable = true;
-    # onActivation.cleanup = "zap";
-    brews = [
-    ];
-    taps = [ ];
-    casks = [
-      # browser
-      { name = "arc"; }
-      # terminal
-      # { name = "wezterm"; }
-      { name = "ghostty"; }
-      # tools
-      { name = "alt-tab"; }
-      { name = "scroll-reverser"; }
-    ];
-  };
-
   users.users.${username} = {
     name = username;
     home = homeDirectory;
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;

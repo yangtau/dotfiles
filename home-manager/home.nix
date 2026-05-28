@@ -87,30 +87,33 @@
 
   programs.direnv = {
     enable = true;
+    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-  programs.fish = {
+  programs.zsh = {
     enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       rm = "rm -i";
       mv = "mv -i";
       cp = "cp -i";
       vim = "nvim";
       v = "nvim";
+      ls = "ls --color=auto -G";
+      q = "exit";
+      p = "python3";
       c = "claude";
       g = "git";
+      darwin-switch = "sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
     };
-    functions = {
-      darwin-switch = ''
-        sudo darwin-rebuild switch --flake path:$HOME/.config#(scutil --get LocalHostName) $argv
-      '';
-
-      # Vi mode indicator disabled — empty function suppresses the [N]/[I]/[V]/[R] bracket.
-      # fish_mode_prompt = "";
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "tmux"
+        "vi-mode"
+      ];
+      theme = "afowler";
     };
-    interactiveShellInit = ''
-      fish_vi_key_bindings
-    '';
   };
 
   programs.git = {
