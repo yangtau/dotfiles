@@ -8,9 +8,17 @@ return {
       opts.window.mappings.o = false
       opts.window.mappings.C = "set_root"
       opts.filesystem.hijack_netrw_behavior = "open_default"
+      -- search files under the current node's directory via snacks picker
+      opts.commands = opts.commands or {}
+      opts.commands.find_in_dir = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        local dir = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
+        require("snacks").picker.files { cwd = dir }
+      end
       opts.filesystem.window = opts.filesystem.window or {}
       opts.filesystem.window.mappings = opts.filesystem.window.mappings or {}
-      opts.filesystem.window.mappings["/"] = "fuzzy_finder"
+      opts.filesystem.window.mappings["/"] = "find_in_dir"
       opts.filesystem.filtered_items = {
         hide_dotfiles = false,
         hide_gitignored = false,
