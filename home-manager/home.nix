@@ -30,7 +30,6 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.cursor-agent
-    llm-agents.droid
 
     # install only telnet
     (runCommand "telnet" { } ''
