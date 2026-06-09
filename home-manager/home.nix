@@ -1,4 +1,5 @@
 { pkgs
+, hermes-agent
 , ...
 }:
 
@@ -30,6 +31,9 @@
     llm-agents.claude-code
     llm-agents.codex
     llm-agents.cursor-agent
+    # Official hermes-agent flake, "full" variant includes provider SDKs
+    # such as Anthropic, needed for session-level switches to Claude models.
+    hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.full
 
     # install only telnet
     (runCommand "telnet" { } ''
@@ -93,6 +97,9 @@
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
+    initContent = ''
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    '';
     shellAliases = {
       rm = "rm -i";
       mv = "mv -i";

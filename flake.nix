@@ -21,12 +21,16 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+    };
   };
 
   outputs =
     { nix-darwin
     , home-manager
     , llm-agents
+    , hermes-agent
     , ...
     }:
     let
@@ -41,6 +45,8 @@
               nixpkgs.overlays = [
                 llm-agents.overlays.default
               ];
+              # Make the hermes-agent flake available to home-manager modules.
+              home-manager.extraSpecialArgs = { inherit hermes-agent; };
             }
             ./darwin-configuration.nix
           ];
