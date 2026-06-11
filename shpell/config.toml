@@ -1,0 +1,3 @@
+provider = "openai-chatgpt"   # 目前唯一支持的 provider
+model = "gpt-5.4-mini"
+reasoning_effort = "low"       # none | low | medium | high | xhigh (per model)

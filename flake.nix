@@ -44,9 +44,11 @@
             {
               nixpkgs.overlays = [
                 llm-agents.overlays.default
+                hermes-agent.overlays.default
+                (final: _prev: {
+                  hermes-agent-full = hermes-agent.packages.${final.stdenv.hostPlatform.system}.full;
+                })
               ];
-              # Make the hermes-agent flake available to home-manager modules.
-              home-manager.extraSpecialArgs = { inherit hermes-agent; };
             }
             ./darwin-configuration.nix
           ];
