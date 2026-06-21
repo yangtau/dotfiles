@@ -95,7 +95,7 @@
     syntaxHighlighting.enable = true;
     initContent = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
-      eval "$(x init zsh)"
+      eval "$(shpell init zsh)"
     '';
     shellAliases = {
       rm = "rm -i";
