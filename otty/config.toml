@@ -1,0 +1,80 @@
+
+theme = "Claude"
+quit-after-last-window-closed = true
+
+font-family = "Monaco"
+font-size = 16
+
+keybind = "super+z=toggle_split_zoom"
+keybind = "ctrl+shift+h=goto_split:left"
+keybind = "ctrl+shift+j=goto_split:down"
+keybind = "ctrl+shift+k=goto_split:top"
+keybind = "ctrl+shift+l=goto_split:right"
+keybind = "super+shift+enter=toggle_quick_terminal"
+keybind = "super+z=toggle_split_zoom"
+keybind = "ctrl+shift+h=goto_split:left"
+keybind = "ctrl+shift+j=goto_split:down"
+keybind = "ctrl+shift+k=goto_split:top"
+keybind = "ctrl+shift+l=goto_split:right"
+keybind = "super+shift+enter=toggle_quick_terminal"
+keybind = "super+z=toggle_split_zoom"
+keybind = "ctrl+shift+h=goto_split:left"
+keybind = "ctrl+shift+j=goto_split:down"
+keybind = "ctrl+shift+k=goto_split:top"
+keybind = "ctrl+shift+l=goto_split:right"
+keybind = "super+shift+enter=toggle_quick_terminal"
+keybind = "super+z=toggle_split_zoom"
+keybind = "ctrl+shift+h=goto_split:left"
+keybind = "ctrl+shift+j=goto_split:down"
+keybind = "ctrl+shift+k=goto_split:top"
+keybind = "ctrl+shift+l=goto_split:right"
+keybind = "super+shift+enter=toggle_quick_terminal"
+
+copy-on-select = true
+
+theme-dark = "Nord"
+auto-theme-dark-mode = false
+foreground = "#3d3929"
+background = "#faf6f1"
+palette-0 = "#3d3929"
+palette-1 = "#c44a3f"
+palette-2 = "#5a8c5e"
+palette-3 = "#d97706"
+palette-4 = "#4a7fb5"
+palette-5 = "#9b6b9e"
+palette-6 = "#4a9b8e"
+palette-7 = "#e8dfd3"
+palette-8 = "#6b6456"
+palette-9 = "#e05a4f"
+palette-10 = "#6fa873"
+palette-11 = "#e89b3e"
+palette-12 = "#5a9ad5"
+palette-13 = "#b580b8"
+palette-14 = "#5ab8a8"
+# palette-15 = "#cdcdcd" (reset to default)
+# selection-foreground = "#fafaff" (reset to default)
+# selection-background = "#ad95e9" (reset to default)
+# cursor-color = "#303030" (reset to default)
+# cursor-text = "#565656" (reset to default)
+
+palette-15 = "#faf6f1"
+
+selection-background = "#e8dfd3"
+cursor-color = "#d97706"
+
+# selection-foreground = "#fafaff" (reset to default)
+# cursor-text = "#565656" (reset to default)
+
+# selection-foreground = "#3d3929" (reset to default)
+# cursor-text = "#faf6f1" (reset to default)
+
+# selection-foreground = "#3d3929" (reset to default)
+# cursor-text = "#faf6f1" (reset to default)
+
+# selection-foreground = "#3d3929" (reset to default)
+# cursor-text = "#faf6f1" (reset to default)
+
+text-blink = true
+
+selection-foreground = "#3d3929"
+cursor-text = "#faf6f1"
