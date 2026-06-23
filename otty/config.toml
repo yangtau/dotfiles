@@ -1,39 +1,21 @@
-
 theme = "Claude"
-quit-after-last-window-closed = true
-
+text-blink = true
 font-family = "Monaco"
-font-size = 16
+# font-size = 16 (reset to default)
 
-keybind = "super+z=toggle_split_zoom"
-keybind = "ctrl+shift+h=goto_split:left"
-keybind = "ctrl+shift+j=goto_split:down"
-keybind = "ctrl+shift+k=goto_split:top"
-keybind = "ctrl+shift+l=goto_split:right"
-keybind = "super+shift+enter=toggle_quick_terminal"
-keybind = "super+z=toggle_split_zoom"
-keybind = "ctrl+shift+h=goto_split:left"
-keybind = "ctrl+shift+j=goto_split:down"
-keybind = "ctrl+shift+k=goto_split:top"
-keybind = "ctrl+shift+l=goto_split:right"
-keybind = "super+shift+enter=toggle_quick_terminal"
-keybind = "super+z=toggle_split_zoom"
-keybind = "ctrl+shift+h=goto_split:left"
-keybind = "ctrl+shift+j=goto_split:down"
-keybind = "ctrl+shift+k=goto_split:top"
-keybind = "ctrl+shift+l=goto_split:right"
-keybind = "super+shift+enter=toggle_quick_terminal"
-keybind = "super+z=toggle_split_zoom"
-keybind = "ctrl+shift+h=goto_split:left"
-keybind = "ctrl+shift+j=goto_split:down"
-keybind = "ctrl+shift+k=goto_split:top"
-keybind = "ctrl+shift+l=goto_split:right"
-keybind = "super+shift+enter=toggle_quick_terminal"
-
+tab-working-directory = "home"
+privilege-notification-on-finish = true
 copy-on-select = true
+clipboard-trim-trailing-spaces = true
+privilege-caffeinate-agent-processing = true
 
-theme-dark = "Nord"
+
+keybind = "cmd+shift+,=reload_config"
+
 auto-theme-dark-mode = false
+
+font-size = 16
+theme-dark = "Nord"
 foreground = "#3d3929"
 background = "#faf6f1"
 palette-0 = "#3d3929"
@@ -51,30 +33,8 @@ palette-11 = "#e89b3e"
 palette-12 = "#5a9ad5"
 palette-13 = "#b580b8"
 palette-14 = "#5ab8a8"
-# palette-15 = "#cdcdcd" (reset to default)
-# selection-foreground = "#fafaff" (reset to default)
-# selection-background = "#ad95e9" (reset to default)
-# cursor-color = "#303030" (reset to default)
-# cursor-text = "#565656" (reset to default)
-
 palette-15 = "#faf6f1"
-
+selection-foreground = "#3d3929"
 selection-background = "#e8dfd3"
 cursor-color = "#d97706"
-
-# selection-foreground = "#fafaff" (reset to default)
-# cursor-text = "#565656" (reset to default)
-
-# selection-foreground = "#3d3929" (reset to default)
-# cursor-text = "#faf6f1" (reset to default)
-
-# selection-foreground = "#3d3929" (reset to default)
-# cursor-text = "#faf6f1" (reset to default)
-
-# selection-foreground = "#3d3929" (reset to default)
-# cursor-text = "#faf6f1" (reset to default)
-
-text-blink = true
-
-selection-foreground = "#3d3929"
 cursor-text = "#faf6f1"
