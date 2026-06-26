@@ -19,3 +19,4 @@ fish/
 # host specifed config
 vars.nix
 *local.nix
+mole/
