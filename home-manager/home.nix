@@ -95,6 +95,8 @@
     syntaxHighlighting.enable = true;
     initContent = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
+      # Keep Homebrew completions in this shell, but do not export them to child zsh.
+      typeset +x FPATH
       eval "$(shpell init zsh)"
     '';
     shellAliases = {
@@ -117,6 +119,9 @@
         "vi-mode"
       ];
       theme = "afowler";
+      extraConfig = ''
+        ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-''${HOST%%.*}-''${ZSH_VERSION}"
+      '';
     };
   };
 
