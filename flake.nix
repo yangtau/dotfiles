@@ -46,7 +46,7 @@
                 llm-agents.overlays.default
                 hermes-agent.overlays.default
                 (final: _prev: {
-                  hermes-agent-full = hermes-agent.packages.${final.stdenv.hostPlatform.system}.full;
+                  hermes-agent-full = hermes-agent.packages.${final.stdenv.hostPlatform.system}.default;
                 })
               ];
             }
