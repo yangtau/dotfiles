@@ -3,7 +3,11 @@
 }:
 
 {
-  imports = if builtins.pathExists ./home.local.nix then [ ./home.local.nix ] else [ ];
+  # imports 收「路径列表」，由 home-manager 去 import；不要自己 import（那会得到 module 函数，
+  # ++ 拼接会报 "expected a list but found a function"）。缺失的 local 文件跳过。
+  imports =
+    (if builtins.pathExists ./skills then [ ./skills ] else [ ])
+    ++ (if builtins.pathExists ./home.local.nix then [ ./home.local.nix ] else [ ]);
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.

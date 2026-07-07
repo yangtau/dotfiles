@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# 刷新 source.nix / source.local.nix 里各 git 源的 rev 到上游最新，然后提示 switch 生效。
+# 独立于 nix：只用系统 git / awk / perl。公共走 https，byted 走系统 ssh（复用现有配置）。
+set -euo pipefail
+
+dir="${SKILLS_DIR:-$HOME/.config/home-manager/skills}"
+export GIT_SSH_COMMAND=/usr/bin/ssh
+
+refresh() {
+  local file="$1" seen="" url ref oldrev new
+  [ -f "$file" ] || return 0
+  echo "==> $(basename "$file")"
+  while IFS="$(printf '\t')" read -r url ref oldrev; do
+    case " $seen " in *" $url "*) continue ;; esac   # 同 url 多条目共享 rev，刷一次即可
+    seen="$seen $url"
+    new=$(git ls-remote "$url" "$ref" 2>/dev/null | head -1 | cut -f1 || true)
+    if [ -z "$new" ]; then
+      echo "  ${url##*/}: ls-remote 失败（VPN/权限？），保持 ${oldrev:0:12}" >&2
+    elif [ "$new" = "$oldrev" ]; then
+      echo "  ${url##*/}: 已最新 ${oldrev:0:12}"
+    else
+      perl -pi -e "s/\Q$oldrev\E/$new/g" "$file"     # 全局替换，同 url 的多条一并更新
+      echo "  ${url##*/}: ${oldrev:0:12} → ${new:0:12}"
+    fi
+  done < <(awk '
+    /url[[:space:]]*=[[:space:]]*"/ { u=$0; sub(/^.*url[[:space:]]*=[[:space:]]*"/,"",u); sub(/".*/,"",u) }
+    /ref[[:space:]]*=[[:space:]]*"/ { r=$0; sub(/^.*ref[[:space:]]*=[[:space:]]*"/,"",r); sub(/".*/,"",r) }
+    /rev[[:space:]]*=[[:space:]]*"/ { v=$0; sub(/^.*rev[[:space:]]*=[[:space:]]*"/,"",v); sub(/".*/,"",v);
+                                      if (u!="" && r!="" && v!="") { print u"\t"r"\t"v; u=""; r=""; v="" } }
+  ' "$file")
+}
+
+refresh "$dir/source.nix"
+refresh "$dir/source.local.nix"
+echo "==> 完成。跑 darwin-switch 生效。"
