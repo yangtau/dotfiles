@@ -10,24 +10,10 @@
     dir = "skills/smux";
   }
   {
-    name = "lark-doc";
-    url = "https://github.com/larksuite/cli.git";
-    ref = "refs/heads/main";
-    rev = "6f95c5eb22466c21485ad91ca047293cb2e151cc";
-    dir = "skills/lark-doc";
-  }
-  {
-    name = "lark-whiteboard";
-    url = "https://github.com/larksuite/cli.git";
-    ref = "refs/heads/main";
-    rev = "6f95c5eb22466c21485ad91ca047293cb2e151cc";
-    dir = "skills/lark-whiteboard";
-  }
-  {
     name = "grill-me";
     url = "https://github.com/mattpocock/skills.git";
     ref = "refs/heads/main";
-    rev = "16a2a5cd00b4416f673f4ff38c7971a04dd708e7";
+    rev = "8515a080a74dbcf5019a1a78efc24b5fcafb36b8";
     dir = "skills/productivity/grill-me";
   }
   {

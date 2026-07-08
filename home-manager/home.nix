@@ -33,7 +33,6 @@
 
     llm-agents.claude-code
     llm-agents.codex
-    llm-agents.cursor-agent
 
     # install only telnet
     (runCommand "telnet" { } ''
