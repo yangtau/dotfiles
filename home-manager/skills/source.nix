@@ -13,14 +13,14 @@
     name = "grill-me";
     url = "https://github.com/mattpocock/skills.git";
     ref = "refs/heads/main";
-    rev = "8515a080a74dbcf5019a1a78efc24b5fcafb36b8";
+    rev = "d574778f94cf620fcc8ce741584093bc650a61d3";
     dir = "skills/productivity/grill-me";
   }
   {
-    name = "e-design";
+    name = "emil-design-eng";
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
-    rev = "1274a0584c4fe9e94304a4e29094cefe5eb51dbe";
+    rev = "f76beceb7d3fc8c43309cefad5a095a206103a4e";
     dir = "skills/emil-design-eng";
   }
 ]

@@ -113,6 +113,7 @@
       p = "python3";
       c = "claude";
       g = "git";
+      darwin-update = "nix flake update --flake path:$HOME/.config && $HOME/.config/home-manager/skills/update && sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
       darwin-switch = "sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
     };
     oh-my-zsh = {
