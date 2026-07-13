@@ -6,7 +6,30 @@
 let
   # 纯数据源：source.nix（公共，进 git）+ source.local.nix（本机，gitignore，缺失即空）。
   readSources = f: if builtins.pathExists f then import f else [ ];
-  sources = readSources ./source.nix ++ readSources ./source.local.nix;
+  sourceGroups = readSources ./source.nix ++ readSources ./source.local.nix;
+
+  # 一个 git 仓库可以声明多个 skills，避免重复 url/ref/rev。
+  # name 可省略，默认取 dir 的最后一段；显式 name 可用于别名。
+  # 旧的单 skill 项和 { name; path; } 本地源仍保持兼容。
+  expandSource =
+    source:
+    if source ? skills then
+      map (skill: removeAttrs source [ "skills" ] // skill) source.skills
+    else
+      [ source ];
+  withDefaultName =
+    source:
+    source
+    // {
+      name =
+        if source ? name then
+          source.name
+        else if source ? dir then
+          builtins.baseNameOf source.dir
+        else
+          throw "skill source must define name or dir";
+    };
+  sources = map withDefaultName (lib.concatMap expandSource sourceGroups);
 
   # 安装目标（相对 $HOME）。增删只改这里。
   targets = [
