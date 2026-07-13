@@ -16,8 +16,8 @@ in
     "flakes"
   ];
 
-  programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh ];
+  # programs.zsh.enable = true;
+  # environment.shells = [ pkgs.zsh ];
 
   # Keyboard
   system.keyboard.enableKeyMapping = true;
@@ -28,14 +28,7 @@ in
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    htop
-    wget
-    tmux
-    jq
-    ripgrep
-    neovim
-  ];
+  # environment.systemPackages = with pkgs; [ ];
 
   users.users.${username} = {
     name = username;

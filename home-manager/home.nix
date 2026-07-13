@@ -1,7 +1,11 @@
 { pkgs
+, llm-agents
 , ...
 }:
 
+let
+  llm-pkgs = llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   # imports 收「路径列表」，由 home-manager 去 import；不要自己 import（那会得到 module 函数，
   # ++ 拼接会报 "expected a list but found a function"）。缺失的 local 文件跳过。
@@ -20,19 +24,27 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    htop
+    wget
+    tmux
+    jq
+    ripgrep
+    neovim
+
     gnused
     delta
     nil
 
     gh
 
-    orbstack
+    # orbstack
 
     rustup
     nodejs
 
-    llm-agents.claude-code
-    llm-agents.codex
+    llm-pkgs.claude-code
+    llm-pkgs.codex
+    llm-pkgs.antigravity-cli
 
     # install only telnet
     (runCommand "telnet" { } ''

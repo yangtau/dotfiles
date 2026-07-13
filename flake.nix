@@ -30,48 +30,25 @@
     { nix-darwin
     , home-manager
     , llm-agents
-    , hermes-agent
     , ...
     }:
     let
-      mkDarwinSystem =
-        vars:
+      vars = import ./vars.nix;
+    in
+    {
+      darwinConfigurations.${vars.hostname} =
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit vars; };
           modules = [
             home-manager.darwinModules.home-manager
             {
-              nixpkgs.overlays = [
-                llm-agents.overlays.default
-                hermes-agent.overlays.default
-                (final: _prev: {
-                  hermes-agent-full = hermes-agent.packages.${final.stdenv.hostPlatform.system}.default;
-                })
-              ];
+              home-manager.extraSpecialArgs = {
+                inherit llm-agents;
+              };
             }
             ./darwin-configuration.nix
           ];
         };
-    in
-    {
-      darwinConfigurations = {
-        # 当前机器，新机器在此添加
-        m3 = mkDarwinSystem {
-          username = "bytedance";
-          homeDirectory = "/Users/bytedance";
-          hostname = "m3";
-        };
-        mini = mkDarwinSystem {
-          username = "tau";
-          homeDirectory = "/Users/tau";
-          hostname = "mini";
-        };
-        air = mkDarwinSystem {
-          username = "tau";
-          homeDirectory = "/Users/tau";
-          hostname = "air";
-        };
-      };
     };
 }
