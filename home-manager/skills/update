@@ -16,12 +16,12 @@ refresh() {
     seen="$seen $url"
     new=$(git ls-remote "$url" "$ref" 2>/dev/null | head -1 | cut -f1 || true)
     if [ -z "$new" ]; then
-      echo "  ${url##*/}: ls-remote failed (VPN or permission issue?); keeping ${oldrev:0:12}" >&2
+      echo "  ${url}: ls-remote failed (VPN or permission issue?); keeping ${oldrev:0:12}" >&2
     elif [ "$new" = "$oldrev" ]; then
-      echo "  ${url##*/}: already up to date ${oldrev:0:12}"
+      echo "  ${url}: already up to date ${oldrev:0:12}"
     else
       perl -pi -e "s/\Q$oldrev\E/$new/g" "$file"     # Update every entry sharing this revision.
-      echo "  ${url##*/}: ${oldrev:0:12} → ${new:0:12}"
+      echo "  ${url}: ${oldrev:0:12} → ${new:0:12}"
     fi
   done < <(awk '
     /url[[:space:]]*=[[:space:]]*"/ { u=$0; sub(/^.*url[[:space:]]*=[[:space:]]*"/,"",u); sub(/".*/,"",u) }
