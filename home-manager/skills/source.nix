@@ -8,47 +8,35 @@
     ref = "refs/heads/main";
     rev = "70a6899bdec5d3d3b51d9b927c0c0db0e22bb73f";
     skills = [
-      {
-        dir = "skills/smux";
-      }
+      { dir = "skills/smux"; }
     ];
   }
 
   {
     url = "https://github.com/mattpocock/skills.git";
     ref = "refs/heads/main";
-    rev = "391a2701dd948f94f56a39f7533f8eea9a859c87";
+    rev = "66898f60e8c744e269f8ce06c2b2b99ce7660d5f";
     skills = [
-      {
-        dir = "skills/productivity/grill-me";
-      }
-      {
-        dir = "skills/engineering/grill-with-docs";
-      }
-      {
-        dir = "skills/engineering/diagnosing-bugs";
-      }
-      {
-        dir = "skills/engineering/improve-codebase-architecture";
-      }
-      {
-        dir = "skills/engineering/tdd";
-      }
-      {
-        dir = "skills/engineering/codebase-design";
-      }
-      {
-        dir = "skills/productivity/grilling";
-      }
-      {
-        dir = "skills/engineering/domain-modeling";
-      }
-      {
-        dir = "skills/engineering/code-review";
-      }
-      {
-        dir = "skills/engineering/setup-matt-pocock-skills";
-      }
+      # call by user
+      { dir = "skills/engineering/grill-with-docs"; }
+      { dir = "skills/engineering/improve-codebase-architecture"; }
+      { dir = "skills/engineering/setup-matt-pocock-skills"; }
+      { dir = "skills/engineering/to-spec"; }
+      { dir = "skills/engineering/to-issue"; }
+      { dir = "skills/engineering/implement"; }
+      { dir = "skills/engineering/wayfinder"; }
+      { dir = "skills/productivity/grill-me"; }
+
+      # call by model
+      { dir = "skills/engineering/prototype"; }
+      { dir = "skills/engineering/diagnosing-bugs"; }
+      { dir = "skills/engineering/research"; }
+      { dir = "skills/engineering/tdd"; }
+      { dir = "skills/engineering/domain-modeling"; }
+      { dir = "skills/engineering/codebase-design"; }
+      { dir = "skills/engineering/code-review"; }
+      { dir = "skills/engineering/resolving-merge-conflicts"; }
+      { dir = "skills/productivity/grilling"; }
     ];
   }
 
@@ -57,12 +45,8 @@
     ref = "refs/heads/main";
     rev = "7bb7061b5cf7de15ea1aeaf00fbd9e6592a20fce";
     skills = [
-      {
-        dir = "skills/emil-design-eng";
-      }
-      {
-        dir = "skills/apple-design";
-      }
+      { dir = "skills/emil-design-eng"; }
+      { dir = "skills/apple-design"; }
     ];
   }
 ]
