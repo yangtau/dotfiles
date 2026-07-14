@@ -21,9 +21,6 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
-    hermes-agent = {
-      url = "github:NousResearch/hermes-agent";
-    };
   };
 
   outputs =
@@ -36,19 +33,18 @@
       vars = import ./vars.nix;
     in
     {
-      darwinConfigurations.${vars.hostname} =
-        nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit vars; };
-          modules = [
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.extraSpecialArgs = {
-                inherit llm-agents;
-              };
-            }
-            ./darwin-configuration.nix
-          ];
-        };
+      darwinConfigurations.${vars.hostname} = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit vars; };
+        modules = [
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.extraSpecialArgs = {
+              inherit llm-agents;
+            };
+          }
+          ./darwin-configuration.nix
+        ];
+      };
     };
 }
