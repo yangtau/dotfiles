@@ -13,7 +13,8 @@ return {
       opts.commands.find_in_dir = function(state)
         local node = state.tree:get_node()
         local path = node:get_id()
-        local dir = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h")
+        local dir = node.type == "directory" and path
+          or vim.fn.fnamemodify(path, ":h")
         require("snacks").picker.files { cwd = dir }
       end
       opts.filesystem.window = opts.filesystem.window or {}
@@ -79,5 +80,12 @@ return {
         },
       },
     },
+  },
+  -- Amp Plugin
+  {
+    "sourcegraph/amp.nvim",
+    branch = "main",
+    lazy = false,
+    opts = { auto_start = true, log_level = "info" },
   },
 }

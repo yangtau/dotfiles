@@ -20,3 +20,4 @@ fish/
 vars.nix
 *local.nix
 mole/
+gw/
