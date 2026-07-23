@@ -46,6 +46,7 @@ in
     llm-pkgs.codex
     llm-pkgs.antigravity-cli
     llm-pkgs.amp
+    llm-pkgs.pi
 
     # install only telnet
     (runCommand "telnet" { } ''
