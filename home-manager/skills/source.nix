@@ -22,10 +22,13 @@
       { dir = "skills/engineering/improve-codebase-architecture"; }
       { dir = "skills/engineering/setup-matt-pocock-skills"; }
       { dir = "skills/engineering/to-spec"; }
-      { dir = "skills/engineering/to-issue"; }
+      { dir = "skills/engineering/to-tickets"; }
       { dir = "skills/engineering/implement"; }
       { dir = "skills/engineering/wayfinder"; }
+
       { dir = "skills/productivity/grill-me"; }
+      { dir = "skills/productivity/handoff"; }
+      { dir = "skills/productivity/writing-great-skills"; }
 
       # call by model
       { dir = "skills/engineering/prototype"; }
@@ -43,7 +46,7 @@
   {
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
-    rev = "f6f79ca1d8e9e2d82c8b90d7481b70ca66f4adfb";
+    rev = "e695d13cb298db0f46d5ef05be2ad13fa12908a6";
     skills = [
       { dir = "skills/emil-design-eng"; }
       { dir = "skills/apple-design"; }
