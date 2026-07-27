@@ -1,5 +1,7 @@
 { pkgs
+, lib
 , llm-agents
+, vars
 , ...
 }:
 
@@ -109,26 +111,40 @@ in
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
-    initContent = ''
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-      # Keep Homebrew completions in this shell, but do not export them to child zsh.
-      typeset +x FPATH
-      eval "$(shpell init zsh)"
-    '';
-    shellAliases = {
-      rm = "rm -i";
-      mv = "mv -i";
-      cp = "cp -i";
-      vim = "nvim";
-      v = "nvim";
-      ls = "ls --color=auto -G";
-      q = "exit";
-      p = "python3";
-      c = "claude";
-      g = "git";
-      darwin-update = "nix flake update --flake path:$HOME/.config && $HOME/.config/home-manager/skills/update && sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
-      darwin-switch = "sudo darwin-rebuild switch --flake path:$HOME/.config#$(scutil --get LocalHostName)";
-    };
+    initContent =
+      lib.optionalString pkgs.stdenv.isDarwin ''
+        if [[ -x /opt/homebrew/bin/brew ]]; then
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+          # Keep Homebrew completions in this shell, but do not export them to child zsh.
+          typeset +x FPATH
+        fi
+      ''
+      + ''
+        if (( $+commands[shpell] )); then
+          eval "$(shpell init zsh)"
+        fi
+      '';
+    shellAliases =
+      {
+        rm = "rm -i";
+        mv = "mv -i";
+        cp = "cp -i";
+        vim = "nvim";
+        v = "nvim";
+        ls = "ls --color=auto -G";
+        q = "exit";
+        p = "python3";
+        c = "claude";
+        g = "git";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isDarwin {
+        darwin-update = "nix flake update --flake \"path:$(realpath \"$HOME/.config\")\" && $HOME/.config/home-manager/skills/update && sudo darwin-rebuild switch --flake \"path:$(realpath \"$HOME/.config\")#${vars.hostname}\"";
+        darwin-switch = "sudo darwin-rebuild switch --flake \"path:$(realpath \"$HOME/.config\")#${vars.hostname}\"";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isLinux {
+        home-update = "nix flake update --flake \"path:$(realpath \"$HOME/.config\")\" && $HOME/.config/home-manager/skills/update && home-manager switch --flake \"path:$(realpath \"$HOME/.config\")#${vars.username}\"";
+        home-switch = "home-manager switch --flake \"path:$(realpath \"$HOME/.config\")#${vars.username}\"";
+      };
     oh-my-zsh = {
       enable = true;
       plugins = [

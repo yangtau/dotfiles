@@ -24,26 +24,46 @@
   };
 
   outputs =
-    { nix-darwin
+    { nixpkgs
+    , nix-darwin
     , home-manager
     , llm-agents
     , ...
     }:
     let
       vars = import ./vars.nix;
+      lib = nixpkgs.lib;
+      isDarwin = lib.hasSuffix "-darwin" vars.system;
+      isLinux = lib.hasSuffix "-linux" vars.system;
     in
-    {
+    assert lib.assertMsg (isDarwin || isLinux) "unsupported system: ${vars.system}";
+    lib.optionalAttrs isDarwin {
       darwinConfigurations.${vars.hostname} = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
+        system = vars.system;
         specialArgs = { inherit vars; };
         modules = [
           home-manager.darwinModules.home-manager
           {
             home-manager.extraSpecialArgs = {
-              inherit llm-agents;
+              inherit llm-agents vars;
             };
           }
           ./darwin-configuration.nix
+        ];
+      };
+    }
+    // lib.optionalAttrs isLinux {
+      homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = vars.system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit llm-agents vars;
+        };
+        modules = [
+          ./home-manager/home.nix
+          ./home-manager/linux.nix
         ];
       };
     };
