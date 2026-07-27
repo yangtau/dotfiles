@@ -19,6 +19,10 @@ in
     "flakes"
   ];
 
+  programs.zsh.profileExtra = ''
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  '';
+
   programs.zsh.shellAliases = {
     home-update = "nix flake update --flake \"${configFlakeRef}\" && $HOME/.config/home-manager/skills/update && home-manager switch --flake \"${configFlakeTarget}\"";
     home-switch = "home-manager switch --flake \"${configFlakeTarget}\"";

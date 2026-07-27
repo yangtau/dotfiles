@@ -1,5 +1,7 @@
 .DS_Store
 htop/
+nix/
+systemd/
 gh/
 go/
 dlv/
