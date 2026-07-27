@@ -33,37 +33,37 @@
     let
       vars = import ./vars.nix;
       lib = nixpkgs.lib;
-      isDarwin = lib.hasSuffix "-darwin" vars.system;
       isLinux = lib.hasSuffix "-linux" vars.system;
+      homeSpecialArgs = { inherit llm-agents vars; };
+      commonHomeModules = [ ./home-manager/home.nix ];
     in
-    assert lib.assertMsg (isDarwin || isLinux) "unsupported system: ${vars.system}";
-    lib.optionalAttrs isDarwin {
+    # Only Linux uses standalone Home Manager; Darwin keeps nix-darwin integration.
+    if isLinux then {
+      homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = vars.system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = homeSpecialArgs;
+        modules = commonHomeModules ++ [ ./home-manager/linux.nix ];
+      };
+    } else {
       darwinConfigurations.${vars.hostname} = nix-darwin.lib.darwinSystem {
         system = vars.system;
         specialArgs = { inherit vars; };
         modules = [
           home-manager.darwinModules.home-manager
           {
-            home-manager.extraSpecialArgs = {
-              inherit llm-agents vars;
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              extraSpecialArgs = homeSpecialArgs;
+              users.${vars.username}.imports =
+                commonHomeModules
+                ++ [ ./home-manager/darwin.nix ];
             };
           }
           ./darwin-configuration.nix
-        ];
-      };
-    }
-    // lib.optionalAttrs isLinux {
-      homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = vars.system;
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = {
-          inherit llm-agents vars;
-        };
-        modules = [
-          ./home-manager/home.nix
-          ./home-manager/linux.nix
         ];
       };
     };

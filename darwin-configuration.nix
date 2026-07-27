@@ -38,14 +38,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.${username} =
-    { pkgs, ... }:
-    {
-      imports = [ ./home-manager/home.nix ];
-    };
-
   system.primaryUser = "${username}";
 
   # Used for backwards compatibility, please read the changelog before changing.
