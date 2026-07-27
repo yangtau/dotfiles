@@ -1,11 +1,6 @@
 {
   description = "nix-darwin + home-manager config";
 
-  nixConfig = {
-    extra-substituters = [ "https://cache.numtide.com" ];
-    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
-  };
-
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -38,33 +33,34 @@
       commonHomeModules = [ ./home-manager/home.nix ];
     in
     # Only Linux uses standalone Home Manager; Darwin keeps nix-darwin integration.
-    if isLinux then {
-      homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = vars.system;
-          config.allowUnfree = true;
+    if isLinux then
+      {
+        homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = vars.system;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = homeSpecialArgs;
+          modules = commonHomeModules ++ [ ./home-manager/linux.nix ];
         };
-        extraSpecialArgs = homeSpecialArgs;
-        modules = commonHomeModules ++ [ ./home-manager/linux.nix ];
+      }
+    else
+      {
+        darwinConfigurations.${vars.hostname} = nix-darwin.lib.darwinSystem {
+          system = vars.system;
+          specialArgs = { inherit vars; };
+          modules = [
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                extraSpecialArgs = homeSpecialArgs;
+                users.${vars.username}.imports = commonHomeModules ++ [ ./home-manager/darwin.nix ];
+              };
+            }
+            ./darwin-configuration.nix
+          ];
+        };
       };
-    } else {
-      darwinConfigurations.${vars.hostname} = nix-darwin.lib.darwinSystem {
-        system = vars.system;
-        specialArgs = { inherit vars; };
-        modules = [
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              extraSpecialArgs = homeSpecialArgs;
-              users.${vars.username}.imports =
-                commonHomeModules
-                ++ [ ./home-manager/darwin.nix ];
-            };
-          }
-          ./darwin-configuration.nix
-        ];
-      };
-    };
 }

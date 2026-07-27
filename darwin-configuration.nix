@@ -11,10 +11,18 @@ in
 {
   # nix.package = pkgs.nix;
   nix.gc.automatic = true;
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    extra-substituters = [
+      "https://cache.numtide.com"
+    ];
+    extra-trusted-public-keys = [
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
+  };
 
   # programs.zsh.enable = true;
   # environment.shells = [ pkgs.zsh ];
