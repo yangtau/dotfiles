@@ -18,7 +18,9 @@
     rev = "2ab958093e83e0ec752e6c1c5932da465bf23e0c";
     skills = [
       # call by user
+      { dir = "skills/engineering/ask-matt"; }
       { dir = "skills/engineering/grill-with-docs"; }
+      { dir = "skills/engineering/triage"; }
       { dir = "skills/engineering/improve-codebase-architecture"; }
       { dir = "skills/engineering/setup-matt-pocock-skills"; }
       { dir = "skills/engineering/to-spec"; }
