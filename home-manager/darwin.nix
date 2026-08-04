@@ -26,6 +26,13 @@ let
       } ''
       mkdir -p $out
       tar -xzf $src -C $out --strip-components=1
+      cat > $out/bin/terminal-browser <<EOF
+      #!/bin/sh
+      export TERMINAL_BROWSER_DIST_ROOT="$out"
+      export ELECTRON_RUN_AS_NODE=1
+      exec "$out/electron/terminal-browser.app/Contents/MacOS/terminal-browser" "$out/cli/dist/main.js" "\$@"
+      EOF
+      chmod +x $out/bin/terminal-browser
     '';
 in
 {
