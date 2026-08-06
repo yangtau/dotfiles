@@ -15,7 +15,7 @@
   {
     url = "https://github.com/mattpocock/skills.git";
     ref = "refs/heads/main";
-    rev = "2ab958093e83e0ec752e6c1c5932da465bf23e0c";
+    rev = "8b36d4fb2635b3c21998dcd8144439c9e5ba7302";
     skills = [
       # call by user
       { dir = "skills/engineering/ask-matt"; }
@@ -48,7 +48,7 @@
   {
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
-    rev = "da80201b64de7d608a6dc5f723797ce6c65b692b";
+    rev = "de33dbed000212b54400a33767d1e4d03654db2a";
     skills = [
       { dir = "skills/emil-design-eng"; }
       { dir = "skills/apple-design"; }
