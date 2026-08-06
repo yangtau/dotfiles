@@ -8,6 +8,7 @@ local function import(package)
 end
 
 import "configs.keymap"
+import "configs.theme"
 import "configs.ui"
 import "configs.font"
 

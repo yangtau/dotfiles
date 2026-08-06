@@ -11,28 +11,17 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
   return { { Text = title } }
 end)
 
-local cat = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]
-cat.background = "#ffffff"
-cat.tab_bar.background = "#f0f0f0"
-cat.tab_bar.inactive_tab.bg_color = cat.tab_bar.background
-cat.tab_bar.active_tab.bg_color = "#c2c2df"
-cat.tab_bar.active_tab.fg_color = "#323222"
-
 return {
   default_cursor_style = "BlinkingBlock",
-  color_schemes = {
-    ["catppuccin"] = cat,
-  },
-  color_scheme = "catppuccin",
 
   enable_scroll_bar = true,
   scrollback_lines = 100000,
 
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = false,
-  hide_tab_bar_if_only_one_tab = false,
-  show_new_tab_button_in_tab_bar = false,
-  text_background_opacity = 0.9,
+  hide_tab_bar_if_only_one_tab = true,
+  show_new_tab_button_in_tab_bar = true,
+  -- text_background_opacity = 0.9,
 
   window_background_opacity = 1,
 
