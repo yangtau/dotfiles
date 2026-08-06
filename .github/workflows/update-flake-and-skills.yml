@@ -1,0 +1,58 @@
+name: Update flake and skills
+
+on:
+  schedule:
+    - cron: "17 */5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-flake-and-skills
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+
+      - name: Update flake inputs and skills
+        env:
+          NIX_CONFIG: "access-tokens = github.com=${{ github.token }}"
+          SKILLS_DIR: ${{ github.workspace }}/home-manager/skills
+        run: |
+          nix flake update
+          ./home-manager/skills/update
+
+      - name: Validate changes
+        run: |
+          bash -n home-manager/skills/update
+          git diff --check
+          git diff --exit-code -- . \
+            ':(exclude)flake.lock' \
+            ':(exclude)home-manager/skills/source.nix'
+
+      - name: Commit and update main
+        run: |
+          git add flake.lock home-manager/skills/source.nix
+
+          if git diff --cached --quiet; then
+            echo "No updates available."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update flake inputs and skills"
+          git pull --rebase origin main
+          git push origin HEAD:main
