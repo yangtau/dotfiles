@@ -30,57 +30,7 @@ local function split_nav(m)
   return m
 end
 
-local function get_pane_info(pane, tab)
-  if pane == nil then
-    return nil
-  end
-
-  for _, item in ipairs(tab:panes_with_info()) do
-    if item.pane:pane_id() == pane then
-      return item
-    end
-  end
-  return nil
-end
-
-local function open_or_focus_pane(
-  tab_to_panes --[[ tab_id= {bottom=, last=} ]],
-  arg
-)
-  return wezterm.action_callback(function(win, pane)
-    local tab = win:active_tab()
-    local panes = tab_to_panes[tab:tab_id()]
-
-    local bottom_pane, last_pane
-    if panes then
-      bottom_pane = panes.bottom
-      last_pane = panes.last
-    end
-
-    -- check if the bottom pane is still valid
-    local bottom_pane_info = get_pane_info(bottom_pane, tab)
-    local last_pane_info = get_pane_info(last_pane, tab)
-
-    tab:set_zoomed(false)
-
-    if not bottom_pane_info or not last_pane_info then -- no bottom pane, open one
-      win:perform_action({ SplitPane = arg }, pane)
-      tab_to_panes[tab:tab_id()] =
-        { bottom = tab:active_pane():pane_id(), last = pane:pane_id() }
-    elseif pane:pane_id() == bottom_pane then -- on bottom pane, switch to last
-      last_pane_info.pane:activate()
-    else -- switch to bottom and set last
-      bottom_pane_info.pane:activate()
-      tab_to_panes[tab:tab_id()].last = pane:pane_id()
-    end
-  end)
-end
-
 local act = wezterm.action
--- pane opend by `
-local tab_to_grave_pane = {} --[[ tab_id= {bottom=, last=} ]]
--- pane opend by /
-local tab_to_left_pane = {}
 
 return {
   disable_default_key_bindings = true,
@@ -180,13 +130,13 @@ return {
     },
     { mods = "SUPER", key = "z", action = act.TogglePaneZoomState },
     {
-      mods = "CTRL",
-      key = "-",
+      mods = "SUPER|SHIFT",
+      key = "d",
       action = act.SplitVertical { domain = "CurrentPaneDomain" },
     },
     {
-      mods = "CTRL",
-      key = "\\",
+      mods = "SUPER",
+      key = "d",
       action = act.SplitHorizontal { domain = "CurrentPaneDomain" },
     },
     split_nav { mods = "CTRL", key = "h", action = { "move", "Left" } },
@@ -208,29 +158,6 @@ return {
       mods = "CTRL",
       key = "RightArrow",
       action = { "resize", "Right" },
-    },
-    {
-      mods = "CTRL",
-      key = "`",
-      action = open_or_focus_pane(
-        tab_to_grave_pane,
-        { direction = "Down", size = { Percent = 30 } }
-      ),
-    },
-    {
-      mods = "CTRL",
-      key = "/",
-      action = open_or_focus_pane(
-        tab_to_left_pane,
-        { direction = "Right", size = { Percent = 30 } }
-      ),
-    },
-    {
-      key = "!",
-      mods = "CTRL|SHIFT",
-      action = wezterm.action_callback(function(_, pane)
-        pane:move_to_new_tab()
-      end),
     },
 
     {
