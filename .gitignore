@@ -10,7 +10,6 @@ wireshark/
 trae.vim
 marscode.vim
 github-copilot/
-amp/
 
 # managed by nix home manager
 git/

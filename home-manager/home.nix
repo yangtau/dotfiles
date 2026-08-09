@@ -45,10 +45,7 @@ in
     rustup
     # nodejs
 
-    # llm-pkgs.claude-code
     llm-pkgs.codex
-    # llm-pkgs.antigravity-cli
-    # llm-pkgs.amp
     llm-pkgs.pi
     # llm-pkgs.opencode
 
@@ -128,7 +125,6 @@ in
       ls = "ls --color=auto -G";
       q = "exit";
       p = "python3";
-      c = "claude";
       g = "git";
     };
     oh-my-zsh = {
