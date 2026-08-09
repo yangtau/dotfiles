@@ -45,12 +45,12 @@ in
     rustup
     # nodejs
 
-    llm-pkgs.claude-code
+    # llm-pkgs.claude-code
     llm-pkgs.codex
-    llm-pkgs.antigravity-cli
-    llm-pkgs.amp
+    # llm-pkgs.antigravity-cli
+    # llm-pkgs.amp
     llm-pkgs.pi
-    llm-pkgs.opencode
+    # llm-pkgs.opencode
 
     # install only telnet
     (runCommand "telnet" { } ''
