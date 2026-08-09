@@ -48,7 +48,7 @@
   {
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
-    rev = "de33dbed000212b54400a33767d1e4d03654db2a";
+    rev = "9075d1724a831411ab5cf138dd9b5cd406ffc2e2";
     skills = [
       { dir = "skills/emil-design-eng"; }
       { dir = "skills/apple-design"; }
