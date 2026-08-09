@@ -1,6 +1,7 @@
-{ pkgs
-, llm-agents
-, ...
+{
+  pkgs,
+  llm-agents,
+  ...
 }:
 
 let
@@ -39,8 +40,10 @@ in
 
     # orbstack
 
+    bun
+    uv
     rustup
-    nodejs
+    # nodejs
 
     llm-pkgs.claude-code
     llm-pkgs.codex
