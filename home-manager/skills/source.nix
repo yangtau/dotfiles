@@ -30,7 +30,7 @@
 
       { dir = "skills/productivity/grill-me"; }
       { dir = "skills/productivity/handoff"; }
-      { dir = "skills/productivity/writing-great-skills"; }
+      { dir = "skills/productivity/wait-what"; }
 
       # call by model
       { dir = "skills/engineering/prototype"; }
@@ -41,7 +41,10 @@
       { dir = "skills/engineering/codebase-design"; }
       { dir = "skills/engineering/code-review"; }
       { dir = "skills/engineering/resolving-merge-conflicts"; }
+      { dir = "skills/engineering/wizard"; }
+
       { dir = "skills/productivity/grilling"; }
+      { dir = "skills/productivity/writing-for-agents"; }
     ];
   }
 
