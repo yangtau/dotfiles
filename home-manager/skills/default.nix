@@ -34,6 +34,7 @@ let
   # 安装目标（相对 $HOME）。增删只改这里。
   targets = [
     ".agents/skills"
+    ".claude/skills"
   ];
   home = config.home.homeDirectory;
 
