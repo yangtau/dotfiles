@@ -1,6 +1,7 @@
-{ pkgs
-, llm-agents
-, ...
+{
+  pkgs,
+  llm-agents,
+  ...
 }:
 
 let
@@ -44,7 +45,7 @@ in
 
     llm-pkgs.codex
     llm-pkgs.pi
-    # llm-pkgs.opencode
+    llm-pkgs.grok
 
     # install only telnet
     (runCommand "telnet" { } ''
