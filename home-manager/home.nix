@@ -1,11 +1,13 @@
 {
   pkgs,
   llm-agents,
+  grok-build,
   ...
 }:
 
 let
-  llm-pkgs = llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  system = pkgs.stdenv.hostPlatform.system;
+  llm-pkgs = llm-agents.packages.${system};
 in
 {
   # imports 收「路径列表」，由 home-manager 去 import；不要自己 import（那会得到 module 函数，
@@ -45,7 +47,7 @@ in
 
     llm-pkgs.codex
     llm-pkgs.pi
-    llm-pkgs.grok
+    grok-build.packages.${system}.default
 
     # install only telnet
     (runCommand "telnet" { } ''

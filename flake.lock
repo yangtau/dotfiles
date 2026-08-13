@@ -54,6 +54,26 @@
         "type": "github"
       }
     },
+    "grok-build": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786586707,
+        "narHash": "sha256-5+SyoDZ89pyhRE7Co7lqTY4rsrhHk+aDf8rCPnkGMHY=",
+        "owner": "yangtau",
+        "repo": "grok-build",
+        "rev": "bc16859b8d7869c1495c2d46c42ff4b1ad3a3058",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "grok-build",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -150,6 +170,7 @@
     },
     "root": {
       "inputs": {
+        "grok-build": "grok-build",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "nix-darwin": "nix-darwin",
