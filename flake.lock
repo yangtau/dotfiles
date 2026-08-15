@@ -61,11 +61,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786647846,
-        "narHash": "sha256-ZkUKVneqLof6mVqfaqUgeyfNkhcbm/EqOxpVtSKhpAI=",
+        "lastModified": 1786807302,
+        "narHash": "sha256-en9wxGob0UWYbM4xJI+FdeB/SLUqER1azjqmsg/nqWA=",
         "owner": "yangtau",
         "repo": "grok-build",
-        "rev": "e7d4d5c10cdc4da57de5d1b3a5d3630ad7f0641e",
+        "rev": "a964880140161e0f25f1e246df7e8fb49fd8e3b1",
         "type": "github"
       },
       "original": {
