@@ -56,16 +56,17 @@
     },
     "grok-build": {
       "inputs": {
+        "nix-rust-prebuilt": "nix-rust-prebuilt",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1786915280,
-        "narHash": "sha256-GChVzsGvJ7hqH9fGFDpC1+Ul1tKw/aZjZW9us6u4ZSI=",
+        "lastModified": 1786970613,
+        "narHash": "sha256-mswb3Ieb0LQOFLs6wwzHPhxAPSwLFJyUz5TfT/XgQow=",
         "owner": "yangtau",
         "repo": "grok-build",
-        "rev": "b9e6e2cf4eb9b3fc4749b4aff8a546421d651556",
+        "rev": "aab59cb914caae5882f04b174f29952e24dde46c",
         "type": "github"
       },
       "original": {
@@ -76,16 +77,17 @@
     },
     "gw": {
       "inputs": {
+        "nix-rust-prebuilt": "nix-rust-prebuilt_2",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1786951664,
-        "narHash": "sha256-1R/JPlZYzKzCIlgSkQiDUhNmjR3Y8lOtn4c5mXDYKOY=",
+        "lastModified": 1786970758,
+        "narHash": "sha256-Ks5+mdfCdNx58I1s9QS4MXWgZutF3xqZDIE0oTXH5DM=",
         "owner": "yangtau",
         "repo": "gw",
-        "rev": "5814737d18de260055b1a1b221a1a1a1474fa211",
+        "rev": "aee7ffc384f45255aec4ba706d1da07f37b590a3",
         "type": "github"
       },
       "original": {
@@ -156,6 +158,51 @@
         "type": "github"
       }
     },
+    "nix-rust-prebuilt": {
+      "locked": {
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "type": "github"
+      }
+    },
+    "nix-rust-prebuilt_2": {
+      "locked": {
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "type": "github"
+      }
+    },
+    "nix-rust-prebuilt_3": {
+      "locked": {
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1786719841,
@@ -201,16 +248,17 @@
     },
     "shpell": {
       "inputs": {
+        "nix-rust-prebuilt": "nix-rust-prebuilt_3",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1786953031,
-        "narHash": "sha256-KgvxxnQJxDg+/mPFg3jLzwp+qTnIjj2Rb+u+3bMH+uc=",
+        "lastModified": 1786970758,
+        "narHash": "sha256-CGk5UxaraE9REZBwK4NDrBA8x+Kjue1DUWiPqqHMvJs=",
         "owner": "yangtau",
         "repo": "shpell",
-        "rev": "9048bd6fcd99ff4505daea909736d60d1202c9f3",
+        "rev": "7540bdf14f4ab4cb66e6a18b0537b54e8e323cc8",
         "type": "github"
       },
       "original": {
