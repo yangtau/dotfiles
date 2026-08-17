@@ -2,6 +2,8 @@
   pkgs,
   llm-agents,
   grok-build,
+  gw,
+  shpell,
   ...
 }:
 
@@ -48,6 +50,8 @@ in
     llm-pkgs.codex
     llm-pkgs.pi
     grok-build.packages.${system}.default
+    gw.packages.${system}.default
+    shpell.packages.${system}.default
 
     # install only telnet
     (runCommand "telnet" { } ''

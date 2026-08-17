@@ -20,6 +20,14 @@
       url = "github:yangtau/grok-build";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gw = {
+      url = "github:yangtau/gw";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    shpell = {
+      url = "github:yangtau/shpell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,13 +36,15 @@
     , home-manager
     , llm-agents
     , grok-build
+    , gw
+    , shpell
     , ...
     }:
     let
       vars = import ./vars.nix;
       lib = nixpkgs.lib;
       isLinux = lib.hasSuffix "-linux" vars.system;
-      homeSpecialArgs = { inherit llm-agents grok-build vars; };
+      homeSpecialArgs = { inherit llm-agents grok-build gw shpell vars; };
       commonHomeModules = [ ./home-manager/home.nix ];
     in
     # Only Linux uses standalone Home Manager; Darwin keeps nix-darwin integration.

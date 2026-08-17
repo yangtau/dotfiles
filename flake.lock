@@ -74,6 +74,26 @@
         "type": "github"
       }
     },
+    "gw": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786948525,
+        "narHash": "sha256-/ATRXHurOKWm6ZvxaYR4RiolB1nOCu8GmYAXQEYFF7k=",
+        "owner": "yangtau",
+        "repo": "gw",
+        "rev": "8dc66c128656685b757e16e81d2a8825e2e16db2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "gw",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -171,10 +191,32 @@
     "root": {
       "inputs": {
         "grok-build": "grok-build",
+        "gw": "gw",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "shpell": "shpell"
+      }
+    },
+    "shpell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781759247,
+        "narHash": "sha256-JV1AvrDGtOxIdBmfj7q3ViBNTs7yk87rXOIlr5cQhYw=",
+        "owner": "yangtau",
+        "repo": "shpell",
+        "rev": "0cd9dde80f5e22b5a8eff1200a7cc228d9fa8325",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "shpell",
+        "type": "github"
       }
     },
     "systems": {
