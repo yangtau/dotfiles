@@ -81,11 +81,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786948525,
-        "narHash": "sha256-/ATRXHurOKWm6ZvxaYR4RiolB1nOCu8GmYAXQEYFF7k=",
+        "lastModified": 1786951664,
+        "narHash": "sha256-1R/JPlZYzKzCIlgSkQiDUhNmjR3Y8lOtn4c5mXDYKOY=",
         "owner": "yangtau",
         "repo": "gw",
-        "rev": "8dc66c128656685b757e16e81d2a8825e2e16db2",
+        "rev": "5814737d18de260055b1a1b221a1a1a1474fa211",
         "type": "github"
       },
       "original": {
@@ -206,11 +206,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781759247,
-        "narHash": "sha256-JV1AvrDGtOxIdBmfj7q3ViBNTs7yk87rXOIlr5cQhYw=",
+        "lastModified": 1786953031,
+        "narHash": "sha256-KgvxxnQJxDg+/mPFg3jLzwp+qTnIjj2Rb+u+3bMH+uc=",
         "owner": "yangtau",
         "repo": "shpell",
-        "rev": "0cd9dde80f5e22b5a8eff1200a7cc228d9fa8325",
+        "rev": "9048bd6fcd99ff4505daea909736d60d1202c9f3",
         "type": "github"
       },
       "original": {

@@ -15,7 +15,7 @@
   {
     url = "https://github.com/mattpocock/skills.git";
     ref = "refs/heads/main";
-    rev = "068b6e0c62393147daf03530149cdce209c93da8";
+    rev = "9c9f36ccd3995266cd675468af71639c8dde1ec5";
     skills = [
       # call by user
       { dir = "skills/engineering/ask-matt"; }
