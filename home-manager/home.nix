@@ -47,7 +47,6 @@ in
     rustup
     nodejs
 
-    llm-pkgs.codex
     llm-pkgs.pi
     grok-build.packages.${system}.default
     gw.packages.${system}.default
