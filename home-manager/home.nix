@@ -1,10 +1,9 @@
-{
-  pkgs,
-  llm-agents,
-  grok-build,
-  gw,
-  shpell,
-  ...
+{ pkgs
+, llm-agents
+, grok-build
+, gw
+, shpell
+, ...
 }:
 
 let
@@ -33,6 +32,7 @@ in
     wget
     tmux
     jq
+    fzf
     ripgrep
     neovim
 
