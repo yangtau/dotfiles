@@ -48,7 +48,9 @@ in
     nodejs
 
     llm-pkgs.pi
+    llm-pkgs.amp
     grok-build.packages.${system}.default
+
     gw.packages.${system}.default
     shpell.packages.${system}.default
 
