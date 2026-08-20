@@ -254,11 +254,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786970758,
-        "narHash": "sha256-CGk5UxaraE9REZBwK4NDrBA8x+Kjue1DUWiPqqHMvJs=",
+        "lastModified": 1787221512,
+        "narHash": "sha256-OvS04QOYmJ25nE15Y0dsD9YrWP9R0sfoyOu+eWa8pL0=",
         "owner": "yangtau",
         "repo": "shpell",
-        "rev": "7540bdf14f4ab4cb66e6a18b0537b54e8e323cc8",
+        "rev": "2d7c51ede84aced9e949b557dd6e43e4b8b4534f",
         "type": "github"
       },
       "original": {
