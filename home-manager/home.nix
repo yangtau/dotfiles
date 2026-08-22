@@ -49,6 +49,7 @@ in
 
     llm-pkgs.pi
     llm-pkgs.amp
+    llm-pkgs.cursor-agent
     grok-build.packages.${system}.default
 
     gw.packages.${system}.default
