@@ -18,14 +18,14 @@
     rev = "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76";
     skills = [
       # call by user
-      { dir = "skills/engineering/ask-matt"; }
+      # { dir = "skills/engineering/ask-matt"; }
       { dir = "skills/engineering/grill-with-docs"; }
       { dir = "skills/engineering/triage"; }
       { dir = "skills/engineering/improve-codebase-architecture"; }
       { dir = "skills/engineering/setup-matt-pocock-skills"; }
       { dir = "skills/engineering/to-spec"; }
       { dir = "skills/engineering/to-tickets"; }
-      { dir = "skills/engineering/implement"; }
+      # { dir = "skills/engineering/implement"; }
       { dir = "skills/engineering/wayfinder"; }
 
       { dir = "skills/productivity/grill-me"; }
