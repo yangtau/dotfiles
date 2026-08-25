@@ -1,10 +1,9 @@
-{
-  pkgs,
-  llm-agents,
-  grok-build,
-  gw,
-  shpell,
-  ...
+{ pkgs
+, llm-agents
+, grok-build
+, gw
+, shpell
+, ...
 }:
 
 let
@@ -51,7 +50,7 @@ in
     llm-pkgs.pi
     llm-pkgs.amp
     llm-pkgs.cursor-agent
-    llm-pkgs.opencode
+    llm-pkgs.opencode2
     grok-build.packages.${system}.default
 
     gw.packages.${system}.default
