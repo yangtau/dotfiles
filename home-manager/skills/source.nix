@@ -8,7 +8,7 @@
     # lark-cli 统一入口：上游全部 lark-* 子域合并进个人仓库 router 的 references/subskills/ 下。
     url = "https://github.com/larksuite/cli.git";
     ref = "refs/heads/main";
-    rev = "0f9553385c48234ab7e16ab4c9b08c745f1c59d4";
+    rev = "d0158ab289a9ce9d664c5ab2abbf1839bcf1ea36";
     unified = {
       name = "lark-cli";
       srcGlob = "skills/lark-*";
@@ -25,7 +25,7 @@
   {
     url = "https://github.com/ShawnPana/smux.git";
     ref = "refs/heads/main";
-    rev = "70a6899bdec5d3d3b51d9b927c0c0db0e22bb73f";
+    rev = "f8f591b0b7966b210aa0b68f4f3bce54cf64e07b";
     skills = [
       { dir = "skills/smux"; }
     ];
