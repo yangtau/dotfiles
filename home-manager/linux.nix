@@ -24,7 +24,7 @@ in
   '';
 
   programs.zsh.shellAliases = {
-    home-update = "nix flake update --flake \"${configFlakeRef}\" && $HOME/.config/home-manager/skills/update && home-manager switch --flake \"${configFlakeTarget}\"";
+    home-update = "nix flake update --flake \"${configFlakeRef}\" && $HOME/.config/home-manager/skills/update && $HOME/.config/home-manager/pkgs/update && home-manager switch --flake \"${configFlakeTarget}\"";
     home-switch = "home-manager switch --flake \"${configFlakeTarget}\"";
   };
 }
