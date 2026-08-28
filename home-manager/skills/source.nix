@@ -68,6 +68,15 @@
   }
 
   {
+    url = "https://github.com/anthropics/claude-plugins-community.git";
+    ref = "refs/heads/main";
+    rev = "a727be1c7bd6064419b6f60d71993a19198adc17";
+    skills = [
+      { dir = "eli5/skills/eli5"; }
+    ];
+  }
+
+  {
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
     rev = "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7";
