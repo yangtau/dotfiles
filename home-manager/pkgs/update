@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Refresh version + integrity for npm-sourced packages in this directory.
+# For each ./*.json with a "npm" field, query the npm registry's /latest
+# endpoint and rewrite {version, hash} in place. Uses SRI hashes directly
+# (npm's dist.integrity is already sha512-<base64>).
+#
+# Independent of Nix; needs curl and jq.
+set -euo pipefail
+
+dir="${PKGS_DIR:-$(cd "$(dirname "$0")" && pwd)}"
+
+for f in "$dir"/*.json; do
+  [ -f "$f" ] || continue
+  name=$(jq -r '.npm // empty' "$f")
+  [ -n "$name" ] || continue
+
+  echo "==> $name"
+  meta=$(curl -sL --fail "https://registry.npmjs.org/$name/latest" || true)
+  if [ -z "$meta" ]; then
+    echo "  registry query failed; skipping" >&2
+    continue
+  fi
+
+  new_version=$(echo "$meta" | jq -r '.version')
+  new_hash=$(echo "$meta" | jq -r '.dist.integrity')
+  old_version=$(jq -r '.version' "$f")
+
+  if [ "$new_version" = "$old_version" ]; then
+    echo "  already up to date $old_version"
+    continue
+  fi
+
+  tmp=$(mktemp)
+  jq --arg v "$new_version" --arg h "$new_hash" \
+     '.version = $v | .hash = $h' "$f" > "$tmp"
+  mv "$tmp" "$f"
+  echo "  $old_version → $new_version"
+done
+
+echo "==> npm package pins refreshed."
