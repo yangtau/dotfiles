@@ -8,7 +8,7 @@
     # lark-cli 统一入口：上游全部 lark-* 子域合并进个人仓库 router 的 references/subskills/ 下。
     url = "https://github.com/larksuite/cli.git";
     ref = "refs/heads/main";
-    rev = "decc9549b58283531cbb40d318e97ba7d0793a27";
+    rev = "6646386e0996b1ff5df640bccff834a20bcb203b";
     unified = {
       name = "lark-cli";
       srcGlob = "skills/lark-*";
@@ -79,7 +79,7 @@
   {
     url = "https://github.com/ChromeDevTools/chrome-devtools-mcp.git";
     ref = "refs/heads/main";
-    rev = "d1baa90e2ba8df743c6a3ad41083611799340b5f";
+    rev = "fd67970881624f231ff84129a1234bb04c762be7";
     skills = [
       { dir = "skills/chrome-devtools-cli"; }
     ];
