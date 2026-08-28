@@ -77,6 +77,15 @@
   }
 
   {
+    url = "https://github.com/ChromeDevTools/chrome-devtools-mcp.git";
+    ref = "refs/heads/main";
+    rev = "d1baa90e2ba8df743c6a3ad41083611799340b5f";
+    skills = [
+      { dir = "skills/chrome-devtools-cli"; }
+    ];
+  }
+
+  {
     url = "https://github.com/emilkowalski/skills.git";
     ref = "refs/heads/main";
     rev = "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7";

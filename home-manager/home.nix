@@ -73,6 +73,26 @@ in
       } $out/bin/tmux-bridge
       chmod +x $out/bin/tmux-bridge
     '')
+
+    # chrome-devtools-mcp: pre-bundled npm tarball (no runtime deps thanks to rollup bundle).
+    # Bumps: fetch new version+integrity from https://registry.npmjs.org/chrome-devtools-mcp/latest.
+    (
+      let
+        version = "1.8.0";
+        src = fetchurl {
+          url = "https://registry.npmjs.org/chrome-devtools-mcp/-/chrome-devtools-mcp-${version}.tgz";
+          hash = "sha512-Wrm9z0/5WbVs778apjWgYRkpe9bvYQWjK2zVRwqoPAtz1IHQ5+GvotM07UGXJcfrA0rj6Gt1Pnn5+w/Tf1nU4w==";
+        };
+      in
+      runCommand "chrome-devtools-mcp-${version}" { nativeBuildInputs = [ makeWrapper ]; } ''
+        mkdir -p $out/lib/chrome-devtools-mcp $out/bin
+        tar xzf ${src} -C $out/lib/chrome-devtools-mcp --strip-components=1
+        makeWrapper ${nodejs}/bin/node $out/bin/chrome-devtools \
+          --add-flags $out/lib/chrome-devtools-mcp/build/src/bin/chrome-devtools.js
+        makeWrapper ${nodejs}/bin/node $out/bin/chrome-devtools-mcp \
+          --add-flags $out/lib/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js
+      ''
+    )
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
