@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788195641,
-        "narHash": "sha256-CnIR1wz3weM3JoDFUH2tTXFhA17K8sYKMCqCDatD/Gc=",
+        "lastModified": 1787965836,
+        "narHash": "sha256-aS0cO2eS37+R6/TYXPw6hZj+tkekMNNIi+DXMiPVafI=",
         "owner": "yangtau",
         "repo": "grok-build",
-        "rev": "2eea5b4f591c9350ec4bd85e3b30029f4842d1fa",
+        "rev": "e30b7847d4a443d13c8b0ad2cd429f1cbc962e4b",
         "type": "github"
       },
       "original": {
@@ -77,10 +77,7 @@
     },
     "gw": {
       "inputs": {
-        "nix-rust-prebuilt": [
-          "grok-build",
-          "nix-rust-prebuilt"
-        ],
+        "nix-rust-prebuilt": "nix-rust-prebuilt_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -163,11 +160,41 @@
     },
     "nix-rust-prebuilt": {
       "locked": {
-        "lastModified": 1788195631,
-        "narHash": "sha256-QjnIfWrBpCH3Wjd5HUPQoYofj4V29oDCWGm02Uq7HuY=",
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
         "owner": "yangtau",
         "repo": "nix-rust-prebuilt",
-        "rev": "ad6efa8679f18950d1f8ae56a73590b6182523fe",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "type": "github"
+      }
+    },
+    "nix-rust-prebuilt_2": {
+      "locked": {
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "type": "github"
+      }
+    },
+    "nix-rust-prebuilt_3": {
+      "locked": {
+        "lastModified": 1786970574,
+        "narHash": "sha256-WyMev0ZkZXZp6yToFu3RkyhcDaq+6pmb/PRe/wcP2/U=",
+        "owner": "yangtau",
+        "repo": "nix-rust-prebuilt",
+        "rev": "3719898054bdfc253859b16c063a80f933683c89",
         "type": "github"
       },
       "original": {
@@ -221,10 +248,7 @@
     },
     "shpell": {
       "inputs": {
-        "nix-rust-prebuilt": [
-          "grok-build",
-          "nix-rust-prebuilt"
-        ],
+        "nix-rust-prebuilt": "nix-rust-prebuilt_3",
         "nixpkgs": [
           "nixpkgs"
         ]

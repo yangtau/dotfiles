@@ -23,12 +23,10 @@
     gw = {
       url = "github:yangtau/gw";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nix-rust-prebuilt.follows = "grok-build/nix-rust-prebuilt";
     };
     shpell = {
       url = "github:yangtau/shpell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nix-rust-prebuilt.follows = "grok-build/nix-rust-prebuilt";
     };
   };
 
