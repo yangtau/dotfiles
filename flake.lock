@@ -83,11 +83,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787900516,
-        "narHash": "sha256-tzflwkpAMxrOgi56knvhmT8etNgd0PEeODRI0badjTU=",
+        "lastModified": 1788153927,
+        "narHash": "sha256-sdLPlmF2pySlPeu2DzIvJI2ZuTW1kBSAssYQ7OjkKyY=",
         "owner": "yangtau",
         "repo": "gw",
-        "rev": "8e9f701ffe7868651d5240f2f6ee7910f73c7ecb",
+        "rev": "8fa8767c5baadc257c24403fe0d1d906e5043107",
         "type": "github"
       },
       "original": {
