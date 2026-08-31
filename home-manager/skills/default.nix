@@ -1,4 +1,4 @@
-# home-manager module：读 source → fetchGit 进 store → 声明成 home.file 软链到各 target。
+# home-manager module：读 source → fetch 进 store → 声明成 home.file 软链到各 target。
 # 软链/prune（删声明即删链）/gcroot 全由 home-manager 接管，本文件只做「source → home.file」的纯声明。
 # 刷 rev 是正交的命令式操作，见同目录独立脚本 ./update（不经 nix）。
 { config, lib, pkgs, ... }:
@@ -7,6 +7,38 @@ let
   # 纯数据源：source.nix（公共，进 git）+ source.local.nix（本机，gitignore，缺失即空）。
   readSources = f: if builtins.pathExists f then import f else [ ];
   sourceGroups = readSources ./source.nix ++ readSources ./source.local.nix;
+
+  # 拉仓库：只钉 rev，不需要 sha256，纯 eval 合法。
+  # github.com HTTPS → archive tarball（无历史、走 CDN）；其它 git → shallow clone。
+  # git@ / ssh:// 保持 fetchGit，避免把私钥 GitHub 误走 API。
+  parseGitHubHttps =
+    url:
+    let
+      m = builtins.match "https://github.com/([^/]+)/([^/]+)" url;
+    in
+    if m == null then
+      null
+    else
+      {
+        owner = builtins.elemAt m 0;
+        repo = lib.removeSuffix ".git" (builtins.elemAt m 1);
+      };
+  fetchRepo =
+    { url, rev, ... }:
+    let
+      gh = parseGitHubHttps url;
+    in
+    if gh != null then
+      builtins.fetchTree {
+        type = "github";
+        inherit (gh) owner repo;
+        inherit rev;
+      }
+    else
+      builtins.fetchGit {
+        inherit url rev;
+        shallow = true;
+      };
 
   # 一个 git 仓库可以声明多个 skills，避免重复 url/ref/rev。
   # name 可省略，默认取 dir 的最后一段；显式 name 可用于别名。
@@ -37,14 +69,14 @@ let
   # 合并 skill：把上游仓库按 glob 匹配的子域目录拷进 router 的 dest 下，
   # 再铺上 router（个人仓库的 SKILL.md 等）。子域互为兄弟目录，内部 ../ 相对引用保持成立。
   # srcGlob 相对上游仓库根（如 "skills/lark-*"）；dest 相对 skill 根（如 "references/subskills"）。
-  # derivation 输出是真实 store path，与 fetchGit 分支同样「纯 eval 直接软链」。
+  # derivation 输出是真实 store path，与 git 源同样「纯 eval 直接软链」。
   mergeSkill =
     s:
     let
       u = s.unified;
-      repo = builtins.fetchGit { inherit (s) url ref rev; };
+      repo = fetchRepo s;
       r = u.router;
-      routerRepo = builtins.fetchGit { inherit (r) url ref rev; } + "/${r.dir}";
+      routerRepo = fetchRepo r + "/${r.dir}";
     in
     pkgs.runCommand "${u.name}-skill" { } ''
       mkdir -p "$out/${u.dest}"
@@ -69,7 +101,7 @@ let
   home = config.home.homeDirectory;
 
   # 每个 skill × 每个 target 一个 home.file 条目。
-  #   git 源      → fetchGit 进 store 取 dir（store 路径，纯 eval 允许直接软链）。
+  #   git 源      → fetchRepo 进 store 取 dir（store 路径，纯 eval 允许直接软链）。
   #   unified 源  → mergeSkill 合并上游子域与 router，软链整个 derivation 输出。
   #   纯本地目录  → mkOutOfStoreSymlink 软链到原地（不拷进 store；纯 eval 不读绝对路径，故不报错）。
   # 跳过自引用：本地目录已实体位于某 target 下时（如 aside-browser 在 ~/.agents/skills），
@@ -81,7 +113,7 @@ let
       isGit = !isUnified && s ? url;
       loc =
         if isUnified then mergeSkill s
-        else if isGit then builtins.fetchGit { inherit (s) url ref rev; } + "/${s.dir}"
+        else if isGit then fetchRepo s + "/${s.dir}"
         else s.path;
       source = if isUnified || isGit then loc else config.lib.file.mkOutOfStoreSymlink s.path;
     in

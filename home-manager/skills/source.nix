@@ -1,6 +1,7 @@
 # 公共 skill 源（进 git，可跨机复现）。纯数据，每项描述一个仓库。
 # git 源：{ url; ref; rev; skills = [ { dir; name ? basename(dir); } ... ]; }
-# 同一仓库的多个 skills 共享 url/ref/rev，fetchGit 后分别取 dir 子目录。
+# 同一仓库的多个 skills 共享 url/ref/rev，fetch 后分别取 dir 子目录。
+# github.com HTTPS 走 tarball（无 git 历史）；其它 git 走 shallow clone。
 # rev 由 `skills-update` 用 git ls-remote 刷到上游最新。
 [
 
