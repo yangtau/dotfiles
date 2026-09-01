@@ -73,10 +73,6 @@ in
       } $out/bin/tmux-bridge
       chmod +x $out/bin/tmux-bridge
     '')
-
-    # chrome-devtools-mcp: version + integrity pinned in pkgs/chrome-devtools-mcp.json.
-    # Bump via ./pkgs/update (queries npm registry, rewrites JSON in place).
-    (callPackage ./pkgs/chrome-devtools-mcp.nix { })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
