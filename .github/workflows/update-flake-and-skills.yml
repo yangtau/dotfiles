@@ -30,25 +30,21 @@ jobs:
         env:
           NIX_CONFIG: "access-tokens = github.com=${{ github.token }}"
           SKILLS_DIR: ${{ github.workspace }}/home-manager/skills
-          PKGS_DIR: ${{ github.workspace }}/home-manager/pkgs
         run: |
           nix flake update
           ./home-manager/skills/update
-          ./home-manager/pkgs/update
 
       - name: Validate changes
         run: |
           bash -n home-manager/skills/update
-          bash -n home-manager/pkgs/update
           git diff --check
           git diff --exit-code -- . \
             ':(exclude)flake.lock' \
-            ':(exclude)home-manager/skills/source.nix' \
-            ':(exclude)home-manager/pkgs/*.json'
+            ':(exclude)home-manager/skills/source.nix'
 
       - name: Commit and update main
         run: |
-          git add flake.lock home-manager/skills/source.nix home-manager/pkgs/*.json
+          git add flake.lock home-manager/skills/source.nix
 
           if git diff --cached --quiet; then
             echo "No updates available."

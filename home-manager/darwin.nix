@@ -48,7 +48,7 @@ in
       fi
     '';
     shellAliases = {
-      darwin-update = "nix flake update --flake \"${configFlakeRef}\" && $HOME/.config/home-manager/skills/update && $HOME/.config/home-manager/pkgs/update && sudo darwin-rebuild switch --flake \"${configFlakeTarget}\"";
+      darwin-update = "nix flake update --flake \"${configFlakeRef}\" && $HOME/.config/home-manager/skills/update && sudo darwin-rebuild switch --flake \"${configFlakeTarget}\"";
       darwin-switch = "sudo darwin-rebuild switch --flake \"${configFlakeTarget}\"";
     };
   };
