@@ -17,7 +17,7 @@
       router = {
         url = "https://github.com/yangtau/skills.git";
         ref = "refs/heads/main";
-        rev = "f61733fd9a5bba88aeb288a0aea04ff0747ea95c";
+        rev = "1cf2f58b3230cb898ed6444bfb0511a527b7ce97";
         dir = "skills/lark-cli";
       };
     };
@@ -26,7 +26,7 @@
   {
     url = "https://github.com/yangtau/skills.git";
     ref = "refs/heads/main";
-    rev = "f61733fd9a5bba88aeb288a0aea04ff0747ea95c";
+    rev = "1cf2f58b3230cb898ed6444bfb0511a527b7ce97";
     sha256 = "1izsvmhcmlh9qsb3l841mk09bdbylzwqpvzcciw5w75clirkrrlw";
     skills = [
       { dir = "skills/fix-todos"; }
