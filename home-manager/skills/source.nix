@@ -9,7 +9,7 @@
     # lark-cli 统一入口：上游全部 lark-* 子域合并进个人仓库 router 的 references/subskills/ 下。
     url = "https://github.com/larksuite/cli.git";
     ref = "refs/heads/main";
-    rev = "6956ac2eab2040b6edea0f9aac43567b08ded326";
+    rev = "7fd6ef3c07182257ce776cdc5a614e122d5bd4b3";
     unified = {
       name = "lark-cli";
       srcGlob = "skills/lark-*";
